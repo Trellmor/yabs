@@ -1,0 +1,1 @@
+<div class="message <?php echo $message->getLevel(); ?>"><?php echo nl2br($message->getMessage()); ?></div>

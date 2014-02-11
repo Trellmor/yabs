@@ -1,4 +1,4 @@
-<?php
+<?php namespace Application;
 
 class Registry {
 	private $vars = array();
@@ -28,7 +28,7 @@ class Registry {
 	/**
 	 * Set a variable
 	 * 
-	 * @param mixed $index
+	 * @param string $index
 	 * @param mixed $value
 	 */
 	public function __set($index, $value) {
@@ -38,11 +38,21 @@ class Registry {
 	/**
 	 * Get a variable
 	 * 
-	 * @param mixed $index
+	 * @param string $index
 	 * @return mixed
 	 */
 	public function __get($index) {
 		return $this->vars[$index];
+	}
+	
+	/**
+	 * Check if a variable is set
+	 * 
+	 * @param string $index
+	 * @return True if the variable is set
+	 */
+	public function __isset($index) {
+		return isset($this->vars[$index]);
 	}
 }
 

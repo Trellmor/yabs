@@ -1,0 +1,39 @@
+<?php namespace Controllers;
+
+use Application\Session;
+use Application\Input;
+use Application\Registry;
+use Application\Uri;
+use Models\Message;
+use Models\User;
+
+class Login extends Controller {	
+	public function index() {
+		$this->view->load('header');
+		$this->handleMessage();
+		$this->view->load('login');
+		$this->view->load('footer');
+	}
+
+	public function login() {
+		$input = new Input('POST');
+		if (($userId = User::verifyLogin($input->username, $input->password)) !== false) {
+			Session::start();
+			$_SESSION['user_id'] = $userId;
+			
+			$this->redirect(Uri::To('admin'));
+		} else {
+			Registry::getInstance()->message = new Message(_('Login failed.'));
+			$this->internalRedirect(Uri::pathTo('admin/login'));
+			return;
+		}
+	}
+	
+	public function logout() {
+		Session::destroy();
+		Registry::getInstance()->message = new Message(_('Logged out.', Message::LEVEL_INFO));
+		$this->internalRedirect(Uri::pathTo('admin/login'));
+	}
+}
+
+?>
