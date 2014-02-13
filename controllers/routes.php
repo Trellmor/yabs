@@ -13,5 +13,6 @@ Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Comment
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\AdminController', 'index', 'admin/'));
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Login', 'index', 'admin/login/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Login', 'login', 'admin/login/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Login', 'Logout', 'admin/logout/'));
 
 ?>

@@ -1,4 +1,4 @@
-<?php namespace Application\hash;
+<?php namespace Application\Crypto;
 
 class MD5 extends Hash {
 	

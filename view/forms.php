@@ -1,7 +1,16 @@
 <?php namespace View;
 
+use Application\CSRF;
+
 class Forms {
-	public static function form($type, $name, $value = null) {
+	public static function form($action) {
+		$csrf = new CSRF();
+		$form = '<form action="' . $action . '" method="post">';
+		$form .= '<input type="hidden" id="' . $csrf->getName() . '" name="' . $csrf->getName() . '" value="' . $csrf->getToken() . '" />';
+		return $form;
+	}
+	
+	public static function input($type, $name, $value = null) {
 		switch ($type) {
 			case 'text':
 				return static::inputText($name, $value);

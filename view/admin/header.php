@@ -1,5 +1,6 @@
 <?php 
 use Application\Uri;
+use Models\User;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@ use Application\Uri;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
     <title>Dashboard Template for Bootstrap</title>
 
@@ -35,14 +36,13 @@ use Application\Uri;
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="<?php Uri::to('admin'); ?>"><?php echo _('Dashboard'); ?></a></li>
+            <?php if ($user->hasPermission(User::PERM_SETTINGS)): ?>
+            <li><a href="<?php echo Uri::to('admin/settings'); ?>"><?php echo _('Settings'); ?></a></li>
+            <?php endif; ?>
+            <li><a href="<?php echo Uri::to('admin/user/' . $user->getId()); ?>"><?php echo _('Profile'); ?></a></li>
+            <li><a href="<?php echo Uri::to('admin/logout/'); ?>"><?php echo _('Logout'); ?></a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </div>
@@ -51,8 +51,8 @@ use Application\Uri;
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
+            <li><a href="#">Overview</a></li>
+            <li class="active"><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>
           </ul>

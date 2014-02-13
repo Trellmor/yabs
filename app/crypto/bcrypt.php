@@ -1,4 +1,4 @@
-<?php namespace Application\hash;
+<?php namespace Application\Crypto;
 
 class BCrypt extends Hash {
 	private $rounds = 12;

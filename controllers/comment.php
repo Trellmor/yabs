@@ -1,5 +1,7 @@
 <?php namespace Controllers;
 
+use Application\CSRF;
+
 use Application\Uri;
 use Models;
 use Models\ValidationException;
@@ -8,6 +10,12 @@ use Controllers\Controller;
 
 class Comment extends Controller {
 	public function add() {
+		$csrf = new CSRF();
+		if (!$csrf->verifyToken()) {
+			$this->redirect(Uri::to('/'));
+			exit;
+		}
+		
 		$get = new Input('GET');
 		$post = new Input('POST');
 		

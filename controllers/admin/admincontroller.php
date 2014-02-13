@@ -15,10 +15,13 @@ class AdminController extends Controller {
 			$this->redirect(Uri::to('admin/login'));
 			die();
 		}
+		
+		$this->view->assignVar('user', Registry::getInstance()->user);
 	}
 	
 	public function index() {
 		$this->view->load('header');
+		$this->view->load('dashboard');
 		$this->handleMessage();
 		$this->view->load('footer');
 	}

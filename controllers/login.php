@@ -1,5 +1,7 @@
 <?php namespace Controllers;
 
+use Application\CSRF;
+
 use Application\Session;
 use Application\Input;
 use Application\Registry;
@@ -16,6 +18,12 @@ class Login extends Controller {
 	}
 
 	public function login() {
+		$csrf = new CSRF();
+		if (!$csrf->verifyToken()) {
+			$this->redirect(Uri::to('/'));
+			exit;
+		}
+		
 		$input = new Input('POST');
 		if (($userId = User::verifyLogin($input->username, $input->password)) !== false) {
 			Session::start();
@@ -31,8 +39,7 @@ class Login extends Controller {
 	
 	public function logout() {
 		Session::destroy();
-		Registry::getInstance()->message = new Message(_('Logged out.', Message::LEVEL_INFO));
-		$this->internalRedirect(Uri::pathTo('admin/login'));
+		$this->info(_('Logged out.'));
 	}
 }
 

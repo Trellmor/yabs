@@ -1,12 +1,13 @@
 <?php namespace Models;
 
-use Application\hash\MD5;
-use Application\hash\BCrypt;
+use Application\Crypto\MD5;
+use Application\Crypto\BCrypt;
 use DAL;
 
 class User {
 	const PERM_ENTRY_WRITE = 0;
-	const PERM_ENTRY_ALL = 1;		
+	const PERM_ENTRY_ALL = 1;
+	const PERM_SETTINGS = 2;		
 	
 	private $user_id = -1;
 	private $user_mail;
@@ -59,33 +60,33 @@ class User {
 		return array_search($permission, $this->permissions) !== false;
 	}
 	
-	public function getUserId() {
+	public function getId() {
 		return $this->user_id;
 	}
 	
-	public function getUserName() {
+	public function getName() {
 		return $this->user_name;
 	}
 	
-	public function setUserName($value) {
+	public function setName($value) {
 		if (empty($value)) {
 			throw new ValidationException(_('Name is required.'));
 		}
 		$this->user_name = $value;
 	}
 	
-	public function getUserMail() {
+	public function getMail() {
 		return $this->user_mail;
 	}
 	
-	public function setUserMail($value) {
+	public function setMail($value) {
 		if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
 			throw new ValidationException(_('Invalid E-Mail address.'));
 		}
 		$this->user_mail = $value;
 	}
 	
-	public function setUserPassword($value) {
+	public function setPassword($value) {
 		$hash = new BCrypt();
 		$this->user_password = $hash->hash($value);
 	}

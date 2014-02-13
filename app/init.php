@@ -10,10 +10,6 @@ if (version_compare(PHP_VERSION, '5.4') < 0) {
 if (ini_get('register_globals')) {
 	$sg = array($_REQUEST, $_SERVER, $_FILES);
 	
-	if (isset($_SESSION)) {
-		array_unshift($sg, $_SESSION);
-	}
-	
 	foreach ($sg as $global) {
 		foreach (array_keys($global) as $key) {
 			unset(${$key});

@@ -16,7 +16,23 @@ abstract class Controller {
 	protected function error($code, $message) {
 		http_response_code($code);
 		
-		$this->view->assignVar('message', new Message($message, Message::LEVEL_ERROR));
+		$this->message(new Message($message, Message::LEVEL_ERROR));
+	}
+	
+	protected function info($message) {
+		$this->message(new Message($message, Message::LEVEL_INFO));
+	}
+	
+	protected function success($message) {
+		$this->message(new Message($message, Message::LEVEL_SUCCESS));
+	}
+	
+	protected function warn($message) {
+		$this->message(new Message($message, Message::LEVEL_WARNING));
+	}
+	
+	protected function message() {
+		$this->view->assignVar('message', $message);
 		$this->view->load('header');
 		$this->view->load('message');
 		$this->view->load('footer');
