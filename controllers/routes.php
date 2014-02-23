@@ -20,8 +20,10 @@ Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Ad
 
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Entry', 'index', 'admin/entry/'));
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Entry', 'index', 'admin/entry/page/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Entry', 'create', 'admin/entry/new'));
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Entry', 'edit', 'admin/entry/([0-9]+)/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Entry', 'save', 'admin/entry/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Entry', 'saveNew', 'admin/entry/new/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Entry', 'delete', 'admin/entry/delete/'));
 
 ?>
