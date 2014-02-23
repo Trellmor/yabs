@@ -13,5 +13,5 @@ use Application\Uri;
 		</p>
 	</div>
 
-	<p class="postmetadata">Posted in {S_ENTRY_CATEGORY_NAME} | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
+	<p class="postmetadata">Posted in <?php echo $entry->getCategoryName(); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
 </div>

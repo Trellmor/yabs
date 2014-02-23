@@ -1,5 +1,7 @@
 <?php namespace Models;
 
+use Application\Registry;
+
 use DAL;
 
 class Entry {	
@@ -12,11 +14,14 @@ class Entry {
 	private $user_id;
 	private $user_name;
 	private $entry_visible;
+	private $category_id;
+	private $category_name;
 	
 	protected static function getAllEntries() {
 		$qb = DAL\Factory::newQueryBuilder();
 		$qb->table('yabs_entry e');
 		$qb->leftJoin('yabs_user u', 'u.user_id = e.user_id');
+		$qb->leftJoin('yabs_category c', 'c.category_id = e.category_id');
 		return $qb;
 	}
 	
@@ -30,6 +35,21 @@ class Entry {
 		$qb = static::getAllVisibleEntries();		
 		$qb->limit($limit, $offset);
 		$qb->orderBy(['e.entry_date DESC']);
+		$sth = $qb->query([ 
+				'e.entry_title', 
+				'e.entry_teaser', 
+				'e.entry_content',
+				'e.entry_date', 
+				'e.entry_uri', 
+				'u.user_name',
+				'c.category_name'
+			]);
+		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
+	}
+	
+	public static function getEntries($limit, $offset = 0) {
+		$qb = static::getAllEntries();
+		$qb->limit($limit, $offset)->orderBy(['e.entry_id DESC']);
 		$sth = $qb->query([
 				'e.entry_id', 
 				'e.entry_title', 
@@ -37,7 +57,28 @@ class Entry {
 				'e.entry_content',
 				'e.entry_date', 
 				'e.entry_uri', 
-				'u.user_name'
+				'u.user_id',
+				'u.user_name',
+				'c.category_id',
+				'c.category_name'
+			]);
+		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
+	}
+	
+	public static function getEntriesForUser($userId, $limit, $offset = 0) {
+		$qb = static::getAllEntries();
+		$qb->where('user_id = ?', [[$userId, \PDO::PARAM_INT]])->limit($limit, $offset)->orderBy(['e.entry_date DESC']);
+		$sth = $qb->query([
+				'e.entry_id', 
+				'e.entry_title', 
+				'e.entry_teaser', 
+				'e.entry_content',
+				'e.entry_date', 
+				'e.entry_uri', 
+				'u.user_id',
+				'u.user_name',
+				'c.category_id',
+				'c.category_name'
 			]);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
@@ -53,7 +94,9 @@ class Entry {
 				'e.entry_date', 
 				'e.entry_uri', 
 				'u.user_id',
-				'u.user_name'
+				'u.user_name',
+				'c.category_id',
+				'c.category_name'
 			]);
 		return $sth->fetchObject(__CLASS__);
 	}
@@ -62,16 +105,49 @@ class Entry {
 		$qb = static::getAllVisibleEntries();
 		$qb->where('e.entry_uri = ?', [$uri]);
 		$sth = $qb->query([
-				'e.entry_id', 
 				'e.entry_title', 
 				'e.entry_teaser', 
 				'e.entry_content', 
 				'e.entry_date', 
 				'e.entry_uri',
-				'u.user_id', 
-				'u.user_name'
+				'u.user_name',
+				'c.category_name'
 			]);
 		return $sth->fetchObject(__CLASS__);
+	}
+	
+	public function delete() {
+		Registry::getInstance()->db->beginTransaction();
+		try {
+			$qb = DAL\Factory::newQueryBuilder();
+			$qb->table('yabs_comment')->where('entry_id = ?', [[$this->entry_id, \PDO::PARAM_INT]])->delete();
+			
+			$qb = DAL\Factory::newQueryBuilder();			
+			$qb->table('yabs_entry')->where('entry_id = ?', [[$this->entry_id, \PDO::PARAM_INT]])->delete();
+						
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollBack();
+			throw $e;
+		}
+	}
+	
+	public function save() {
+		if ($this->getId() != -1) {
+			$this->update();
+		} else {
+			$this->insert();
+		}
+	}
+	
+	private function update() {
+		$qb = DAL\Factory::newQueryBuilder();
+		$qb->table('yabs_entry')->where('entry_id = :entry_id', ['entry_id' => [$this->entry_id, \PDO::PARAM_INT]]);
+		$qb->update([
+				'entry_title' => $this->entry_title,
+				'entry_teaser' => $this->entry_teaser,
+				'entry_content' => $this->entry_content				
+				]);
 	}
 	
 	public function getId() {
@@ -132,6 +208,18 @@ class Entry {
 	
 	public function getUserName() {
 		return $this->user_name;
+	}
+	
+	public function getCategoryId() {
+		return $this->category_id;
+	}
+	
+	public function setCategoryId($value) {
+		$this->category_id = $value;
+	}
+	
+	public function getCategoryName() {
+		return $this->category_name;
 	}
 }
 

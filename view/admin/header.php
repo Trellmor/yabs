@@ -12,7 +12,7 @@ use Models\User;
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title><?php echo _('yabs Dashboard'); ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo Uri::to('/'); ?>/view/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,11 +32,11 @@ use Models\User;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="<?php echo Uri::to('/'); ?>">Project name</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php Uri::to('admin'); ?>"><?php echo _('Dashboard'); ?></a></li>
+            <li><a href="<?php echo Uri::to('admin'); ?>"><?php echo _('Dashboard'); ?></a></li>
             <?php if ($user->hasPermission(User::PERM_SETTINGS)): ?>
             <li><a href="<?php echo Uri::to('admin/settings'); ?>"><?php echo _('Settings'); ?></a></li>
             <?php endif; ?>
@@ -51,22 +51,11 @@ use Models\User;
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="#">Overview</a></li>
-            <li class="active"><a href="#">Reports</a></li>
+            <li><a href="<?php echo Uri::to('admin/entry/new'); ?>"><?php echo('New entry'); ?></a></li>
+            <li><a href="<?php echo Uri::to('admin/entry'); ?>"><?php echo('Entries'); ?></a></li>
+            <!--<li class="active"><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
+            <li><a href="#">Export</a></li>-->
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

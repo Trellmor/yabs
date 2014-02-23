@@ -31,7 +31,7 @@ class AdminController extends Controller {
 			return true;
 		} else {
 			$this->error(403, _('Access denied.'));
-			return false;
+			die();
 		}
 	}
 }

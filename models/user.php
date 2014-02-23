@@ -8,6 +8,7 @@ use DAL;
 class User {
 	const PERM_ENTRY_WRITE = 0;
 	const PERM_ENTRY_ALL = 1;
+	const PERM_ENTRY_DELETE = 3;
 	const PERM_SETTINGS = 2;		
 	
 	private $user_id = -1;

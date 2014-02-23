@@ -1,8 +1,8 @@
 <?php
-
 use Application\Uri;
+?>
 
-foreach ($entries as $entry): ?>
+<?php foreach ($entries as $entry): ?>
 <div class="post">
 	<h2><a href="<?php echo Uri::to('blog/' . urlencode($entry->getUri())); ?>"><?php echo $entry->getTitle(); ?></a></h2>
 	<small><?php echo date('l, j. F Y G:H', $entry->getDate()); ?> by <?php echo $entry->getUserName(); ?></small>
@@ -19,11 +19,11 @@ foreach ($entries as $entry): ?>
 		</p>
 	</div>
 
-	<p class="postmetadata">Posted in {S_ENTRY_CATEGORY_NAME} | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
+	<p class="postmetadata">Posted in <?php echo $entry->getCategoryName(); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
 </div>
 <?php endforeach; ?>
 			
 <div class="navigation">
-	<div class="alignleft"><?php if ($page > 1): ?><a href="<?php echo $page_prev; ?>">Newer</a> <?php endif; ?></div>
-	<div class="alignright"><?php if (count($entries) > 0): ?><a href="<?php echo $page_next; ?>">Older</a> <?php endif; ?></div>
+	<div class="alignleft"><?php if ($page > 1): ?><a href="<?php echo $page_prev; ?>"><?php echo _('Newer'); ?></a> <?php endif; ?></div>
+	<div class="alignright"><?php if (count($entries) > 0): ?><a href="<?php echo $page_next; ?>"><?php echo _('Older'); ?></a> <?php endif; ?></div>
 </div>
