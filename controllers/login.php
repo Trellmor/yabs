@@ -31,8 +31,8 @@ class Login extends Controller {
 			
 			$this->redirect(Uri::To('admin'));
 		} else {
-			Registry::getInstance()->message = new Message(_('Login failed.'));
-			$this->internalRedirect(Uri::pathTo('admin/login'));
+			Message::save(_('Login failed.'));
+			$this->redirect(Uri::pathTo('admin/login'));
 			return;
 		}
 	}

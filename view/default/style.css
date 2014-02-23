@@ -249,12 +249,12 @@ body {
 	width: 450px;
 	}
 
-.message {
+.alert {
 	margin-top: 40px;
 	text-align: center;
 }
 
-.message.error {
+.alert-danger {
 	color: red;
 }
 
