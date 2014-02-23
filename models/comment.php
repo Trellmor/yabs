@@ -114,7 +114,7 @@ class Comment {
 	}
 	
 	public function isVisible() {
-		return $this->getVisible == true;
+		return $this->getVisible() == true;
 	}
 	
 	public function getVisible() {

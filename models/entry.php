@@ -1,5 +1,7 @@
 <?php namespace Models;
 
+use Application\Exceptions\ValidationException;
+
 use Application\Registry;
 
 use DAL;
@@ -57,6 +59,7 @@ class Entry {
 				'e.entry_content',
 				'e.entry_date', 
 				'e.entry_uri', 
+				'e.entry_visible',
 				'u.user_id',
 				'u.user_name',
 				'c.category_id',
@@ -75,6 +78,7 @@ class Entry {
 				'e.entry_content',
 				'e.entry_date', 
 				'e.entry_uri', 
+				'e.entry_visible',
 				'u.user_id',
 				'u.user_name',
 				'c.category_id',
@@ -93,6 +97,7 @@ class Entry {
 				'e.entry_content', 
 				'e.entry_date', 
 				'e.entry_uri', 
+				'e.entry_visible',
 				'u.user_id',
 				'u.user_name',
 				'c.category_id',
@@ -146,8 +151,35 @@ class Entry {
 		$qb->update([
 				'entry_title' => $this->entry_title,
 				'entry_teaser' => $this->entry_teaser,
-				'entry_content' => $this->entry_content				
+				'entry_content' => $this->entry_content,
+				'entry_visible' => [$this->entry_visible, \PDO::PARAM_INT],
+				'entry_uri' => $this->entry_uri,
+				'entry_date' => [$this->entry_date, \PDO::PARAM_INT],
+				'category_id' => [$this->category_id, \PDO::PARAM_INT]
 				]);
+	}
+	
+	private function insert() {		
+		$qb = DAL\Factory::newQueryBuilder();
+		Registry::getInstance()->db->beginTransaction();
+		try {		
+			$qb->table('yabs_entry')->insert([
+					'entry_title' => $this->entry_title,
+					'entry_teaser' => $this->entry_teaser,
+					'entry_content' => $this->entry_content,
+					'entry_visible' => [$this->entry_visible, \PDO::PARAM_INT],
+					'entry_uri' => $this->entry_uri,
+					'entry_date' => [$this->entry_date, \PDO::PARAM_INT],
+					'category_id' => [$this->category_id, \PDO::PARAM_INT],
+					'user_id' => [$this->user_id, \PDO::PARAM_INT]
+					]);
+			$this->entry_id = Registry::getInstance()->db->lastInsertId();
+						
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollBack();
+			throw $e;
+		}
 	}
 	
 	public function getId() {
@@ -159,6 +191,7 @@ class Entry {
 	}
 	
 	public function setTitle($value) {
+		$value = substr($value, 0, 255);
 		$this->entry_title = $value;
 	}
 	
@@ -182,11 +215,27 @@ class Entry {
 		$this->entry_content = $value;
 	}
 	
-	public function getUri() {
+	public function getUri() {	
 		return $this->entry_uri;
 	}
 	
 	public function setUri($value) {
+		if (empty($value)) {
+			$value = $this->entry_title;
+		}
+		
+		if (empty($value)) {
+			throw new ValidationException(_('Entry URI cannot be empty.'));
+		}
+		
+		$value = substr($value, 0, 36);
+		
+		$qb = DAL\Factory::newQueryBuilder();
+		$qb->table('yabs_entry')->where('entry_id != ? and entry_uri = ?', [[$this->entry_id, \PDO::PARAM_INT], $value]);
+		if ($qb->query(['count(*)'])->fetchColumn(0) > 0) {
+			throw new ValidationException(_('Entry URI already in use.'));
+		}
+		
 		$this->entry_uri = $value;
 	}
 	
@@ -196,6 +245,18 @@ class Entry {
 	
 	public function setDate($value) {
 		$this->entry_date = $value;
+	}
+	
+	public function isVisible() {
+		return $this->getVisible() == true;
+	}
+	
+	public function getVisible() {
+		return (bool) $this->entry_visible;
+	}
+	
+	public function setVisible($value) {
+		$this->entry_visible = (int) $value;
 	}
 	
 	public function getUserId() {

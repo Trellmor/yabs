@@ -14,10 +14,8 @@ use Models\User;
 
     <title><?php echo _('yabs Dashboard'); ?></title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo Uri::to('/'); ?>/view/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <link href="<?php echo Uri::to('/'); ?>/view/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="<?php echo Uri::to('/'); ?>/view/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="<?php echo Uri::to('/'); ?>/view/admin/admin.css" rel="stylesheet">
   </head>
 

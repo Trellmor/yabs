@@ -1,5 +1,7 @@
 <?php namespace Controllers\Admin;
 
+use Models\Category;
+
 use Application\CSRF;
 use Application\Input;
 use Application\Registry;
@@ -45,11 +47,24 @@ class Entry extends AdminController {
 			}
 		}
 		
+		$this->editEntry($entry);
+	}
+	
+	public function editEntry($entry) {
 		$this->view->assignVar('entry', $entry);
+		$this->view->assignVar('categories', $this->getCategories());
 		$this->view->load('header');
 		$this->handleMessage();
 		$this->view->load('entry');
 		$this->view->load('footer');
+	}
+	
+	public function create() {
+		$this->checkPermission(USER::PERM_ENTRY_WRITE);
+		
+		$entry = new Models\Entry();
+		$entry->setDate(time());
+		$this->editEntry($entry);
 	}
 	
 	private function loadEntry($entryId) {
@@ -110,22 +125,76 @@ class Entry extends AdminController {
 				
 		try {
 			$entry = $this->loadEntry($entryId);
-
-			$input = new Input(Input::POST);
-			$input->filter('entry_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_ENCODE_AMP);
-			
-			$entry->setTitle($input->entry_title);
-			$entry->setContent($input->entry_content);
-			$entry->setTeaser((empty($input->entry_teaser)) ? null : $input->entry_teaser);
-						
-			$entry->save();
-			Message::save(_('Entry saved.'), Message::LEVEL_SUCCESS);
-			$this->redirect(Uri::to('admin/entry/' . $entry->getId()));
 		} catch (ValidationException $e) {
 			Message::save($e->getMessage(), Message::LEVEL_ERROR);
 			$this->redirect(Uri::to('admin/entry'));
 			exit;
 		}
+
+		try {
+			$input = new Input(Input::POST);
+			$this->fillEntry($entry, $input);
+			
+			$entry->save();
+			Message::save(_('Entry saved.'), Message::LEVEL_SUCCESS);
+			$this->redirect(Uri::to('admin/entry/' . $entry->getId()));
+		} catch (ValidationException $e) {
+			$input->save();
+			Message::save($e->getMessage(), Message::LEVEL_ERROR);
+			$this->redirect(Uri::to('admin/entry/' . $entry->getId()));
+			exit;
+		}
+	}
+	
+	private function fillEntry($entry, $input) {
+		$input->filter('entry_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter('entry_uri', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter('category_id', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+			
+		$entry->setTitle($input->entry_title);
+		$entry->setContent($input->entry_content);
+		$entry->setTeaser((empty($input->entry_teaser)) ? null : $input->entry_teaser);
+		$date = \DateTime::createFromFormat('Y-m-d H:i', $input->entry_date);
+		$entry->setDate($date->getTimestamp());
+		$entry->setUri($input->entry_uri);
+		$entry->setVisible(isset($input->entry_visible));
+		$entry->setCategoryId($input->category_id);
+	}
+	
+	public function saveNew() {
+		$this->checkPermission(User::PERM_ENTRY_WRITE);
+		
+		$csrf = new CSRF();
+		if (!$csrf->verifyToken()) {
+			Message::save(_('Save failed.'), Message::LEVEL_ERROR);
+			$this->redirect(Uri::to('admin/entry/new'));
+			exit;
+		}
+		
+		$entry = new Models\Entry();
+		$input = new Input(Input::POST);
+		
+		try {
+			$this->fillEntry($entry, $input);
+			$entry->setUserId(Registry::getInstance()->user->getId());
+			$entry->save();
+			$this->redirect(Uri::to('admin/entry/' . $entry->getId()));
+		} catch (ValidationException $e) {
+			$input->save();
+			Message::save($e->getMessage(), Message::LEVEL_ERROR);
+			$this->redirect(Uri::to('admin/entry/new'));
+			exit;
+		}
+	}
+	
+	private function getCategories() {
+		$result = array();
+		$categories = Category::getCategories();
+		$result[''] = '';
+		foreach ($categories as $category) {
+			$result[$category->getId()] = $category->getName();
+		}
+		return $result;
 	}
 }
 
