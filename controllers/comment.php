@@ -4,7 +4,7 @@ use Application\CSRF;
 
 use Application\Uri;
 use Models;
-use Models\ValidationException;
+use Application\Exceptions\ValidationException;
 use Application\Input;
 use Controllers\Controller;
 

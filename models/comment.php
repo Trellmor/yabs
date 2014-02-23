@@ -1,6 +1,7 @@
 <?php namespace Models;
 
 use DAL;
+use \Application\Exceptions\ValidationException;
 
 class Comment {
 	private $comment_id = -1;

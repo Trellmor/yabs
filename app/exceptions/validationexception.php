@@ -1,4 +1,4 @@
-<?php namespace Models;
+<?php namespace Application\Exceptions;
 
 class ValidationException extends \Exception {}
 

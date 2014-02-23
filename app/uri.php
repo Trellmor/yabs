@@ -1,6 +1,6 @@
 <?php namespace Application;
 
-class UriException extends \Exception {};
+use Application\Exceptions\UriException;
 
 class Uri {
 	private static $base = null;

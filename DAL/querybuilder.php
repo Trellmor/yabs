@@ -1,6 +1,7 @@
 <?php namespace DAL;
 
 use Application\Registry;
+use Application\Exceptions\QueryBuilderException;
 
 abstract class QueryBuilder implements IQueryBuilder {
 	protected $table = NULL;

@@ -1,9 +1,7 @@
 <?php namespace DAL;
 
 use Application\Registry;
-
-class QueryBuilderException extends \Exception {
-}
+use Application\Exceptions\QueryBuilderException;
 
 class Factory {
 	private function __construct() {

@@ -1,6 +1,6 @@
 <?php namespace View;
 
-class InvalidViewException extends \Exception {}
+use Application\Exceptions\InvalidViewException;
 
 class View {
 	private $template;

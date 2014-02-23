@@ -1,6 +1,6 @@
 <?php namespace Application\Crypto;
 
-class HashException extends \Exception {}
+use Application\Exceptions\HashException;
 
 abstract class Hash {
 	/**

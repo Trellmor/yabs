@@ -1,6 +1,6 @@
 <?php namespace Application\Crypto;
 
-class RNGException extends \Exception {}
+use Application\Exceptions\RNGException;
 
 class SecureRandom {
 	public function getBytes($count) {

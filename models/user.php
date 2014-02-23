@@ -2,6 +2,7 @@
 
 use Application\Crypto\MD5;
 use Application\Crypto\BCrypt;
+use Application\Exceptions\ValidationException;
 use DAL;
 
 class User {
