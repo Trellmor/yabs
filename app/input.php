@@ -1,6 +1,9 @@
 <?php namespace Application;
 
 class Input{
+	const POST = 'POST';
+	const GET = 'GET';
+	
 	private $data;
 	
 	public function __construct($method) {
@@ -19,9 +22,9 @@ class Input{
 	
 	public function filter($variable, $filter, $options = null) {
 		if ($options != null) {
-			$this->{$variable} = filter_var($this->{$variable}, $filter, $options);
+			$this->data[$variable] = filter_var($this->{$variable}, $filter, $options);
 		} else {
-			$this->{$variable} = filter_var($this->{$variable}, $filter);
+			$this->data[$variable] = filter_var($this->{$variable}, $filter);
 		}
 	}
 	
