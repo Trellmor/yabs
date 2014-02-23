@@ -36,16 +36,19 @@ abstract class QueryBuilder implements IQueryBuilder {
 	
 	public function leftJoin($table, $on) {
 		$this->joins .= ' LEFT JOIN ' . $table . ' ON (' . $on . ')';
+		return $this;
 	}
 	
 	public function limit($limit, $offset = 0) {
 		$this->limit = ' LIMIT ';
-		if ($offset != 0) $this->limit .= $offset . ', ';
-		$this->limit .= $limit;
+		if ($offset != 0) $this->limit .= (int) $offset . ', ';
+		$this->limit .= (int) $limit;
+		return $this;
 	}
 	
 	public function orderBy(array $orderColumns) {
 		$this->orderColumns = array_merge($this->orderColumns, $orderColumns);
+		return $this;
 	}
 	
 	public function query(array $columns) {
@@ -78,7 +81,6 @@ abstract class QueryBuilder implements IQueryBuilder {
 		if (!empty($this->selection)) {
 			$query .= ' WHERE ' . $this->selection;
 		}
-		
 		$sth = Registry::getInstance()->db->prepare($query);
 		$this->bindValues($sth, $this->selectionArgs);
 		if ($sth->execute()) {
