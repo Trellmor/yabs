@@ -79,6 +79,7 @@ textdomain('default');
  * Session
  */
 Session::load();
+Input::restore();
 
 /**
  * Route URL

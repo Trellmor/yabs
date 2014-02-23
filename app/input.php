@@ -8,11 +8,14 @@ class Input{
 	
 	public function __construct($method) {
 		switch ($method) {
-			case 'GET':
+			case static::GET:
 				parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $this->data);
 				break;
-			case 'POST':
+			case static::POST:
 				$this->data = $_POST;
+				break;
+			case 'NULL':
+				$this->data = array();
 				break;
 			default:
 				parse_str(file_get_contents('php://input'), $this->data);
@@ -57,6 +60,18 @@ class Input{
 	
 	public function __isset($index) {
 		return isset($this->data[$index]);
+	}
+	
+	public function save() {
+		Session::start();
+		$_SESSION['input'] = $this;
+	}
+	
+	public static function restore() {
+		if (isset($_SESSION['input'])) {
+			Registry::getInstance()->input = $_SESSION['input'];
+			unset($_SESSION['input']);
+		}
 	}
 }
 
