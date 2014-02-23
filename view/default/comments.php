@@ -1,8 +1,7 @@
-<?php 
-
+<?php
+use View\HTML;
 use View\Forms;
 use Application\Uri;
-
 ?>
 
 	<h3 id="comments"><?php echo _('Comments')?></h3> 
@@ -12,7 +11,7 @@ use Application\Uri;
 <?php foreach ($comments as $comment): ?>
 		<li class="<?php echo ($i % 2 == 0) ? 'alt' : ''; $i++; ?>" id="com<?php echo $comment->getId(); ?>">
 
-			<cite><?php echo $comment->getAuthor(); ?></cite>:
+			<cite><?php HTML::out($comment->getAuthor()); ?></cite>:
 			<br />
 
 			<small class="commentmetadata"><a href="#com<?php echo $comment->getId(); ?>"><?php echo date('d.m.Y H:i', $comment->getDate()); ?></a></small>

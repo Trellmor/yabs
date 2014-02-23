@@ -1,25 +1,26 @@
 <?php
+use View\HTML;
 use Application\Uri;
 ?>
 
 <?php foreach ($entries as $entry): ?>
 <div class="post">
-	<h2><a href="<?php echo Uri::to('blog/' . urlencode($entry->getUri())); ?>"><?php echo $entry->getTitle(); ?></a></h2>
-	<small><?php echo date('l, j. F Y G:H', $entry->getDate()); ?> by <?php echo $entry->getUserName(); ?></small>
+	<h2><a href="<?php echo Uri::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
+	<small><?php echo date('l, j. F Y G:H', $entry->getDate()); ?> by <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
 		<p>
 			<?php if ($entry->hasTeaser()): ?>
 				<?php echo $entry->getTeaser(); ?>
 				<br /><br />
-				<a href="<?php echo URI::to('blog/' . urlencode($entry->getUri())); ?>"><?php echo _('Read more'); ?></a>
+				<a href="<?php echo URI::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php echo _('Read more'); ?></a>
 			<?php else: ?>
 				<?php echo $entry->getContent(); ?>
 			<?php endif; ?>
 		</p>
 	</div>
 
-	<p class="postmetadata">Posted in <?php echo $entry->getCategoryName(); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
+	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
 </div>
 <?php endforeach; ?>
 			
