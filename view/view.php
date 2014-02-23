@@ -8,6 +8,7 @@ class View {
 	
 	public function __construct($template) {
 		$this->template = $template;
+		$this->assignVar('view', $this);
 	}
 	
 	public function getTemplate() {
