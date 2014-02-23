@@ -10,6 +10,7 @@ class Uri {
 	
 	/**
 	 * Create new Uri instance with specific path
+	 * 
 	 * @param string $path
 	 * @return Uri instance
 	 */
@@ -19,13 +20,37 @@ class Uri {
 	}
 	
 	/**
+	 * Create new URI instance to the current page
+	 * 
+	 * @return Uri instance
+	 */
+	public static function currentPage() {
+		$uri = static::to(static::detectPath());
+		foreach ($_GET as $k => $v) {
+			$uri->param($k, $v);
+		}
+		
+		return $uri;
+	}
+	
+	/**
 	 * Set the URI path
+	 * 
 	 * @param string $path
 	 * @return Uri instance
 	 */
 	public function path($path) {
 		$this->path = $path;
 		return $this;
+	}
+	
+	/**
+	 * Get the path component
+	 * 
+	 * @return string Path
+	 */
+	public function getPath() {
+		return Uri::pathTo($this->path);
 	}
 	
 	/**
@@ -87,6 +112,7 @@ class Uri {
 	
 	/**
 	 * Generate a routable path 
+	 * 
 	 * @param string $path
 	 * @return string Formatted path
 	 */
@@ -96,6 +122,7 @@ class Uri {
 	
 	/**
 	 * Detect the current requested path
+	 * 
 	 * @throws UriException
 	 * @return string
 	 */
@@ -104,11 +131,32 @@ class Uri {
 			throw new UriException('REQUEST_URI not set');
 		}
 		
-		$uri = static::removeQuery($_SERVER['REQUEST_URI']);
+		return static::detectPathFrom($_SERVER['REQUEST_URI']);
+	}
+	
+	private static function detectPathFrom($uri) {
+		$uri = static::removeQuery($uri);
 		$uri = urldecode($uri);		
 		$uri = static::removeScript($uri);
 		
 		return rtrim(ltrim($uri, '/'), '/') . '/';
+	}
+	
+	/**
+	 * Parse an URI string
+	 * 
+	 * @param string $uri
+	 * @return Uri instance
+	 */
+	public static function parse($uri) {
+		$uri = static::to(static::detectPathFrom(parse_url($uri, PHP_URL_PATH)));
+		
+		$query = array();
+		parse_str(parse_url($uri, PHP_URL_QUERY), $query);
+		foreach ($query as $k => $v) {
+			$uri->param($k, $v);
+		}
+		return $uri;
 	}
 	
 	private static function generateBaseUri() {
