@@ -90,16 +90,15 @@ abstract class QueryBuilder implements IQueryBuilder {
 		}
 	}
 	
-	public function update(array $contentValues) {
+	public function generateUpdate(array $columns) {
 		$query = 'UPDATE ' .$this->table . ' SET ';
-		$columns = array_keys($contentValues);
 		$first = true;
 		foreach ($columns as $column) {
 			if (!$first)
 				$query .= ', ';
 			else
 				$first = false;
-			
+				
 			$query .= $column . ' = :' . $column;
 		}
 		
@@ -107,7 +106,12 @@ abstract class QueryBuilder implements IQueryBuilder {
 			$query .= ' WHERE ' . $this->selection;
 		}
 		
-		$sth = Registry::getInstance()->db->prepare($query);
+		return Registry::getInstance()->db->prepare($query);
+	}
+	
+	public function update(array $contentValues) {
+		$columns = array_keys($contentValues);
+		$sth = $this->generateUpdate($columns);
 		$this->bindValues($sth, array_merge($contentValues, $this->selectionArgs));
 		if ($sth->execute()) {
 			$sth->rowCount();
@@ -116,17 +120,29 @@ abstract class QueryBuilder implements IQueryBuilder {
 		}
 	}
 	
-	public function insert(array $contentValues) {
+	public function generateInsert(array $columns) {
 		$query = 'INSERT INTO ' . $this->table;
-		$columns = array_keys($contentValues);
 		$query .= ' (' . implode(', ', $columns) . ')';
 		$query .= ' VALUES (:' . implode(', :', $columns) . ')';
-		$sth = Registry::getInstance()->db->prepare($query);
+		return Registry::getInstance()->db->prepare($query);
+	} 
+	
+	public function insert(array $contentValues) {
+		$columns = array_keys($contentValues);
+		$sth = $this->generateInsert($columns);
 		$this->bindValues($sth, $contentValues);
-		if ($sth->execute()) {
-			$sth->rowCount();
-		} else {
-			return false;
+		Registry::getInstance()->db->beginTransaction();
+		try {
+			if ($sth->execute()) {
+				$result = Registry::getInstance()->db->lastInsertId();				
+				Registry::getInstance()->db->commit();
+				return $result;
+			} else {
+				Registry::getInstance()->db->rollBack();
+				return false;
+			}
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollBack();
 		}
 	}
 	
@@ -135,6 +151,8 @@ abstract class QueryBuilder implements IQueryBuilder {
 			//Parameters are 1-based
 			if (is_int($parameter)) {
 				$parameter++;
+			} else {
+				$parameter = ':' . $parameter;
 			}
 			
 			if (is_array($value)) {
