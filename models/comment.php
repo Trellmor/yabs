@@ -1,7 +1,7 @@
 <?php namespace Models;
 
 use DAL;
-use \Application\Exceptions\ValidationException;
+use Application\Exceptions\ValidationException;
 
 class Comment {
 	private $comment_id = -1;
@@ -47,7 +47,7 @@ class Comment {
 	private function insert() {
 		$qb = DAL\Factory::newQueryBuilder();
 		$qb->table('yabs_comment');
-		$qb->insert(array(
+		$this->comment_id = $qb->insert(array(
 				'entry_id' => [$this->entry_id, \PDO::PARAM_INT],
 				'comment_author' => $this->comment_author,
 				'comment_mail' => $this->comment_mail,

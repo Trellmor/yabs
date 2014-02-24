@@ -1,12 +1,13 @@
 <?php namespace Controllers;
 
+use Application\Registry;
 use Application\CSRF;
-
 use Application\Uri;
-use Models;
-use Application\Exceptions\ValidationException;
 use Application\Input;
+use Application\Exceptions\ValidationException;
+use Models;
 use Controllers\Controller;
+use View\HTML;
 
 class Comment extends Controller {
 	public function add() {
@@ -26,7 +27,7 @@ class Comment extends Controller {
 		if (($entry = Models\Entry::getEntry($get->entry_id)) === false) {
 			$this->error(200, _('Invalid entry.'));
 		}		
-		$post->filter('comment_author', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_ENCODE_AMP);
+		$post->filter('comment_author', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$post->filter('comment_mail', FILTER_SANITIZE_EMAIL);
 		$post->filter('comment_url', FILTER_SANITIZE_URL);
 				
@@ -43,14 +44,30 @@ class Comment extends Controller {
 			$comment->setDate(time());
 			$comment->setIP($_SERVER['REMOTE_ADDR']);
 			$comment->setVisible(true);
-			$comment->setSpam(false);
+			
+			if (Registry::getInstance()->settings->akismet) {
+				$this->akismet($comment);	
+			} else {			
+				$comment->setSpam(false);
+			}
 			$comment->save();
 		
-			$this->redirect(Uri::to('blog/' . urlencode($entry->getUri())));
+			$this->redirect(Uri::to('blog/' . HTML::filter($entry->getUri()) . '#com' . $comment->getId()));
 		} catch (ValidationException $e) {
 			$this->error(200, $e->getMessage());
 			exit;
 		}
+	}
+	
+	private function akismet($comment) {
+		require_once APP_ROOT . '/libs/Akismet/Akismet.class.php';
+		$akismet = new Akismet(Uri::to(''), Registry::getInstance()->settings->akismet_key);
+		$akismet->setCommentAuthor($comment->getAuthor());
+		$akismet->setCommentAuthorEmail($comment->getMail());
+		$akismet->setCommentAuthorURL($comment->getUrl());
+		$akismet->setCommentContent($comment->getText());
+		$akismet->setPermalink(Uri::to('blog/' . HTML::filter($entry->getUri())));
+		$comment->setSpam($akismet->isCommentSpam());
 	}
 	
 	private function loadHTMLPurifier() {
