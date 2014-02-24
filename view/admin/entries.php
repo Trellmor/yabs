@@ -1,4 +1,5 @@
 <?php
+use Models\User;
 use View\HTML;
 use View\Forms;
 use Application\Uri;
@@ -20,9 +21,10 @@ $view->load('modal');
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Title</th>
-        <th></th>
+        <th class="col-md-1">#</th>
+        <th class="col-md-8"><?php echo _('Title'); ?></th>
+        <th class="col-md-1 text-center"><?php echo _('Published'); ?></th>
+        <th class="col-md-2"></th>
       </tr>
     </thead>
     <tbody>
@@ -30,11 +32,18 @@ $view->load('modal');
       <tr>
         <th><?php echo $entry->getId(); ?></th>
         <th><?php HTML::out($entry->getTitle()); ?></th>
+        <th class="text-center">
+          <span class="color-<?php echo ($entry->getVisible()) ? 'yes' : 'no'?>">
+            <span class="glyphicon glyphicon-eye-<?php echo ($entry->getvisible()) ? 'open' : 'close'; ?>"></span>
+          </span>
+        </th>
         <th class="text-right">
           <a class="btn btn-default" href="<?php echo Uri::to('admin/entry/' . $entry->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+          <?php if ($user->hasPermission(User::PERM_ENTRY_DELETE)): ?>
           <button data-id="<?php echo $entry->getId(); ?>" class="btn btn-default entry-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
+          <?php endif; ?>
         </th>
       </tr>
 <?php endforeach; ?>

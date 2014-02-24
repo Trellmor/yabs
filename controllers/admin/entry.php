@@ -1,7 +1,6 @@
 <?php namespace Controllers\Admin;
 
 use Models\Category;
-
 use Application\CSRF;
 use Application\Input;
 use Application\Registry;

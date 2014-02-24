@@ -138,10 +138,10 @@ class Entry {
 	}
 	
 	public function save() {
-		if ($this->getId() != -1) {
-			$this->update();
-		} else {
+		if ($this->getId() < 0) {
 			$this->insert();
+		} else {
+			$this->update();
 		}
 	}
 	

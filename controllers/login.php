@@ -32,7 +32,7 @@ class Login extends Controller {
 			$this->redirect(Uri::To('admin'));
 		} else {
 			Message::save(_('Login failed.'));
-			$this->redirect(Uri::pathTo('admin/login'));
+			$this->redirect(Uri::to('admin/login'));
 			return;
 		}
 	}

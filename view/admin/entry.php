@@ -2,9 +2,9 @@
 use View\Forms;
 use Application\Uri;
 ?>
-<h1>Entry</h1>
+<h1 class="page-header">Entry</h1>
 
-<?php echo Forms::form(Uri::to('admin/entry/' . (($entry->getId() != -1) ? $entry->getId() : 'new'))); ?>
+<?php echo Forms::form(Uri::to('admin/entry/' . (($entry->getId() != -1) ? $entry->getId() : 'new')), ['role' => 'form']); ?>
 
 <div class="form-group">
   <label for="entry_title"><?php echo _('Title'); ?></label>
@@ -54,5 +54,4 @@ use Application\Uri;
 <div class="form-group">
   <?php echo Forms::input('submit', 'save', _('Save'), ['class' => 'btn btn-default']); ?>
 </div>
-<?php Forms::input('submit', 'submit', _('Save')); ?>
 </form>
