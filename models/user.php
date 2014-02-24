@@ -9,7 +9,9 @@ class User {
 	const PERM_ENTRY_WRITE = 0;
 	const PERM_ENTRY_ALL = 1;
 	const PERM_ENTRY_DELETE = 3;
-	const PERM_SETTINGS = 2;		
+	const PERM_SETTINGS = 2;
+	const PERM_CATEGORY = 4;
+	const PERM_CATEGORY_DELETE = 5;
 	
 	private $user_id = -1;
 	private $user_mail;

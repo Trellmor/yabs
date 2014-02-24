@@ -29,4 +29,11 @@ Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\E
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Settings', 'index', 'admin/settings/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Settings', 'save', 'admin/settings/'));
 
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Category', 'index', 'admin/category/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Category', 'edit', 'admin/category/new/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Category', 'edit', 'admin/category/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'save', 'admin/category/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'save', 'admin/category/new/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'delete', 'admin/category/delete/'));
+
 ?>

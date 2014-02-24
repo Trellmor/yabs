@@ -58,5 +58,11 @@ use Models\User;
             <li><a href="#">Export</a></li>-->
           </ul>
           <?php endif; ?>
+                    
+          <ul class="nav nav-sidebar">          
+            <?php if ($user->hasPermission(User::PERM_CATEGORY)): ?>
+          	<li><a href="<?php echo Uri::to('admin/category'); ?>"><?php echo('Categories'); ?></a></li>
+          	<?php endif; ?>
+          </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

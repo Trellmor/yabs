@@ -33,7 +33,6 @@ class Forms {
 	}
 	
 	public static function inputPassword($name, $attrib = null) {
-		$value = static::checkValue($name, $value);
 		return '<input' . static::getAttributes(static::arrayMerge(['type' => 'password', 'id' => $name, 'name' => $name], $attrib)) . ' />';
 	}
 	

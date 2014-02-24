@@ -28,3 +28,12 @@ $('.entry-delete').click(function () {
 $('#modal-entry-delete .btn-primary').click(function () {
 	$('#entry-delete').submit();
 });
+    
+$('.category_delete').click(function () {
+	$('#category_id').val($(this).data('id'));
+	$('#modal-category-delete').modal('show');
+});
+
+$('#modal-category-delete .btn-primary').click(function () {
+	$('#category-delete').submit();
+});
