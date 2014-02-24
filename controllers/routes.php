@@ -26,4 +26,7 @@ Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\E
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Entry', 'saveNew', 'admin/entry/new/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Entry', 'delete', 'admin/entry/delete/'));
 
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Settings', 'index', 'admin/settings/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Settings', 'save', 'admin/settings/'));
+
 ?>

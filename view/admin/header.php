@@ -1,4 +1,5 @@
 <?php 
+use View\HTML;
 use Application\Uri;
 use Models\User;
 ?>
@@ -30,7 +31,7 @@ use Models\User;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?php echo Uri::to('/'); ?>">Project name</a>
+          <a class="navbar-brand" href="<?php echo Uri::to('/'); ?>"><?php HTML::out($settings->getSiteTitle()); ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -48,12 +49,14 @@ use Models\User;
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
+          <?php if ($user->hasPermission(User::PERM_ENTRY_WRITE)): ?>
+          <ul class="nav nav-sidebar">          
             <li><a href="<?php echo Uri::to('admin/entry/new'); ?>"><?php echo('New entry'); ?></a></li>
             <li><a href="<?php echo Uri::to('admin/entry'); ?>"><?php echo('Entries'); ?></a></li>
             <!--<li class="active"><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>-->
           </ul>
+          <?php endif; ?>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

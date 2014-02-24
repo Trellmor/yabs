@@ -11,6 +11,8 @@ abstract class Controller {
 	public function __construct() {
 		$template = Registry::getInstance()->template;
 		$this->view = new View($template);
+		$this->view->assignVar('settings', Registry::getInstance()->settings);
+		$this->view->assignVar('page_title', Registry::getInstance()->settings->getSiteTitle());
 	}
 
 	protected function error($code, $message) {

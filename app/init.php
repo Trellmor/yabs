@@ -60,6 +60,7 @@ unset($config['database']['password']);
 
 Registry::getInstance()->template = 'default';
 Registry::getInstance()->config = $config;
+Registry::getInstance()->settings = \Models\Settings::load();
 
 /**
  * Initialize routing

@@ -1,3 +1,8 @@
+<?php 
+use Application\Uri;
+
+use View\HTML;
+?>
 </div>
 
 <div id="sidebar">
@@ -20,10 +25,10 @@
 <div id="footer">
 	<p>
 		<!-- feel free to remove this -->
-		{S_SITE_TITLE} is proudly powered by 
+		<?php HTML::out($settings->getSiteTitle()) ?> is proudly powered by 
 		<a href="http://yabs.tac-ops.net/">yabs</a> and <a href="http://binarybonsai.com/kubrick/">Kubrick</a> by Michael Heilmann
 
-		<br />{S_FEED_ENTRIES} (ATOM 1.0) | {S_ADMINPANEL}
+		<br />{S_FEED_ENTRIES} (ATOM 1.0) | <a href="<?php echo Uri::to('admin'); ?>"><?php echo _('Admin'); ?></a>
 	</p>
 </div>
 

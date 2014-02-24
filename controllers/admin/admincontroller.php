@@ -17,6 +17,7 @@ class AdminController extends Controller {
 		}
 		
 		$this->view->assignVar('user', Registry::getInstance()->user);
+		$this->view->assignVar('settings', Registry::getInstance()->settings);
 	}
 	
 	public function index() {

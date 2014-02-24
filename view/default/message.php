@@ -1,1 +1,1 @@
-<div class="message <?php echo $message->getLevel(); ?>"><?php echo nl2br($message->getMessage()); ?></div>
+<div class="alert <?php echo $message->getCssLevel(); ?>"><?php echo nl2br($message->getMessage()); ?></div>

@@ -2,6 +2,7 @@
 use Application\Uri;
 ?>
 
+        </div>
       </div>
     </div>
     

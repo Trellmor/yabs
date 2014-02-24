@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Application\Registry;
 use Application\Uri;
 use Models\Entry;
 use Models\Comment;
@@ -32,6 +33,7 @@ class Blog extends Controller {
 			$comments = array();
 			$comments = Comment::getComments($entry->getId());
 			$this->view->assignVar('comments', $comments);
+			$this->view->assignVar('page_title', $entry->getTitle() . ' - ' . Registry::getInstance()->settings->getSiteTitle());
 			
 			$this->view->load('header');
 			$this->view->load('entry');
