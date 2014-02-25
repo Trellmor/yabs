@@ -8,9 +8,13 @@ use Models\User;
 use Models\Message;
 
 class Category extends AdminController {
-	public function index() {
-		$this->checkPermission(User::PERM_CATEGORY);
+	public function __construct() {
+		parent::__construct();
 		
+		$this->checkPermission(User::PERM_CATEGORY);
+	}
+	
+	public function index() {		
 		$this->view->assignVar('categories', Models\Category::getCategories());
 		$this->view->load('header');
 		$this->handleMessage();
@@ -20,8 +24,6 @@ class Category extends AdminController {
 	}
 	
 	public function edit($categoryId = -1) {
-		$this->checkPermission(User::PERM_CATEGORY);
-		
 		if ($categoryId >= 0) {
 			$category = Models\Category::getCategory($categoryId);
 		} else {
@@ -40,10 +42,7 @@ class Category extends AdminController {
 	}	
 	
 	public function save($categoryId = -1) {
-		$this->checkPermission(User::PERM_CATEGORY);
-		
-		$csrf = new CSRF();
-		if (!$csrf->verifyToken()) {
+		if (!$this->csrf->verifyToken()) {
 			Message::save(_('Delete failed.'), Message::LEVEL_ERROR);
 			$this->redirect(Uri::to('admin/category'));
 			exit;
@@ -74,11 +73,8 @@ class Category extends AdminController {
 		}
 	}
 	
-	public function delete() {
-		$this->checkPermission(User::PERM_CATEGORY_DELETE);
-	
-		$csrf = new CSRF();
-		if (!$csrf->verifyToken()) {
+	public function delete() {	
+		if (!$this->csrf->verifyToken()) {
 			Message::save(_('Delete failed.'), Message::LEVEL_ERROR);
 			$this->redirect(Uri::to('admin/category'));
 			exit;

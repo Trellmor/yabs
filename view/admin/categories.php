@@ -30,11 +30,9 @@ $view->load('modal');
         <th><?php HTML::out($category->getName()); ?></th>
         <th class="text-right">
           <a class="btn btn-default" href="<?php echo Uri::to('admin/category/' . $category->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
-          <?php if ($user->hasPermission(User::PERM_CATEGORY_DELETE)): ?>
           <button data-id="<?php echo $category->getId(); ?>" class="btn btn-default category_delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
-          <?php endif; ?>
         </th>
       </tr>
 <?php endforeach; ?>

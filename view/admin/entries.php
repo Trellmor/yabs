@@ -22,9 +22,9 @@ $view->load('modal');
     <thead>
       <tr>
         <th class="col-md-1">#</th>
-        <th class="col-md-8"><?php echo _('Title'); ?></th>
+        <th class="col-md-9"><?php echo _('Title'); ?></th>
         <th class="col-md-1 text-center"><?php echo _('Published'); ?></th>
-        <th class="col-md-2"></th>
+        <th class="col-md-1"></th>
       </tr>
     </thead>
     <tbody>
@@ -33,17 +33,15 @@ $view->load('modal');
         <th><?php echo $entry->getId(); ?></th>
         <th><?php HTML::out($entry->getTitle()); ?></th>
         <th class="text-center">
-          <span class="color-<?php echo ($entry->getVisible()) ? 'yes' : 'no'?>">
+          <span class="color-<?php echo ($entry->getVisible()) ? 'success' : 'danger'?>">
             <span class="glyphicon glyphicon-eye-<?php echo ($entry->getvisible()) ? 'open' : 'close'; ?>"></span>
           </span>
         </th>
-        <th class="text-right">
+        <th class="text-center">
           <a class="btn btn-default" href="<?php echo Uri::to('admin/entry/' . $entry->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
-          <?php if ($user->hasPermission(User::PERM_ENTRY_DELETE)): ?>
           <button data-id="<?php echo $entry->getId(); ?>" class="btn btn-default entry-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
-          <?php endif; ?>
         </th>
       </tr>
 <?php endforeach; ?>
@@ -51,7 +49,7 @@ $view->load('modal');
   </table>
   <ul class="pager">
     <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/entry/page/' . ($page - 1)); ?>">&larr; <?php echo _('Newer'); ?></a></li>
-    <li class="next <?php echo (count($entries) < 30) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/entry/page/' . ($page + 1)); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
+    <li class="next <?php echo (count($entries) < 15) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/entry/page/' . ($page + 1)); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
   </ul>
   
 </div>

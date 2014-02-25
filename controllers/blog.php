@@ -9,9 +9,14 @@ class Blog extends Controller {
 	
 	public function index($page = 1) {
 		$page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+		if ($page < 1) {
+			$this->redirect(Uri::to('/blog/'));
+			exit;
+		}
 		
 		$entry = new Entry();		
-		$entries = $entry->getVisibleEntries(10, ($page - 1) * 10);
+		$entries = $entry->getVisibleEntries(Registry::getInstance()->settings->getEntriesPerPage(),
+				($page - 1) * Registry::getInstance()->settings->getEntriesPerPage());
 		
 		$this->view->assignVar('entries', $entries);
 		$this->view->assignVar('page', $page);
@@ -31,7 +36,7 @@ class Blog extends Controller {
 			$this->view->assignVar('entry', $entry);
 			
 			$comments = array();
-			$comments = Comment::getComments($entry->getId());
+			$comments = Comment::getCommentsForEntry($entry->getId());
 			$this->view->assignVar('comments', $comments);
 			$this->view->assignVar('page_title', $entry->getTitle() . ' - ' . Registry::getInstance()->settings->getSiteTitle());
 			

@@ -67,6 +67,22 @@ class Settings {
 		$this->site_title = $value;
 	}
 	
+	public function getEntriesPerPage() {
+		return $this->entries_per_page;
+	}
+	
+	public function setEntriesPerPage($value) {
+		$this->entries_per_page = $value;
+	}
+	
+	public function getDateTimeFormat() {
+		return $this->datetime_format;
+	}
+	
+	public function setDateTimeFormat($value) {
+		$this->datetime_format = $value;
+	}
+	
 	public function getAkismet() {
 		return $this->akismet;
 	}

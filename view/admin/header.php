@@ -20,7 +20,7 @@ use Models\User;
     <link href="<?php echo Uri::to('/'); ?>/view/admin/admin.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body data-csrf="<? HTML::out($csrf->getToken()); ?>" data-base-uri="<?php HTML::out(Uri::to('')); ?>">
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -49,19 +49,24 @@ use Models\User;
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <?php if ($user->hasPermission(User::PERM_ENTRY_WRITE)): ?>
-          <ul class="nav nav-sidebar">          
+          <ul class="nav nav-sidebar">
+                   
+            <?php if ($user->hasPermission(User::PERM_ENTRY)): ?> 
             <li><a href="<?php echo Uri::to('admin/entry/new'); ?>"><?php echo('New entry'); ?></a></li>
             <li><a href="<?php echo Uri::to('admin/entry'); ?>"><?php echo('Entries'); ?></a></li>
+            <?php endif; ?>
+            
+            <?php if ($user->hasPermission(User::PERM_CATEGORY)): ?>
+          	<li><a href="<?php echo Uri::to('admin/category'); ?>"><?php echo('Categories'); ?></a></li>
+          	<?php endif; ?>
             <!--<li class="active"><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>-->
           </ul>
-          <?php endif; ?>
                     
           <ul class="nav nav-sidebar">          
-            <?php if ($user->hasPermission(User::PERM_CATEGORY)): ?>
-          	<li><a href="<?php echo Uri::to('admin/category'); ?>"><?php echo('Categories'); ?></a></li>
+            <?php if ($user->hasPermission(User::PERM_COMMENT)): ?>
+          	<li><a href="<?php echo Uri::to('admin/comment'); ?>"><?php echo('Comments'); ?></a></li>
           	<?php endif; ?>
           </ul>
         </div>

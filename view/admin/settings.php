@@ -11,7 +11,19 @@ use View\Forms;
     <?php echo Forms::input('text', 'site_title', $settings->getSiteTitle(), ['class' => 'form-control']) ?>
 </div>
 
+<div class="form-group">
+  <label for="entries_per_page"><?php echo _('Entries per page'); ?></label>
+    <?php echo Forms::input('text', 'entries_per_page', $settings->getEntriesPerPage(), ['class' => 'form-control']) ?>
+</div>
+
+<div class="form-group">
+  <label for="datetime_format"><?php echo _('Date and time format'); ?></label>
+    <?php echo Forms::input('text', 'datetime_format', $settings->getDateTimeFormat(), ['class' => 'form-control']) ?>
+</div>
+
+
 <h2 class="sub-header"><?php echo _('Akismet'); ?></h2>
+
 <div class="checkbox">
   <label>
     <?php echo Forms::input('checkbox', 'akismet', $settings->getAkismet()); ?>

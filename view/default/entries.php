@@ -6,7 +6,7 @@ use Application\Uri;
 <?php foreach ($entries as $entry): ?>
 <div class="post">
 	<h2><a href="<?php echo Uri::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
-	<small><?php echo date('l, j. F Y G:H', $entry->getDate()); ?> by <?php HTML::out($entry->getUserName()); ?></small>
+	<small><?php Html::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> by <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
 		<p>
@@ -26,5 +26,5 @@ use Application\Uri;
 			
 <div class="navigation">
 	<div class="alignleft"><?php if ($page > 1): ?><a href="<?php echo $page_prev; ?>"><?php echo _('Newer'); ?></a> <?php endif; ?></div>
-	<div class="alignright"><?php if (count($entries) > 0): ?><a href="<?php echo $page_next; ?>"><?php echo _('Older'); ?></a> <?php endif; ?></div>
+	<div class="alignright"><?php if (count($entries) == $settings->getEntriesPerPage()): ?><a href="<?php echo $page_next; ?>"><?php echo _('Older'); ?></a> <?php endif; ?></div>
 </div>

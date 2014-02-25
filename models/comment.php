@@ -15,8 +15,10 @@ class Comment {
 	private $comment_hostname;
 	private $comment_date;
 	private $entry_id;
+	private $entry_uri;
+	private $entry_title;
 	
-	public static function getComments($entry_id) {
+	public static function getCommentsForEntry($entry_id) {
 		$qb = DAL\Factory::newQueryBuilder();
 		$qb->table('yabs_comment');
 		$qb->where('entry_id = ? and comment_spam = ? and comment_visible = ?', [
@@ -35,6 +37,32 @@ class Comment {
 				]);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
+
+	private static $columns = array(
+			'c.comment_id',
+			'c.comment_author',
+			'c.comment_mail',
+			'c.comment_url',
+			'c.comment_text',
+			'c.comment_visible',
+			'c.comment_spam',
+			'c.comment_ip',
+			'c.comment_hostname',
+			'c.comment_date',
+			'e.entry_id',
+			'e.entry_uri',
+			'e.entry_title'); 
+	
+	public static function getComments($limit, $offset = 0) {
+		$qb = DAL\Factory::newQueryBuilder()->table('yabs_comment c')->limit($limit, $offset);
+		$qb->leftJoin('yabs_entry e', ('e.entry_id = c.entry_id'))->orderBy(['c.comment_date DESC']);
+		return $qb->query(static::$columns)->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
+	}
+	
+	public static function getComment($commentId) {
+		return DAL\Factory::newQueryBuilder()->table('yabs_comment c')->leftJoin('yabs_entry e', 'e.entry_id = c.entry_id')->
+			where('c.comment_id = ?', [[$commentId, \PDO::PARAM_INT]])->query(static::$columns)->fetchObject(__CLASS__);
+	}
 	
 	public function save() {
 		if ($this->comment_id < 0) {
@@ -42,6 +70,10 @@ class Comment {
 		} else {
 			$this->update();
 		}
+	}
+	
+	public function delete() {
+		DAL\Factory::newQueryBuilder()->table('yabs_comment')->where('comment_id = ?', [[$this->comment_id, \PDO::PARAM_INT]])->delete();
 	}
 	
 	private function insert() {
@@ -62,7 +94,18 @@ class Comment {
 	}
 	
 	private function update() {
-		
+		DAL\Factory::newQueryBuilder()->table('yabs_comment')->
+			where('comment_id = :comment_id', ['comment_id' => [$this->comment_id, \PDO::PARAM_INT]])->update([
+				'comment_author' => $this->comment_author,
+				'comment_mail' => $this->comment_mail,
+				'comment_url' => $this->comment_url,
+				'comment_text' => $this->comment_text,
+				'comment_date' => [$this->comment_date, \PDO::PARAM_INT],
+				'comment_ip' => [$this->comment_ip, \PDO::PARAM_INT],
+				'comment_hostname' => $this->comment_hostname,
+				'comment_visible' => [$this->comment_visible, \PDO::PARAM_INT],
+				'comment_spam' => [$this->comment_spam, \PDO::PARAM_INT],
+			]);
 	}
 	
 	public function getId() {
@@ -164,6 +207,14 @@ class Comment {
 	
 	public function setEntryId($value) {
 		$this->entry_id = $value;
+	}
+	
+	public function getEntryUri() {
+		return $this->entry_uri;
+	}
+	
+	public function getEntryTitle() {
+		return $this->entry_title;
 	}
 }
 

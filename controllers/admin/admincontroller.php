@@ -1,11 +1,14 @@
 <?php namespace Controllers\Admin;
 
+use Application\CSRF;
 use Application\Session;
 use Application\Uri;
 use Application\Registry;
 use Controllers\Controller;
 
 class AdminController extends Controller {
+	protected $csrf;
+	
 	public function __construct() {
 		parent::__construct();
 		$this->view->setTemplate('admin');
@@ -16,8 +19,11 @@ class AdminController extends Controller {
 			die();
 		}
 		
+		$this->csrf = new CSRF();
+		
 		$this->view->assignVar('user', Registry::getInstance()->user);
 		$this->view->assignVar('settings', Registry::getInstance()->settings);
+		$this->view->assignVar('csrf', $this->csrf);
 	}
 	
 	public function index() {

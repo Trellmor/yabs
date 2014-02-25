@@ -80,9 +80,9 @@ body {
 /*
  * Text color classes
  */
-.color-yes {
+.color-success {
 	color: #5cb85c;
 }
-.color-no {
+.color-danger {
 	color: #d9534f;
 }

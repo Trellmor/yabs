@@ -7,6 +7,7 @@ use Application\Route;
  * All routes are registered here
  */
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Blog', 'index', '/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Blog', 'index', 'blog/'));
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Blog', 'index', 'blog/page/([0-9]+)/'));
 Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Blog', 'entry', 'blog/(.*)/'));
 
@@ -35,5 +36,11 @@ Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Ca
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'save', 'admin/category/([0-9]+)/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'save', 'admin/category/new/'));
 Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Category', 'delete', 'admin/category/delete/'));
+
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Comment', 'index', 'admin/comment/'));
+Registry::getInstance()->router->addRoute(new Route('GET', 'Controllers\Admin\Comment', 'index', 'admin/comment/page/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Comment', 'toggleSpam', 'admin/api/comment/spam/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Comment', 'toggleVisible', 'admin/api/comment/visible/'));
+Registry::getInstance()->router->addRoute(new Route('POST', 'Controllers\Admin\Comment', 'delete', 'admin/comment/delete/'));
 
 ?>
