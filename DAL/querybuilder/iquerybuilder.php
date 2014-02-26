@@ -1,4 +1,4 @@
-<?php namespace DAL;
+<?php namespace DAL\QueryBuilder;
 
 interface IQueryBuilder {
 	function table($table);

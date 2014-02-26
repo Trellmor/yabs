@@ -1,4 +1,4 @@
-<?php namespace DAL;
+<?php namespace DAL\QueryBuilder;
 
 use Application\Registry;
 use Application\Exceptions\QueryBuilderException;
@@ -131,18 +131,29 @@ abstract class QueryBuilder implements IQueryBuilder {
 		$columns = array_keys($contentValues);
 		$sth = $this->generateInsert($columns);
 		$this->bindValues($sth, $contentValues);
-		Registry::getInstance()->db->beginTransaction();
+		
+		$transaction = false;
+		if (!Registry::getInstance()->db->inTransaction()) {
+			Registry::getInstance()->db->beginTransaction();
+			$transaction = true;
+		}
 		try {
 			if ($sth->execute()) {
 				$result = Registry::getInstance()->db->lastInsertId();				
-				Registry::getInstance()->db->commit();
+				if ($transaction) {
+					Registry::getInstance()->db->commit();
+				}
 				return $result;
 			} else {
-				Registry::getInstance()->db->rollBack();
+				if ($transaction) {
+					Registry::getInstance()->db->rollBack();
+				}
 				return false;
 			}
 		} catch (\PDOException $e) {
-			Registry::getInstance()->db->rollBack();
+			if ($transaction) {
+				Registry::getInstance()->db->rollBack();
+			}
 		}
 	}
 	

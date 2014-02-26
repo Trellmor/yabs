@@ -56,6 +56,7 @@ Registry::getInstance()->db = new \PDO($config['database']['dsn'], $config['data
 		$config['database']['password'], $config['database']['options']);
 unset($config['database']['username']);
 unset($config['database']['password']);
+\DAL\Factory::DAL()->init();
 
 
 Registry::getInstance()->template = 'default';
