@@ -75,7 +75,11 @@ class Forms {
 		$result = '';
 		if ($attrib !== null) {
 			foreach ($attrib as $name => $value) {
-				$result .= ' ' . $name . '="' . HTML::filter($value) . '"';
+				if (is_int($name)) {
+					$result .= ' ' . $value;
+				} else {
+					$result .= ' ' . $name . '="' . HTML::filter($value) . '"';
+				}
 			}
 		}
 		return $result;

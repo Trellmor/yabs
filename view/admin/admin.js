@@ -3,7 +3,7 @@
  */
 
 // Prevent bootstrap dialog from blocking focusin
-$(document).on('focusin', function(e) {
+$(document).on('focusin', function (e) {
     if ($(e.target).closest(".mce-window").length) {
         e.stopImmediatePropagation();
     }
@@ -122,6 +122,37 @@ $('.comment-delete').click(function () {
 
 $('#modal-comment-delete .btn-primary').click(function () {
 	$('#comment-delete').submit();
+});
+
+/*
+ * Profile
+ */
+$('#user_password_change').change(function () {
+	$('.user-passwords').prop('disabled', !$('#user_password_change').prop('checked'));
+});
+
+$('.user-passwords-new').on('input', function () {
+	if ($('#user_password_change').prop('checked')) {
+		if ($('#user_password_new').val() == $('#user_password_new_confirm').val()) {
+			$('#user_password_new').parent('div').removeClass('has-error').addClass('has-success');
+			$('#user_password_new_confirm').parent('div').removeClass('has-error').addClass('has-success');
+		} else {
+			$('#user_password_new').parent('div').removeClass('has-success').addClass('has-error');
+			$('#user_password_new_confirm').parent('div').removeClass('has-success').addClass('has-error');
+		}
+	}
+});
+
+/*
+ * User
+ */
+$('.user-delete').click(function () {
+	$('#user_id').val($(this).data('id'));
+	$('#modal-user-delete').modal('show');
+});
+
+$('#modal-user-delete .btn-primary').click(function () {
+	$('#user-delete').submit();
 });
 
 /*

@@ -39,7 +39,7 @@ use Models\User;
             <?php if ($user->hasPermission(User::PERM_SETTINGS)): ?>
             <li><a href="<?php echo Uri::to('admin/settings'); ?>"><?php echo _('Settings'); ?></a></li>
             <?php endif; ?>
-            <li><a href="<?php echo Uri::to('admin/user/' . $user->getId()); ?>"><?php echo _('Profile'); ?></a></li>
+            <li><a href="<?php echo Uri::to('admin/profile/'); ?>"><?php echo _('Profile'); ?></a></li>
             <li><a href="<?php echo Uri::to('admin/logout/'); ?>"><?php echo _('Logout'); ?></a></li>
           </ul>
         </div>
@@ -67,6 +67,12 @@ use Models\User;
           <ul class="nav nav-sidebar">          
             <?php if ($user->hasPermission(User::PERM_COMMENT)): ?>
           	<li><a href="<?php echo Uri::to('admin/comment'); ?>"><?php echo('Comments'); ?></a></li>
+          	<?php endif; ?>
+          </ul>
+                
+          <ul class="nav nav-sidebar">          
+            <?php if ($user->hasPermission(User::PERM_USER)): ?>
+          	<li><a href="<?php echo Uri::to('admin/user'); ?>"><?php echo('User'); ?></a></li>
           	<?php endif; ?>
           </ul>
         </div>

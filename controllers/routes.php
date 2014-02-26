@@ -43,4 +43,12 @@ Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'toggleVisible', 'admin/api/comment/visible/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'delete', 'admin/comment/delete/'));
 
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'profile', 'admin/profile/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'saveProfile', 'admin/profile/'));
+
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'index', 'admin/user/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'edit', 'admin/user/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'edit', 'admin/user/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'delete', 'admin/user/delete/'));
+
 ?>
