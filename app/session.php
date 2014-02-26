@@ -9,7 +9,7 @@ class Session {
 		if (static::isSessionActive()) {
 			static::start();
 			if (isset($_SESSION['user_id'])) {
-				$user = User::load($_SESSION['user_id']);
+				$user = User::load($_SESSION['user_id'], true);
 				Registry::getInstance()->user = $user;
 			}
 		}

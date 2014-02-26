@@ -25,9 +25,9 @@ class Login extends Controller {
 		}
 		
 		$input = new Input('POST');
-		if (($userId = User::verifyLogin($input->username, $input->password)) !== false) {
+		if (($user = User::verifyLogin($input->username, $input->password)) !== false) {
 			Session::start();
-			$_SESSION['user_id'] = $userId;
+			$_SESSION['user_id'] = $user->getId();
 			
 			$this->redirect(Uri::To('admin'));
 		} else {
