@@ -9,7 +9,7 @@ class MD5 extends Hash {
 		//If we have a 32char string w/o a $ at the beginning, it's probably a unsalted md5 hash 
 		if (strlen($existingHash) == 32) {
 			if ($existingHash[0] !== '$') {
-				return static::compareStr(md5($input), $existingHash);
+				return Utils::compareStr(md5($input), $existingHash);
 			}
 		}
 		
