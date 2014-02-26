@@ -1,6 +1,9 @@
 <?php namespace Application;
 
 class Route {
+	const GET = 'GET';
+	const POST = 'POST';
+	
 	private $method;
 	private $class;
 	private $function;
@@ -11,6 +14,16 @@ class Route {
 		$this->class = $class;
 		$this->function = $function;
 		$this->url = str_replace('/', '\\/', $url);
+	}
+	
+	public static function get($class, $function, $url) {
+		$c = __CLASS__;
+		return new $c(static::GET, $class, $function, $url);
+	}
+	
+	public static function post($class, $function, $url) {
+		$c = __CLASS__;
+		return new $c(static::POST, $class, $function, $url);
 	}
 	
 	/**
