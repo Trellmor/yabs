@@ -25,10 +25,7 @@ class Comment extends AdminController {
 		
 		$this->view->assignVar('comments', $comments);
 		$this->view->assignVar('page', $page);
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('comments');
-		$this->view->load('footer');
 	}
 	
 	public function toggleSpam() {

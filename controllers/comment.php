@@ -1,5 +1,7 @@
 <?php namespace Controllers;
 
+use Models\Message;
+
 use Application\Registry;
 use Application\CSRF;
 use Application\Uri;
@@ -52,10 +54,11 @@ class Comment extends Controller {
 			}
 			$comment->save();
 		
-			$this->redirect(Uri::to('blog/' . HTML::filter($entry->getUri()) . '#com' . $comment->getId()));
+			$this->redirect(Uri::to('blog/' . HTML::filter($entry->getUri())) . '#com' . $comment->getId());
 		} catch (ValidationException $e) {
-			$this->error(200, $e->getMessage());
-			exit;
+			$post->save();
+			Message::save($e->getMessage(), Message::LEVEL_ERROR);
+			$this->redirect(Uri::to('blog/' . HTML::filter($entry->getUri())) . '#add');
 		}
 	}
 	

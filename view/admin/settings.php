@@ -1,9 +1,11 @@
 <?php
 use Application\Uri;
 use View\Forms;
+
+$view->load('header');
 ?>
 <h1 class="page-header"><?php echo _('Settings'); ?></h1>
-
+<?php $view->handleMessages(); ?>
 <?php echo Forms::form(Uri::to('admin/settings'), ['role' => 'form']); ?>
 
 <div class="form-group">
@@ -40,3 +42,4 @@ use View\Forms;
 </div>
 
 </form>
+<?php $view->load('footer'); ?>

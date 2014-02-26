@@ -1,9 +1,11 @@
 <?php
 use View\Forms;
 use Application\Uri;
-?>
-<h1 class="page-header">Category</h1>
 
+$view->load('header');
+?>
+<h1 class="page-header"><?php _('Category'); ?></h1>
+<?php $view->handleMessages(); ?>
 <?php echo Forms::form(Uri::to('admin/category/' . (($category->getId() >= 0) ? $category->getId() : 'new'), ['role' => 'form'])); ?>
 
 <div class="form-group">
@@ -16,3 +18,4 @@ use Application\Uri;
 </div>
 
 </form>
+<?php $view->load('footer'); ?>

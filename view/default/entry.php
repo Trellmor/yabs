@@ -1,6 +1,8 @@
 <?php
 use View\HTML;
 use Application\Uri;
+
+$view->load('header');
 ?>
 <div class="post">
 	<h2><a href="<?php echo Uri::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
@@ -14,3 +16,7 @@ use Application\Uri;
 
 	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
 </div>
+<?php 
+$view->load('comments');
+$view->load('footer');
+?>

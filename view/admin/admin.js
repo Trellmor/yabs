@@ -165,5 +165,5 @@ function generateAlert(message, level) {
 		'  ' + message,
 		'</div>'
 	].join('');
-	$('h1').before(alert);
+	$('h1').after(alert);
 }

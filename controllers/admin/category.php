@@ -16,11 +16,7 @@ class Category extends AdminController {
 	
 	public function index() {		
 		$this->view->assignVar('categories', Models\Category::getCategories());
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('categories');
-		$this->view->assignVar('category', new Models\Category());
-		$this->view->load('footer');
 	}
 	
 	public function edit($categoryId = -1) {
@@ -31,10 +27,7 @@ class Category extends AdminController {
 		}
 		if ($category !== false) {
 			$this->view->assignVar('category', $category);
-			$this->view->load('header');
-			$this->handleMessage();
 			$this->view->load('category');
-			$this->view->load('footer');
 		} else {
 			Message::save(_('Category not found.'), Message::LEVEL_ERROR);
 			$this->redirect(Uri::to('admin/category'));

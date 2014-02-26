@@ -1,9 +1,11 @@
 <?php
 use View\Forms;
 use Application\Uri;
+
+$view->load('header');
 ?>
 <h1 class="page-header"><?php echo _('Entry'); ?></h1>
-
+<?php $view->handleMessages(); ?>
 <?php echo Forms::form(Uri::to('admin/entry/' . (($entry->getId() != -1) ? $entry->getId() : 'new')), ['role' => 'form']); ?>
 
 <div class="form-group">
@@ -55,3 +57,4 @@ use Application\Uri;
   <?php echo Forms::input('submit', 'save', _('Save'), ['class' => 'btn btn-default']); ?>
 </div>
 </form>
+<?php $view->load('footer'); ?>

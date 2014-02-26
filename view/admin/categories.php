@@ -4,6 +4,8 @@ use View\HTML;
 use View\Forms;
 use Application\Uri;
 
+$view->load('header');
+
 //Load the modals
 $view->assignVar('modal_id', 'modal-category-delete');
 $view->assignVar('modal_title', _('Delete category'));
@@ -13,6 +15,7 @@ $view->assignVar('modal_button_positive', _('Delete'));
 $view->load('modal');
 ?>
 <h1 class="page-header"><?php echo _('Categories'); ?></h1>
+<?php $view->handleMessages(); ?>
 <div class="table-responsive">
   <?php echo Forms::form(Uri::to('admin/category/delete'), ['id' => 'category-delete']); ?>
   <?php echo Forms::input('hidden', 'category_id', ''); ?>
@@ -54,3 +57,4 @@ $view->load('modal');
 </div>
 
 </form>
+<?php $view->load('footer'); ?>

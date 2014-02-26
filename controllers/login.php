@@ -11,10 +11,7 @@ use Models\User;
 
 class Login extends Controller {	
 	public function index() {
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('login');
-		$this->view->load('footer');
 	}
 
 	public function login() {

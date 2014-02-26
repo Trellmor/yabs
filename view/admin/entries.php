@@ -3,6 +3,8 @@ use View\HTML;
 use View\Forms;
 use Application\Uri;
 
+$view->load('header');
+
 //Load the modals
 $view->assignVar('modal_id', 'modal-entry-delete');
 $view->assignVar('modal_title', _('Delete entry'));
@@ -12,6 +14,7 @@ $view->assignVar('modal_button_positive', _('Delete'));
 $view->load('modal');
 ?>
 <h1 class="page-header"><?php echo _('Entries'); ?></h1>
+<?php $view->handleMessages(); ?>
 <div class="table-responsive">
   <?php echo Forms::form(Uri::to('admin/entry/delete'), ['id' => 'entry-delete']); ?>
   <?php echo Forms::input('hidden', 'page', $page); ?>
@@ -52,3 +55,4 @@ $view->load('modal');
   </ul>
   
 </div>
+<?php $view->load('footer'); ?>

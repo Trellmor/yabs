@@ -1,6 +1,7 @@
 <?php namespace View;
 
 use Application\Exceptions\InvalidViewException;
+use Models\Message;
 
 class View {
 	private $template;
@@ -32,6 +33,15 @@ class View {
 		} else {
 			throw new InvalidViewException('View not found: ' . $view);
 		}		
+	}
+		
+	public function handleMessages() {
+		$messages = Message::getSavedMessages();
+	
+		foreach ($messages as $message) {
+			$this->assignVar('message', $message);
+			$this->load('message');
+		}
 	}
 }
 

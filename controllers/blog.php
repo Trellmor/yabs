@@ -23,9 +23,7 @@ class Blog extends Controller {
 		$this->view->assignVar('page_next', Uri::to('blog/page/' . ($page + 1)));
 		$this->view->assignVar('page_prev', Uri::to('blog/page/' . ($page - 1)));
 		
-		$this->view->load('header');
 		$this->view->load('entries');
-		$this->view->load('footer');
 	}
 	
 	public function entry($entry_uri) {
@@ -39,11 +37,8 @@ class Blog extends Controller {
 			$comments = Comment::getCommentsForEntry($entry->getId());
 			$this->view->assignVar('comments', $comments);
 			$this->view->assignVar('page_title', $entry->getTitle() . ' - ' . Registry::getInstance()->settings->getSiteTitle());
-			
-			$this->view->load('header');
+						
 			$this->view->load('entry');
-			$this->view->load('comments');
-			$this->view->load('footer');
 		} else {
 			$this->error(404, _('Entry not found.'));
 			return;

@@ -1,6 +1,9 @@
 <?php
 use Application\Uri;
 use view\Forms;
+
+$view->load('header');
+$view->handleMessages();
 ?>
 
 <h2><?php echo _('Login'); ?></h2>
@@ -9,3 +12,6 @@ use view\Forms;
 	<?php echo _('Password'); ?>: <?php echo Forms::input('password', 'password'); ?><br />
 	<?php echo Forms::input('submit', 'submit', _('Login')); ?>
 </form>
+<?php
+$view->load('footer');
+?>

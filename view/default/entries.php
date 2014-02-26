@@ -1,6 +1,7 @@
 <?php
 use View\HTML;
 use Application\Uri;
+$view->load('header');
 ?>
 
 <?php foreach ($entries as $entry): ?>
@@ -28,3 +29,4 @@ use Application\Uri;
 	<div class="alignleft"><?php if ($page > 1): ?><a href="<?php echo $page_prev; ?>"><?php echo _('Newer'); ?></a> <?php endif; ?></div>
 	<div class="alignright"><?php if (count($entries) == $settings->getEntriesPerPage()): ?><a href="<?php echo $page_next; ?>"><?php echo _('Older'); ?></a> <?php endif; ?></div>
 </div>
+<?php $view->load('footer'); ?>

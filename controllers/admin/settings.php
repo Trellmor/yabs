@@ -10,10 +10,7 @@ class Settings extends AdminController {
 	public function index() {
 		$this->checkPermission(User::PERM_SETTINGS);
 		
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('settings');
-		$this->view->load('footer');
 	}
 	
 	public function save() {

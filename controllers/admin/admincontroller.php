@@ -27,10 +27,7 @@ class AdminController extends Controller {
 	}
 	
 	public function index() {
-		$this->view->load('header');
 		$this->view->load('dashboard');
-		$this->handleMessage();
-		$this->view->load('footer');
 	}
 	
 	protected function checkPermission($permission) {

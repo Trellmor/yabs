@@ -14,7 +14,7 @@ use Application\Uri;
 			<cite><?php HTML::out($comment->getAuthor()); ?></cite>:
 			<br />
 
-			<small class="commentmetadata"><a href="#com<?php echo $comment->getId(); ?>"><?php echo date('d.m.Y H:i', $comment->getDate()); ?></a></small>
+			<small class="commentmetadata"><a name="com<?php echo $comment->getId(); ?>" href="#com<?php echo $comment->getId(); ?>"><?php echo date('d.m.Y H:i', $comment->getDate()); ?></a></small>
 
 			<p><?php echo $comment->getText(); ?></p>
 
@@ -23,7 +23,8 @@ use Application\Uri;
 	</ol>
 	
 <p><br /></p>
-<h3 id="respond"><?php echo _('New comment'); ?></h3>
+<?php $view->handleMessages(); ?>
+<h3 id="respond"><a name="add"></a><?php echo _('New comment'); ?></h3>
 
 <?php echo Forms::form(Uri::to('comment/add/')->param('entry_id', $entry->getId())); ?>
 <p><?php echo Forms::input('text', 'comment_author'); ?> <label for="comment_author"><small><?php echo _('Name'); ?></small></label></p>

@@ -9,15 +9,12 @@ use Models\Message;
 
 class User extends AdminController {
 	function profile() {
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('profile');
-		$this->view->load('footer');
 	}
 	
 	function saveProfile() {	
 		if (!$this->csrf->verifyToken()) {
-			Message::save(_('Delete failed.'), Message::LEVEL_ERROR);
+			Message::save(_('Save failed.'), Message::LEVEL_ERROR);
 			$this->redirect(Uri::to('admin/profile'));
 			exit;
 		}
@@ -64,10 +61,7 @@ class User extends AdminController {
 		$this->checkPermission(Models\User::PERM_USER);
 		
 		$this->view->assignVar('users', Models\User::getUsers());
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('users');
-		$this->view->load('footer');
 	}
 	
 	public function delete() {

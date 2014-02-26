@@ -4,6 +4,8 @@ use View\HTML;
 use View\Forms;
 use Application\Uri;
 
+$view->load('header');
+
 //Load the modals
 $view->assignVar('modal_id', 'modal-comment-delete');
 $view->assignVar('modal_title', _('Delete comment'));
@@ -13,6 +15,7 @@ $view->assignVar('modal_button_positive', _('Delete'));
 $view->load('modal');
 ?>
 <h1 class="page-header"><?php echo _('Comments'); ?></h1>
+<?php $view->handleMessages(); ?>
 <div class="table-responsive">
   <?php echo Forms::form(Uri::to('admin/comment/delete'), ['id' => 'comment-delete']); ?>
   <?php echo Forms::input('hidden', 'page', $page); ?>
@@ -60,3 +63,4 @@ $view->load('modal');
   </ul>
   
 </div>
+<?php $view->load('footer'); ?>

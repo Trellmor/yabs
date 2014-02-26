@@ -35,22 +35,11 @@ abstract class Controller {
 
 	protected function message($message) {
 		$this->view->assignVar('message', $message);
-		$this->view->load('header');
-		$this->view->load('message');
-		$this->view->load('footer');
+		$this->view->load('messagepage');
 	}
 
 	protected function redirect($url) {
 		header('Location: ' . $url);
-	}
-
-	protected function handleMessage() {
-		$messages = Message::getSavedMessages();
-		
-		foreach ($messages as $message) {
-			$this->view->assignVar('message', $message);
-			$this->view->load('message');
-		}
 	}
 }
 

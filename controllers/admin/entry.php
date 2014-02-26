@@ -33,10 +33,7 @@ class Entry extends AdminController {
 
 		$this->view->assignVar('entries', $entries);
 		$this->view->assignVar('page', $page);
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('entries');
-		$this->view->load('footer');
 	}
 
 	public function edit($entryId) {
@@ -59,10 +56,7 @@ class Entry extends AdminController {
 	public function editEntry($entry) {
 		$this->view->assignVar('entry', $entry);
 		$this->view->assignVar('categories', $this->getCategories());
-		$this->view->load('header');
-		$this->handleMessage();
 		$this->view->load('entry');
-		$this->view->load('footer');
 	}
 
 	public function create() {
