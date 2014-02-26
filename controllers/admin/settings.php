@@ -26,6 +26,7 @@ class Settings extends AdminController {
 		}
 		
 		$input = new Input(Input::POST);
+		$input->filter('akismet', FILTER_VALIDATE_BOOLEAN);
 		$input->filter('akismet_key', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 		$input->filter('site_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$input->filter('entries_per_page', FILTER_SANITIZE_NUMBER_INT);

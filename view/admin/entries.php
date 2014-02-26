@@ -1,5 +1,4 @@
 <?php
-use Models\User;
 use View\HTML;
 use View\Forms;
 use Application\Uri;
@@ -33,8 +32,8 @@ $view->load('modal');
         <th><?php echo $entry->getId(); ?></th>
         <th><?php HTML::out($entry->getTitle()); ?></th>
         <th class="text-center">
-          <span class="color-<?php echo ($entry->getVisible()) ? 'success' : 'danger'?>">
-            <span class="glyphicon glyphicon-eye-<?php echo ($entry->getvisible()) ? 'open' : 'close'; ?>"></span>
+          <span class="color-<?php echo ($entry->isVisible()) ? 'success' : 'danger'?>">
+            <span class="glyphicon glyphicon-eye-<?php echo ($entry->isVisible()) ? 'open' : 'close'; ?>"></span>
           </span>
         </th>
         <th class="text-center">

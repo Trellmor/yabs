@@ -46,7 +46,7 @@ class Comment extends Controller {
 			$comment->setVisible(true);
 			
 			if (Registry::getInstance()->settings->akismet) {
-				$this->akismet($comment);	
+				$this->akismet($comment, $entry);
 			} else {			
 				$comment->setSpam(false);
 			}
@@ -59,9 +59,9 @@ class Comment extends Controller {
 		}
 	}
 	
-	private function akismet($comment) {
+	private function akismet($comment, $entry) {
 		require_once APP_ROOT . '/libs/Akismet/Akismet.class.php';
-		$akismet = new Akismet(Uri::to(''), Registry::getInstance()->settings->akismet_key);
+		$akismet = new \Akismet(Uri::to(''), Registry::getInstance()->settings->akismet_key);
 		$akismet->setCommentAuthor($comment->getAuthor());
 		$akismet->setCommentAuthorEmail($comment->getMail());
 		$akismet->setCommentAuthorURL($comment->getUrl());

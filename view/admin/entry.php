@@ -2,7 +2,7 @@
 use View\Forms;
 use Application\Uri;
 ?>
-<h1 class="page-header">Entry</h1>
+<h1 class="page-header"><?php echo _('Entry'); ?></h1>
 
 <?php echo Forms::form(Uri::to('admin/entry/' . (($entry->getId() != -1) ? $entry->getId() : 'new')), ['role' => 'form']); ?>
 
@@ -33,7 +33,7 @@ use Application\Uri;
 
 <div class="checkbox">
   <label>
-    <?php echo Forms::input('checkbox', 'entry_visible', $entry->getVisible()); ?>
+    <?php echo Forms::input('checkbox', 'entry_visible', $entry->isVisible()); ?>
     <?php echo ('Published'); ?>
   </label>
 </div>

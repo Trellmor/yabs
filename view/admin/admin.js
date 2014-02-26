@@ -41,7 +41,7 @@ $('#modal-entry-delete .btn-primary').click(function () {
 /*
  * Categories
  */
-$('.category_delete').click(function () {
+$('.category-delete').click(function () {
 	$('#category_id').val($(this).data('id'));
 	$('#modal-category-delete').modal('show');
 });
@@ -115,7 +115,7 @@ $('.comment-toggle-visible').click(function () {
 	});
 });
 
-$('.comment_delete').click(function () {
+$('.comment-delete').click(function () {
 	$('#comment_id').val($(this).data('id'));
 	$('#modal-comment-delete').modal('show');
 });

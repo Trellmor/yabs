@@ -157,10 +157,6 @@ class Comment {
 	}
 	
 	public function isVisible() {
-		return $this->getVisible() == true;
-	}
-	
-	public function getVisible() {
 		return (bool) $this->comment_visible;
 	}
 	
@@ -169,10 +165,6 @@ class Comment {
 	}
 	
 	public function isSpam() {
-		return $this->getSpam() == true;
-	}
-	
-	public function getSpam() {
 		return (bool) $this->comment_spam;
 	}
 	

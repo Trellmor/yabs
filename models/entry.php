@@ -110,6 +110,7 @@ class Entry {
 		$qb = static::getAllVisibleEntries();
 		$qb->where('e.entry_uri = ?', [$uri]);
 		$sth = $qb->query([
+				'e.entry_id',
 				'e.entry_title', 
 				'e.entry_teaser', 
 				'e.entry_content', 
@@ -248,10 +249,6 @@ class Entry {
 	}
 	
 	public function isVisible() {
-		return $this->getVisible() == true;
-	}
-	
-	public function getVisible() {
 		return (bool) $this->entry_visible;
 	}
 	

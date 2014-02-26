@@ -43,7 +43,7 @@ class Comment extends AdminController {
 			if ($comment === false) {
 				throw new ValidationException(_('Comment not found.'));
 			}			
-			$comment->setSpam(!$comment->getSpam());
+			$comment->setSpam(!$comment->isSpam());
 			$comment->save();
 			$this->json(['status' => 'success', 'message' => _('Comment saved.'), 'comment_spam' => $comment->isSpam()]);
 		} catch (ValidationException $e) {
@@ -65,9 +65,9 @@ class Comment extends AdminController {
 			if ($comment === false) {
 				throw new ValidationException(_('Comment not found.'));
 			}
-			$comment->setVisible(!$comment->getVisible());
+			$comment->setVisible(!$comment->isVisible());
 			$comment->save();
-			$this->json(['status' => 'success', 'message' => _('Comment saved.'), 'comment_visible' => $comment->getVisible()]);
+			$this->json(['status' => 'success', 'message' => _('Comment saved.'), 'comment_visible' => $comment->isVisible()]);
 		} catch (ValidationException $e) {
 			$this->jsonError($e->getMessage());
 		} catch (\PDOException $e) {

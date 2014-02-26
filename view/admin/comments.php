@@ -37,16 +37,16 @@ $view->load('modal');
         <th><?php HTML::out(date('Y-m-d G:H', $comment->getDate())); ?></th>
         <th class="text-center">
           <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-toggle-visible color-<?php echo ($comment->isVisible()) ? 'success' : 'danger' ?>" type="submit">
-            <span class="glyphicon glyphicon-eye-<?php echo ($comment->getVisible()) ? 'open' : 'close'; ?>"></span>
+            <span class="glyphicon glyphicon-eye-<?php echo ($comment->isVisible()) ? 'open' : 'close'; ?>"></span>
           </button>
         </th>
         <th class="text-center">
           <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-toggle-spam color-<?php echo ($comment->isSpam()) ? 'danger' : 'success' ?>" type="submit">
-            <span class="glyphicon glyphicon-<?php echo ($comment->getSpam()) ? 'fire' : 'ok-circle'; ?>"></span>
+            <span class="glyphicon glyphicon-<?php echo ($comment->isSpam()) ? 'fire' : 'ok-circle'; ?>"></span>
           </button>
         </th>
         <th class="text-center">
-          <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment_delete" type="submit">
+          <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
         </th>

@@ -64,6 +64,7 @@ class Category extends AdminController {
 				Message::save(_('Category saved.'), Message::LEVEL_SUCCESS);
 				$this->redirect(Uri::to('admin/category/' . $category->getId()));
 			} catch (ValidationException $e) {
+				$input->save();
 				Message::save($e->getMessage(), Message::LEVEL_ERROR);
 				$this->redirect(Uri::to('admin/category/' . (($categoryId >= 0) ? $categoryId : 'new')));
 			}

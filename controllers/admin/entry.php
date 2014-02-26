@@ -138,7 +138,7 @@ class Entry extends AdminController {
 		try {
 			$input = new Input(Input::POST);
 			$this->fillEntry($entry, $input);
-				
+
 			$entry->save();
 			Message::save(_('Entry saved.'), Message::LEVEL_SUCCESS);
 			$this->redirect(Uri::to('admin/entry/' . $entry->getId()));
@@ -154,6 +154,7 @@ class Entry extends AdminController {
 		$input->filter('entry_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$input->filter('entry_uri', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$input->filter('category_id', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+		$input->filter('entry_visible', FILTER_VALIDATE_BOOLEAN);
 			
 		$entry->setTitle($input->entry_title);
 		$entry->setContent($input->entry_content);
