@@ -3,6 +3,8 @@
 use Application\Registry;
 use Application\Crypto\MD5;
 use Application\Crypto\BCrypt;
+use Application\Crypto\SecureRandom;
+use Application\Crypto\Utils as CryptoUtils;
 use Application\Exceptions\ValidationException;
 use DAL;
 
@@ -57,6 +59,34 @@ class User {
 			$qb->where('user_active = ?', [[1, \PDO::PARAM_INT]]);
 		} 
 		return $qb->query(['user_id', 'user_name', 'user_mail', 'user_active', 'user_password'])->fetchObject(__CLASS__);
+	}
+	
+	/**
+	 * Verify remember login token
+	 * 
+	 * The token will be invalidated if the login succeeds
+	 * 
+	 * @param string $username
+	 * @param string $password
+	 * @return User object on success or false on failure
+	 */
+	public static function verifyRememberToken($userId, $userRememberToken) {
+		$tokens = DAL\Factory::newQueryBuilder()->table('yabs_user_remember')->
+			where('user_id = ? and user_remember_date > ?', [[$userId, \PDO::PARAM_INT], [time() - 60 * 60 * 24 * 30, \PDO::PARAM_INT]])->
+			query(['user_remember_token'])->fetchAll(\PDO::FETCH_COLUMN, 0);
+		if ($tokens !== false) {
+			foreach ($tokens as $token) {
+				if (CryptoUtils::compareStr($userRememberToken, $token)) {
+					
+					DAL\Factory::newQueryBuilder()->table('yabs_user_remember')->
+						where('user_remember_token = ? or user_remember_date < ?', [$token, [time() - 60 * 60 * 24 * 30, \PDO::PARAM_INT]])->
+						delete();
+					
+					return User::load($userId, true);
+				}
+			}
+		}
+		return false;
 	}
 	
 	public static function getUsers() {
@@ -131,6 +161,7 @@ class User {
 			DAL\Factory::newQueryBuilder()->table('yabs_entry')->where('user_id = :userId', ['userId' => [$this->user_id, \PDO::PARAM_INT]])->
 				update(['user_id' => [null, \PDO::PARAM_INT]]);
 			DAL\Factory::newQueryBuilder()->table('yabs_user_permission')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
+			$this->clearRememberTokens();
 			DAL\Factory::newQueryBuilder()->table('yabs_user')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
 			
 			Registry::getInstance()->db->commit();
@@ -138,6 +169,21 @@ class User {
 			Registry::getInstance()->db->rollBack();
 			throw $e;
 		}
+	}
+	
+	public function clearRememberTokens() {
+		DAL\Factory::newQueryBuilder()->table('yabs_user_remember')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
+	}
+	
+	public function generateRememberToken() {
+		$sr = new SecureRandom();
+		$token = $sr->getBytes(32); //256 bit token
+		DAL\Factory::newQueryBuilder()->table('yabs_user_remember')->insert([
+				'user_id' => [$this->user_id, \PDO::PARAM_INT],
+				'user_remember_token' => $token,
+				'user_remember_date' => time()
+			]);
+		return $token;
 	}
 	
 	public function getId() {
@@ -172,6 +218,15 @@ class User {
 		$this->user_mail = $value;
 	}
 	
+	/**
+	 * Set the users password
+	 * 
+	 * The password will be hashed
+	 * All remember login tokens will be expired
+	 * 
+	 * @param string $value
+	 * @throws ValidationException
+	 */
 	public function setPassword($value) {
 		if (empty($value)) {
 			throw new ValidationException(_('Invalid password.'));
@@ -179,6 +234,9 @@ class User {
 		
 		$hash = new BCrypt();
 		$this->user_password = $hash->hash($value);
+		
+		//Invalidate remember login tokens
+		$this->clearRememberTokens();
 	}
 	
 	public function checkPassword($password) {		

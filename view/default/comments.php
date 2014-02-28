@@ -35,6 +35,6 @@ use Application\Uri;
 <p><?php echo Forms::input('textarea', 'comment_text')?><br />
 Erlaubt HTML Tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre</p>
 
-<p><?php echo Forms::input('submit', 'comment_save', _('Save')); ?></p>
+<p><?php echo Forms::input('submit', 'submit', _('Save')); ?></p>
 
 </form>

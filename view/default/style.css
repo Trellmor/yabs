@@ -480,7 +480,7 @@ select {
 	width: 130px;
 	}
 
-#commentform input {
+#commentform input, #loginform input {
 	width: 170px;
 	padding: 2px;
 	margin: 5px 5px 1px 0;
@@ -489,22 +489,22 @@ select {
 #commentform textarea {
 	width: 100%;
 	padding: 2px;
+	height: 250px;
 	}
 
-#commentform #submit {
+#commentform #submit  {
 	margin: 0;
 	float: right;
 	}
 	
-#commentform .checkbox {
+#commentform .checkbox, #loginform .checkbox {
 	width: 14px;
 	margin-right: 169px; /* Don't aks my why it ain't 170px */
 	}
-	
-#commentform textarea {
-	height: 250px;
-	width: 100%;
-	}
+
+#loginform #submit {
+	margin: 0;
+}
 	
 /* End Form Elements */
 
