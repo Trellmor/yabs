@@ -48,7 +48,9 @@ Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 
 
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'index', 'admin/user/'));
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'edit', 'admin/user/([0-9]+)/'));
-Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'edit', 'admin/user/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'save', 'admin/user/([0-9]+)/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'delete', 'admin/user/delete/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'edit', 'admin/user/new/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'save', 'admin/user/new/'));
 
 ?>

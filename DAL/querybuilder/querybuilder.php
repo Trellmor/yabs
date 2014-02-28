@@ -154,6 +154,7 @@ abstract class QueryBuilder implements IQueryBuilder {
 			if ($transaction) {
 				Registry::getInstance()->db->rollBack();
 			}
+			throw $e;
 		}
 	}
 	

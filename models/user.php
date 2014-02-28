@@ -44,21 +44,8 @@ class User {
 			query(['user_id', 'user_name', 'user_mail', 'user_password', 'user_active']);
 		
 		if (($user = $sth->fetchObject(__CLASS__)) !== false) {
-			$hash = new BCrypt();
-			if ($hash->verify($password, $user->user_password)) {
-				if ($hash->needsRehash($user->user_password)) {
-					$user->setPassword($password);
-					$user->save();
-				}
+			if ($user->checkPassword($password)) {
 				return $user;
-			} else {
-				//TODO: Remove this once all users are updated
-				$md5 = new MD5();
-				if ($md5->verify($password, trim($user->user_password))) {
-					$user->setPassword($password);
-					$user->save();
-					return $user;
-				}
 			}
 		}
 		return false;
@@ -69,15 +56,15 @@ class User {
 		if ($onlyActive) {
 			$qb->where('user_active = ?', [[1, \PDO::PARAM_INT]]);
 		} 
-		return $qb->query(['user_id', 'user_name', 'user_mail', 'user_active'])->fetchObject(__CLASS__);
+		return $qb->query(['user_id', 'user_name', 'user_mail', 'user_active', 'user_password'])->fetchObject(__CLASS__);
 	}
 	
 	public static function getUsers() {
 		return $qb = DAL\Factory::newQueryBuilder()->table('yabs_user')->orderBy(['user_name ASC'])->
-			query(['user_id', 'user_name', 'user_mail', 'user_active'])->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
+			query(['user_id', 'user_name', 'user_mail', 'user_active', 'user_password'])->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	
-	public function save() {
+	public function save() { 
 		if ($this->user_id < 0) {
 			$this->insert();
 		} else {
@@ -85,25 +72,65 @@ class User {
 		}
 	}
 	
-	public function update() {
-		$values = 	[
-						'user_mail' => $this->user_mail,
-						'user_active' => $this->user_active
-					];
-					
-		if ($this->user_password != null) {
-			$values['user_password'] = $this->user_password;
+	private function insert() {
+		Registry::getInstance()->db->beginTransaction();
+		try {
+			$this->user_id = DAL\Factory::newQueryBuilder()->table('yabs_user')->insert([
+					'user_name' => $this->user_name,
+					'user_mail' => $this->user_mail,
+					'user_active' => $this->user_active,
+					'user_password' => $this->user_password
+			]);
+			
+			$this->savePermissions();		
+			
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollback();
+			throw $e;
 		}
-		
-		DAL\Factory::newQueryBuilder()->table('yabs_user')->where('user_id = :user_id', ['user_id' => [$this->user_id, \PDO::PARAM_INT]])->
-			update($values);
 	}
+	
+	private function update() {
+		Registry::getInstance()->db->beginTransaction();
+		try {
+			DAL\Factory::newQueryBuilder()->table('yabs_user')->where('user_id = :user_id', ['user_id' => [$this->user_id, \PDO::PARAM_INT]])->
+				update([
+					'user_name' => $this->user_name,
+					'user_mail' => $this->user_mail,
+					'user_active' => $this->user_active,
+					'user_password' => $this->user_password
+				]);
+			
+			
+			$this->savePermissions();		
+			
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollback();
+			throw $e;
+		}
+	}
+	
+	private function savePermissions() {
+		DAL\Factory::newQueryBuilder()->table('yabs_user_permission')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
+		
+		$sth = DAL\Factory::newQueryBuilder()->table('yabs_user_permission')->generateInsert(['user_id', 'user_permission']);
+		$sth->bindParam(':user_id', $this->user_id, \PDO::PARAM_INT);
+		$permission = null;
+		$sth->bindParam(':user_permission', $permission, \PDO::PARAM_INT);
+		
+		foreach ($this->permissions as $permission) {
+			$sth->execute();
+		}
+	} 
 	
 	public function delete() {
 		Registry::getInstance()->db->beginTransaction();
 		try {
 			DAL\Factory::newQueryBuilder()->table('yabs_entry')->where('user_id = :userId', ['userId' => [$this->user_id, \PDO::PARAM_INT]])->
 				update(['user_id' => [null, \PDO::PARAM_INT]]);
+			DAL\Factory::newQueryBuilder()->table('yabs_user_permission')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
 			DAL\Factory::newQueryBuilder()->table('yabs_user')->where('user_id = ?', [[$this->user_id, \PDO::PARAM_INT]])->delete();
 			
 			Registry::getInstance()->db->commit();
@@ -111,10 +138,6 @@ class User {
 			Registry::getInstance()->db->rollBack();
 			throw $e;
 		}
-	}
-	
-	public function hasPermission($permission) {
-		return array_search($permission, $this->permissions) !== false;
 	}
 	
 	public function getId() {
@@ -128,6 +151,12 @@ class User {
 	public function setName($value) {
 		if (empty($value)) {
 			throw new ValidationException(_('Name is required.'));
+		}
+		
+		if (DAL\Factory::newQueryBuilder()->table('yabs_user')->
+				where('user_name = ? and user_id != ?', [$value, [$this->user_id, \PDO::PARAM_INT]])->
+				query(['count(*)'])->fetchColumn(0) > 0) {
+			throw new ValidationException(_('There is already an user with this name.'));
 		}
 		$this->user_name = $value;
 	}
@@ -152,12 +181,50 @@ class User {
 		$this->user_password = $hash->hash($value);
 	}
 	
+	public function checkPassword($password) {		
+		$hash = new BCrypt();
+		
+		if ($hash->verify($password, $this->user_password)) {
+			if ($hash->needsRehash($this->user_password)) {
+				$this->setPassword($password);
+				$this->save();
+			}
+			return true;
+		} else {
+			//TODO: Remove this once all users are updated
+			$md5 = new MD5();
+			if ($md5->verify($password, trim($this->user_password))) {
+				$this->setPassword($password);
+				$this->save();
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public function isActive() {
 		return (bool) $this->user_active;
 	}
 	
 	public function setActive($value) {
 		$this->user_active = (int) $value;
+	}
+	
+	public function hasPermission($permission) {
+		return array_search($permission, $this->permissions) !== false;
+	}
+	
+	public function setPermission($permission, $value) {
+		if ($value) {
+			if (!$this->hasPermission($permission)) {
+				$this->permissions[] = $permission;
+			}
+		} else {
+			if (($index = array_search($permission, $this->permissions)) !== false) {
+				unset($this->permissions[$index]);
+			}
+		}
 	}
 }
 

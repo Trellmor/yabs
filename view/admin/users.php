@@ -47,5 +47,7 @@ $view->load('modal');
     </tbody>
   </table>
   
-  </div>
+ </div>
+ 
+ <a class="btn btn-default" href="<?php echo Uri::to('admin/user/new'); ?>">New</a>
 <?php $view->load('footer'); ?>
