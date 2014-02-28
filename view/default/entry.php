@@ -1,7 +1,7 @@
 <?php
 use View\HTML;
 use Application\Uri;
-
+$view->assignVar('wideColumn', true);
 $view->load('header');
 ?>
 <div class="post">

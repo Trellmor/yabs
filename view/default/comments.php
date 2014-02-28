@@ -26,11 +26,13 @@ use Application\Uri;
 <?php $view->handleMessages(); ?>
 <h3 id="respond"><a name="add"></a><?php echo _('New comment'); ?></h3>
 
-<?php echo Forms::form(Uri::to('comment/add/')->param('entry_id', $entry->getId())); ?>
-<p><?php echo Forms::input('text', 'comment_author'); ?> <label for="comment_author"><small><?php echo _('Name'); ?></small></label></p>
-<p><?php echo Forms::input('text', 'comment_mail'); ?> <label for="comment_mail"><small><?php echo _('E-Mail'); ?></small></label></p>
-<p><?php echo Forms::input('text', 'comment_url'); ?> <label for="comment_url"><small><?php echo _('Homepage'); ?></small></label></p>
-<p><textarea id="comment_text" name="comment_text" rows="10"></textarea><br />
+<?php echo Forms::form(Uri::to('comment/add/')->param('entry_id', $entry->getId()), ['id' => 'commentform']); ?>
+<p><?php echo Forms::input('text', 'comment_author', $commentAuthor->getName()); ?> <label for="comment_author"><small><?php echo _('Name'); ?></small></label></p>
+<p><?php echo Forms::input('text', 'comment_mail', $commentAuthor->getMail()); ?> <label for="comment_mail"><small><?php echo _('E-Mail'); ?></small></label></p>
+<p><?php echo Forms::input('text', 'comment_url', $commentAuthor->getUrl()); ?> <label for="comment_url"><small><?php echo _('Homepage'); ?></small></label></p>
+<p><?php echo Forms::input('checkbox', 'comment_remember', $commentAuthor->isRemember(), ['class' => 'checkbox']); ?><label for="comment_remember"><small><?php echo _('Remember me'); ?></small></label></p>
+
+<p><?php echo Forms::input('textarea', 'comment_text')?><br />
 Erlaubt HTML Tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre</p>
 
 <p><?php echo Forms::input('submit', 'comment_save', _('Save')); ?></p>

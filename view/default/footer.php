@@ -5,6 +5,7 @@ use View\HTML;
 ?>
 </div>
 
+<?php if (!isset($wideColumn) || !$wideColumn): ?>
 <div id="sidebar">
 	<ul>
 		<li class="pagenav"><h2>{KUBRICK_MENU_TITLE}</h2>
@@ -19,6 +20,8 @@ use View\HTML;
 		</li>			
 	</ul>
 </div>
+
+<?php endif; ?>
 
 <hr />
 

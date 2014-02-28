@@ -1,13 +1,13 @@
 <?php namespace Controllers;
 
-use Models\Message;
-
 use Application\Registry;
 use Application\CSRF;
 use Application\Uri;
 use Application\Input;
 use Application\Exceptions\ValidationException;
 use Models;
+use Models\CommentAuthor;
+use Models\Message;
 use Controllers\Controller;
 use View\HTML;
 
@@ -32,6 +32,7 @@ class Comment extends Controller {
 		$post->filter('comment_author', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$post->filter('comment_mail', FILTER_SANITIZE_EMAIL);
 		$post->filter('comment_url', FILTER_SANITIZE_URL);
+		$post->filter('comment_remember', FILTER_VALIDATE_BOOLEAN);
 				
 		if (empty($post->comment_url)) $post->comment_url = null;
 		$post->comment_text = $this->loadHTMLPurifier()->purify($post->comment_text);
@@ -54,6 +55,14 @@ class Comment extends Controller {
 			}
 			$comment->save();
 		
+			$commentAuthor = new CommentAuthor();
+			$commentAuthor->setName($comment->getAuthor());
+			$commentAuthor->setMail($comment->getMail());
+			$commentAuthor->setUrl($comment->getUrl());
+			$commentAuthor->setRemember($post->comment_remember);
+			$commentAuthor->save();
+			
+			Message::save(_('Comment saved.'), Message::LEVEL_SUCCESS);
 			$this->redirect(Uri::to('blog/' . HTML::filter($entry->getUri())) . '#com' . $comment->getId());
 		} catch (ValidationException $e) {
 			$post->save();

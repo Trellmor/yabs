@@ -27,4 +27,4 @@ use Application\Uri;
 
 <hr />
 
-<div id="content" class="narrowcolumn">
+<div id="content" class="<?php echo ((isset($wideColumn) && $wideColumn === true) ? 'widecolumn' : 'narrowcolumn'); ?>">

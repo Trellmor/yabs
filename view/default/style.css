@@ -154,7 +154,7 @@ h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar
 #commentform p {
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	}
-
+	
 .commentmetadata {
 	font-weight: normal;
 	}
@@ -500,6 +500,12 @@ select {
 	width: 14px;
 	margin-right: 169px; /* Don't aks my why it ain't 170px */
 	}
+	
+#commentform textarea {
+	height: 250px;
+	width: 100%;
+	}
+	
 /* End Form Elements */
 
 

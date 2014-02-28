@@ -137,12 +137,14 @@ abstract class QueryBuilder implements IQueryBuilder {
 			Registry::getInstance()->db->beginTransaction();
 			$transaction = true;
 		}
+		
 		try {
 			if ($sth->execute()) {
 				$result = Registry::getInstance()->db->lastInsertId();				
 				if ($transaction) {
 					Registry::getInstance()->db->commit();
 				}
+				
 				return $result;
 			} else {
 				if ($transaction) {

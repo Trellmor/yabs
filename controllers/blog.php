@@ -4,6 +4,7 @@ use Application\Registry;
 use Application\Uri;
 use Models\Entry;
 use Models\Comment;
+use Models\CommentAuthor;
 
 class Blog extends Controller {
 	
@@ -35,7 +36,9 @@ class Blog extends Controller {
 			
 			$comments = array();
 			$comments = Comment::getCommentsForEntry($entry->getId());
+						
 			$this->view->assignVar('comments', $comments);
+			$this->view->assignVar('commentAuthor', new CommentAuthor());
 			$this->view->assignVar('page_title', $entry->getTitle() . ' - ' . Registry::getInstance()->settings->getSiteTitle());
 						
 			$this->view->load('entry');

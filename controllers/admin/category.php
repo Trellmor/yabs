@@ -51,7 +51,6 @@ class Category extends AdminController {
 			$input->filter('category_name', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 			try {
 				$category->setName($input->category_name);
-				var_dump($category);
 				$category->save();
 				
 				Message::save(_('Category saved.'), Message::LEVEL_SUCCESS);
