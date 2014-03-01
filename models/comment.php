@@ -1,5 +1,7 @@
 <?php namespace Models;
 
+use Application\Registry;
+
 use DAL;
 use Application\Exceptions\ValidationException;
 
@@ -65,15 +67,33 @@ class Comment {
 	}
 	
 	public function save() {
-		if ($this->comment_id < 0) {
-			$this->insert();
-		} else {
-			$this->update();
+		Registry::getInstance()->db->beginTransaction();
+		try {
+			if ($this->comment_id < 0) {
+				$this->insert();
+			} else {
+				$this->update();
+			}
+			DAL\Factory::Dal()->Update_EntryCommentCount($this->entry_id);
+			
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollBack();
+			throw $e;
 		}
 	}
 	
 	public function delete() {
-		DAL\Factory::newQueryBuilder()->table('yabs_comment')->where('comment_id = ?', [[$this->comment_id, \PDO::PARAM_INT]])->delete();
+		Registry::getInstance()->db->beginTransaction();
+		try {			
+			DAL\Factory::newQueryBuilder()->table('yabs_comment')->where('comment_id = ?', [[$this->comment_id, \PDO::PARAM_INT]])->delete();
+			DAL\Factory::Dal()->Update_EntryCommentCount($this->entry_id);
+			
+			Registry::getInstance()->db->commit();
+		} catch (\PDOException $e) {
+			Registry::getInstance()->db->rollBack();
+			throw $e;
+		}
 	}
 	
 	private function insert() {

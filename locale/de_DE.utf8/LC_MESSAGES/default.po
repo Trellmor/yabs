@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yabs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 19:19+0100\n"
-"PO-Revision-Date: 2014-03-01 19:20+0100\n"
+"POT-Creation-Date: 2014-03-01 20:00+0100\n"
+"PO-Revision-Date: 2014-03-01 20:00+0100\n"
 "Last-Translator: Daniel Triendl <daniel@pew.cc>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -15,10 +15,11 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Country: GERMANY\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: models/user.php:201
-#: models/comment.php:121
+#: models/comment.php:141
 msgid "Name is required."
 msgstr "Es muss ein Name angegeben werden."
 
@@ -27,7 +28,7 @@ msgid "There is already an user with this name."
 msgstr "Es existiert bereits ein Benutzer mit diesem Namen."
 
 #: models/user.php:218
-#: models/comment.php:132
+#: models/comment.php:152
 msgid "Invalid E-Mail address."
 msgstr "Ungültige E-Mail Addresse"
 
@@ -47,11 +48,11 @@ msgstr "Ungültiger Bildname."
 msgid "Uploaded file is not a valid image type."
 msgstr "Datei ist keine Bilddatei."
 
-#: models/comment.php:143
+#: models/comment.php:163
 msgid "Invalid Homepage."
 msgstr "Ungültige Homepage."
 
-#: models/comment.php:154
+#: models/comment.php:174
 msgid "Text is required."
 msgstr "Es muss ein Text eingegeben werden."
 
@@ -63,7 +64,7 @@ msgstr "Es muss eine URI für den Eintrag angegeben werden."
 msgid "Entry URI already in use."
 msgstr "Es existiert bereits ein Eintrag mit dieser URI."
 
-#: controllers/blog.php:46
+#: controllers/blog.php:45
 msgid "Entry not found."
 msgstr "Eintrag nicht gefunden."
 
@@ -256,6 +257,12 @@ msgstr "Passwort"
 #: view/default/login.php:23
 msgid "Remember login"
 msgstr "Eingeloggt bleiben"
+
+#: view/default/entries.php:22
+msgid "Comment"
+msgid_plural "Comments"
+msgstr[0] "Kommentar"
+msgstr[1] "Kommentare"
 
 #: view/default/entries.php:27
 msgid "Newer"

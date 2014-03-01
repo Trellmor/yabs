@@ -13,6 +13,7 @@ class Entry {
 	private $entry_content = NULL;
 	private $entry_date;
 	private $entry_uri;
+	private $entry_commentcount;
 	private $user_id;
 	private $user_name;
 	private $entry_visible;
@@ -33,19 +34,26 @@ class Entry {
 		return $qb;
 	}
 	
+	private static $columns = [
+			'e.entry_id',
+			'e.entry_title',
+			'e.entry_teaser',
+			'e.entry_content',
+			'e.entry_date',
+			'e.entry_uri',
+			'e.entry_visible',
+			'e.entry_commentcount',
+			'u.user_id',
+			'u.user_name',
+			'c.category_id',
+			'c.category_name'
+		];
+	
 	public static function getVisibleEntries($limit, $offset = 0) {
 		$qb = static::getAllVisibleEntries();		
 		$qb->limit($limit, $offset);
 		$qb->orderBy(['e.entry_date DESC']);
-		$sth = $qb->query([ 
-				'e.entry_title', 
-				'e.entry_teaser', 
-				'e.entry_content',
-				'e.entry_date', 
-				'e.entry_uri', 
-				'u.user_name',
-				'c.category_name'
-			]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	
@@ -54,88 +62,35 @@ class Entry {
 		$qb->where('c.category_name = ?', [$categoryName]);
 		$qb->limit($limit, $offset);
 		$qb->orderBy(['e.entry_date DESC']);
-		$sth = $qb->query([
-				'e.entry_title',
-				'e.entry_teaser',
-				'e.entry_content',
-				'e.entry_date',
-				'e.entry_uri',
-				'u.user_name',
-				'c.category_name'
-				]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}	
 	
 	public static function getEntries($limit, $offset = 0) {
 		$qb = static::getAllEntries();
 		$qb->limit($limit, $offset)->orderBy(['e.entry_id DESC']);
-		$sth = $qb->query([
-				'e.entry_id', 
-				'e.entry_title', 
-				'e.entry_teaser', 
-				'e.entry_content',
-				'e.entry_date', 
-				'e.entry_uri', 
-				'e.entry_visible',
-				'u.user_id',
-				'u.user_name',
-				'c.category_id',
-				'c.category_name'
-			]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	
 	public static function getEntriesForUser($userId, $limit, $offset = 0) {
 		$qb = static::getAllEntries();
 		$qb->where('user_id = ?', [[$userId, \PDO::PARAM_INT]])->limit($limit, $offset)->orderBy(['e.entry_date DESC']);
-		$sth = $qb->query([
-				'e.entry_id', 
-				'e.entry_title', 
-				'e.entry_teaser', 
-				'e.entry_content',
-				'e.entry_date', 
-				'e.entry_uri', 
-				'e.entry_visible',
-				'u.user_id',
-				'u.user_name',
-				'c.category_id',
-				'c.category_name'
-			]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	
 	public static function getEntry($entryId) {
 		$qb = static::getAllEntries();
 		$qb->where('e.entry_id = ?', [[$entryId, \PDO::PARAM_INT]]);
-		$sth = $qb->query([
-				'e.entry_id', 
-				'e.entry_title', 
-				'e.entry_teaser', 
-				'e.entry_content', 
-				'e.entry_date', 
-				'e.entry_uri', 
-				'e.entry_visible',
-				'u.user_id',
-				'u.user_name',
-				'c.category_id',
-				'c.category_name'
-			]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchObject(__CLASS__);
 	}
 	
 	public static function getEntryByUri($uri) {
 		$qb = static::getAllVisibleEntries();
 		$qb->where('e.entry_uri = ?', [$uri]);
-		$sth = $qb->query([
-				'e.entry_id',
-				'e.entry_title', 
-				'e.entry_teaser', 
-				'e.entry_content', 
-				'e.entry_date', 
-				'e.entry_uri',
-				'u.user_name',
-				'c.category_name'
-			]);
+		$sth = $qb->query(static::$columns);
 		return $sth->fetchObject(__CLASS__);
 	}
 	
@@ -271,6 +226,10 @@ class Entry {
 	
 	public function setVisible($value) {
 		$this->entry_visible = (int) $value;
+	}
+	
+	public function getCommentCount() {
+		return $this->entry_commentcount;
 	}
 	
 	public function getUserId() {

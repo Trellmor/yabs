@@ -44,6 +44,24 @@ abstract class DAL {
 				LIMIT 0, 5";
 		return Registry::getInstance()->db->query($sql);
 	}
+	
+	public function Update_EntryCommentCount($entryId) {
+		$sql = "UPDATE yabs_entry SET
+					entry_commentcount = (
+						SELECT
+							count(*)
+						FROM yabs_comment
+						WHERE
+							comment_visible = 1 and
+							comment_spam = 0 and
+							entry_id = :entry_id
+					)
+				WHERE
+					entry_id = :entry_id";
+		$sth = Registry::getInstance()->db->prepare($sql);
+		$sth->bindValue('entry_id', $entryId, \PDO::PARAM_INT);
+		$sth->execute();
+	}
 }
 
 

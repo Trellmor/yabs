@@ -19,7 +19,7 @@ $view->load('header');
 			<?php endif; ?>
 	</div>
 
-	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
+	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | <?php echo $entry->getCommentCount(); ?> <?php echo ngettext('Comment', 'Comments', $entry->getcommentCount()) ?> &#187;</p>
 </div>
 <?php endforeach; ?>
 			
