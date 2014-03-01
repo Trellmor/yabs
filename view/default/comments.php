@@ -16,7 +16,7 @@ use Application\Uri;
 
 			<small class="commentmetadata"><a name="com<?php echo $comment->getId(); ?>" href="#com<?php echo $comment->getId(); ?>"><?php HTML::out(date($settings->getDateTimeFormat(), $comment->getDate())); ?></a></small>
 
-			<p><?php echo $comment->getText(); ?></p>
+			<?php echo $comment->getText(); ?>
 
 		</li>
 <?php endforeach; ?>
@@ -33,7 +33,7 @@ use Application\Uri;
 <p><?php echo Forms::input('checkbox', 'comment_remember', $commentAuthor->isRemember(), ['class' => 'checkbox']); ?><label for="comment_remember"><small><?php echo _('Remember me'); ?></small></label></p>
 
 <p><?php echo Forms::input('textarea', 'comment_text')?><br />
-Erlaubt HTML Tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre</p>
+<p><?php echo _('Allowed HTML tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre');?></p>
 
 <p><?php echo Forms::input('submit', 'submit', _('Save')); ?></p>
 

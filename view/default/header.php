@@ -17,7 +17,6 @@ use Application\Uri;
 
 <div id="page">
 
-
 <div id="header">
 	<div id="headerimg">
 		<h1><a href="<?php HTML::out(Uri::to('/')); ?>"><?php HTML::out($settings->getSiteTitle()); ?></a></h1>

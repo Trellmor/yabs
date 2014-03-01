@@ -7,7 +7,7 @@ $view->load('header');
 <?php foreach ($entries as $entry): ?>
 <div class="post">
 	<h2><a href="<?php HTML::out(Uri::to('blog/' . $entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
-	<small><?php Html::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> by <?php HTML::out($entry->getUserName()); ?></small>
+	<small><?php Html::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> <?php echo _('by'); ?> <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
 			<?php if ($entry->hasTeaser()): ?>
@@ -19,7 +19,7 @@ $view->load('header');
 			<?php endif; ?>
 	</div>
 
-	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | <?php echo $entry->getCommentCount(); ?> <?php echo ngettext('Comment', 'Comments', $entry->getcommentCount()) ?> &#187;</p>
+	<p class="postmetadata"><?php echo _('Posted in'); ?> <?php HTML::out($entry->getCategoryName()); ?> | <a href="<?php HTML::out(Uri::to('blog/' . $entry->getUri()) . '#comments'); ?>"><?php echo $entry->getCommentCount(); ?> <?php echo ngettext('Comment', 'Comments', $entry->getcommentCount()) ?> &#187;</a></p>
 </div>
 <?php endforeach; ?>
 			

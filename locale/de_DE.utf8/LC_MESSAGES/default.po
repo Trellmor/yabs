@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yabs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 20:00+0100\n"
-"PO-Revision-Date: 2014-03-01 20:00+0100\n"
+"POT-Creation-Date: 2014-03-01 21:41+0100\n"
+"PO-Revision-Date: 2014-03-01 21:42+0100\n"
 "Last-Translator: Daniel Triendl <daniel@pew.cc>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -18,180 +18,182 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: models/user.php:201
-#: models/comment.php:141
+#: models/user.php:219
+#: models/comment.php:158
 msgid "Name is required."
 msgstr "Es muss ein Name angegeben werden."
 
-#: models/user.php:207
+#: models/user.php:225
 msgid "There is already an user with this name."
 msgstr "Es existiert bereits ein Benutzer mit diesem Namen."
 
-#: models/user.php:218
-#: models/comment.php:152
+#: models/user.php:236
+#: models/comment.php:169
 msgid "Invalid E-Mail address."
 msgstr "Ungültige E-Mail Addresse"
 
-#: models/user.php:234
+#: models/user.php:252
 msgid "Invalid password."
 msgstr "Ungültiges Passwort."
 
-#: models/image.php:38
+#: models/image.php:56
 msgid "Unable to determine image type of uploaded file."
 msgstr "Der Bildtyp konnte nicht bestimmt werden."
 
-#: models/image.php:45
+#: models/image.php:63
 msgid "Invalid image name."
 msgstr "Ungültiger Bildname."
 
-#: models/image.php:59
+#: models/image.php:77
 msgid "Uploaded file is not a valid image type."
 msgstr "Datei ist keine Bilddatei."
 
-#: models/comment.php:163
+#: models/comment.php:180
 msgid "Invalid Homepage."
 msgstr "Ungültige Homepage."
 
-#: models/comment.php:174
+#: models/comment.php:191
 msgid "Text is required."
 msgstr "Es muss ein Text eingegeben werden."
 
-#: models/entry.php:246
+#: models/entry.php:217
 msgid "Entry URI cannot be empty."
 msgstr "Es muss eine URI für den Eintrag angegeben werden."
 
-#: models/entry.php:254
+#: models/entry.php:225
 msgid "Entry URI already in use."
 msgstr "Es existiert bereits ein Eintrag mit dieser URI."
 
-#: controllers/blog.php:45
+#: controllers/blog.php:63
 msgid "Entry not found."
 msgstr "Eintrag nicht gefunden."
 
-#: controllers/comment.php:27
-#: controllers/comment.php:30
+#: controllers/comment.php:44
+#: controllers/comment.php:47
 msgid "Invalid entry."
 msgstr "Ungültiger Eintrag."
 
-#: controllers/comment.php:66
+#: controllers/comment.php:83
 msgid "Commment was detected to contain spam and is awaiting moderation."
 msgstr "Kommentar wurde als Spam markiert und muss von einem Administrator freigeschalten werden."
 
-#: controllers/comment.php:68
+#: controllers/comment.php:85
+#: controllers/admin/comment.php:63
+#: controllers/admin/comment.php:85
 msgid "Comment saved."
 msgstr "Kommentar wurde gespeichert."
 
-#: controllers/login.php:64
+#: controllers/login.php:81
 msgid "Login failed."
 msgstr "Login ist fehlgeschlagen."
 
-#: controllers/login.php:100
+#: controllers/login.php:117
 msgid "Logged out."
 msgstr "Ausgeloggt."
 
-#: controllers/admin/user.php:17
-#: controllers/admin/comment.php:34
-#: controllers/admin/comment.php:49
-#: controllers/admin/comment.php:56
-#: controllers/admin/comment.php:71
-#: controllers/admin/settings.php:21
-#: controllers/admin/entry.php:119
-#: controllers/admin/entry.php:169
+#: controllers/admin/user.php:35
+#: controllers/admin/comment.php:52
+#: controllers/admin/comment.php:67
+#: controllers/admin/comment.php:74
+#: controllers/admin/comment.php:89
+#: controllers/admin/settings.php:39
+#: controllers/admin/entry.php:136
+#: controllers/admin/entry.php:186
 msgid "Save failed."
 msgstr "Speichern ist fehlgeschlagen."
 
-#: controllers/admin/user.php:33
+#: controllers/admin/user.php:51
 msgid "New password and confirmation didn't match."
 msgstr "Das neue Passwort stimmt nicht mit der Passwortbestätigung überein."
 
-#: controllers/admin/user.php:37
+#: controllers/admin/user.php:55
 msgid "Old password is wrong."
 msgstr "Das alte Passwort ist falsch."
 
-#: controllers/admin/user.php:46
-#: controllers/admin/user.php:172
+#: controllers/admin/user.php:64
+#: controllers/admin/user.php:190
 msgid "Profile saved."
 msgstr "Profil wurde gespeichert."
 
-#: controllers/admin/user.php:71
-#: controllers/admin/user.php:124
-#: controllers/admin/image.php:49
-#: controllers/admin/category.php:39
-#: controllers/admin/category.php:71
-#: controllers/admin/comment.php:79
-#: controllers/admin/entry.php:89
+#: controllers/admin/user.php:89
+#: controllers/admin/user.php:142
+#: controllers/admin/image.php:67
+#: controllers/admin/category.php:57
+#: controllers/admin/category.php:89
+#: controllers/admin/comment.php:97
+#: controllers/admin/entry.php:106
 msgid "Delete failed."
 msgstr "Löschen ist fehlgeschlagen."
 
-#: controllers/admin/user.php:83
+#: controllers/admin/user.php:101
 msgid "You cannot delete yourself."
 msgstr "Der eigene Benutzer kann nicht gelöscht werden."
 
-#: controllers/admin/user.php:87
+#: controllers/admin/user.php:105
 msgid "User deleted."
 msgstr "Benutzer wurde gelöscht."
 
-#: controllers/admin/user.php:90
-#: controllers/admin/user.php:114
+#: controllers/admin/user.php:108
+#: controllers/admin/user.php:132
 msgid "User not found."
 msgstr "Benutzer nicht gefunden."
 
-#: controllers/admin/user.php:159
+#: controllers/admin/user.php:177
 msgid "You cannot deactivate yourself."
 msgstr "Der eigene Benutzer kann nicht deaktiviert werden."
 
-#: controllers/admin/image.php:56
+#: controllers/admin/image.php:74
 msgid "Upload failed."
 msgstr "Upload ist fehlgeschlagen."
 
-#: controllers/admin/image.php:62
+#: controllers/admin/image.php:80
 msgid "Image saved."
 msgstr "Bild wurde gespeichert."
 
-#: controllers/admin/image.php:77
+#: controllers/admin/image.php:95
 msgid "Image not found."
 msgstr "Bild nicht gefunden."
 
-#: controllers/admin/category.php:32
-#: controllers/admin/category.php:64
-#: controllers/admin/category.php:86
+#: controllers/admin/category.php:50
+#: controllers/admin/category.php:82
+#: controllers/admin/category.php:104
 msgid "Category not found."
 msgstr "Kategorie nicht gefunden."
 
-#: controllers/admin/category.php:56
+#: controllers/admin/category.php:74
 msgid "Category saved."
 msgstr "Kategorie wurde gespeichert."
 
-#: controllers/admin/category.php:83
+#: controllers/admin/category.php:101
 msgid "Category deleted."
 msgstr "Kategorie wurde gelöscht."
 
-#: controllers/admin/comment.php:41
-#: controllers/admin/comment.php:63
-#: controllers/admin/comment.php:96
-#: controllers/admin/comment.php:123
+#: controllers/admin/comment.php:59
+#: controllers/admin/comment.php:81
+#: controllers/admin/comment.php:114
+#: controllers/admin/comment.php:141
 msgid "Comment not found."
 msgstr "Kommentar nicht gefunden."
 
-#: controllers/admin/comment.php:93
+#: controllers/admin/comment.php:111
 msgid "Comment deleted."
 msgstr "Kommentar wurde gelöscht."
 
-#: controllers/admin/settings.php:46
+#: controllers/admin/settings.php:64
 msgid "Settings saved."
 msgstr "Einstellungen wurden gespeichert."
 
-#: controllers/admin/admincontroller.php:37
-#: controllers/admin/entry.php:48
-#: controllers/admin/entry.php:80
+#: controllers/admin/admincontroller.php:55
+#: controllers/admin/entry.php:65
+#: controllers/admin/entry.php:97
 msgid "Access denied."
 msgstr "Zugriff verweigert."
 
-#: controllers/admin/entry.php:103
+#: controllers/admin/entry.php:120
 msgid "Entry deleted."
 msgstr "Eintrag wurde gelöscht."
 
-#: controllers/admin/entry.php:137
+#: controllers/admin/entry.php:154
 msgid "Entry saved."
 msgstr "Eintrag wurde gespeichert."
 
@@ -203,6 +205,10 @@ msgstr "Kommentare"
 #: view/default/widget_latestcomments.php:9
 msgid "By"
 msgstr "Von"
+
+#: view/default/widget_latestcomments.php:11
+msgid "In"
+msgstr "In"
 
 #: view/default/widget_latestentry.php:9
 #: view/default/entries.php:16
@@ -233,6 +239,10 @@ msgstr "Homepage"
 msgid "Remember me"
 msgstr "Daten merken"
 
+#: view/default/comments.php:36
+msgid "Allowed HTML tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre"
+msgstr "Erlaubte HTML tags: a, b, i, u, strike, blockquote, code, br, p, strong, pre"
+
 #: view/default/comments.php:38
 msgid "Save"
 msgstr "Speichern"
@@ -257,6 +267,14 @@ msgstr "Passwort"
 #: view/default/login.php:23
 msgid "Remember login"
 msgstr "Eingeloggt bleiben"
+
+#: view/default/entries.php:10
+msgid "by"
+msgstr "von"
+
+#: view/default/entries.php:22
+msgid "Posted in"
+msgstr "Gepostet in"
 
 #: view/default/entries.php:22
 msgid "Comment"
@@ -444,6 +462,7 @@ msgid "Teaser"
 msgstr "Anreißer"
 
 #: view/admin/profile.php:8
+#: view/admin/header.php:42
 msgid "Profile"
 msgstr "Profil"
 
