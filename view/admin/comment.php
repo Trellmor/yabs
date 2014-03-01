@@ -5,11 +5,11 @@ use Application\Uri;
 <h4><?php echo _('Name'); ?></h4>
 <p><?php HTML::out($comment->getAuthor()); ?></p>
 
-<h4><?php echo _('Mail'); ?></h4>
+<h4><?php echo _('E-Mail'); ?></h4>
 <p><a href="mailto:<?php HTML::out($comment->getMail()); ?>"><?php HTML::out($comment->getMail()); ?></a></p>
 
 <?php if ($comment->getUrl() != null): ?>
-<h4><?php echo _('URL'); ?></h4>
+<h4><?php echo _('Homepage'); ?></h4>
 <p><a href="<?php HTML::out($comment->getUrl()); ?>"><?php HTML::out($comment->getUrl()); ?></a></p>
 <?php endif; ?>
 

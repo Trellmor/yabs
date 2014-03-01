@@ -83,6 +83,14 @@ class Settings {
 		$this->datetime_format = $value;
 	}
 	
+	public function getLanguage() {
+		return $this->language;
+	}
+	
+	public function setLanguage($value) {
+		$this->language = $value;
+	}
+	
 	public function getAkismet() {
 		return $this->akismet;
 	}

@@ -53,13 +53,13 @@ class Image extends AdminController {
 		
 		try {
 			if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-				throw new ValidationException(_('Upload failed'));
+				throw new ValidationException(_('Upload failed.'));
 			}
 			
 			$image = new Models\Image();
 			$image->upload($_FILES['file']['name'], $_FILES['file']['tmp_name']);
 			
-			Message::save(_('Image saved'), Message::LEVEL_SUCCESS);
+			Message::save(_('Image saved.'), Message::LEVEL_SUCCESS);
 			$this->redirect(Uri::to('admin/image/' . $image->getId()));
 		} catch (ValidationException $e) {
 			Message::save($e->getMessage(), Message::LEVEL_ERROR);

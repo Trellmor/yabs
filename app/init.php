@@ -72,7 +72,7 @@ require_once APP_ROOT . '/controllers/routes.php';
 /**
  * Internationalization
  */
-setlocale(LC_ALL, 'de_DE.utf8');
+setlocale(LC_ALL, Registry::getInstance()->settings->getLanguage() . '.utf8');
 bindtextdomain('default', APP_ROOT . '/locale');
 bind_textdomain_codeset('default', 'UTF-8');
 textdomain('default');

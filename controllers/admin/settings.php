@@ -28,6 +28,7 @@ class Settings extends AdminController {
 		$input->filter('site_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$input->filter('entries_per_page', FILTER_SANITIZE_NUMBER_INT);
 		$input->filter('datetime_format', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter('language', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_LOW);
 		
 		$settings = Models\Settings::load();
 		try {
@@ -36,6 +37,7 @@ class Settings extends AdminController {
 			$settings->setSiteTitle($input->site_title);
 			$settings->setEntriesPerPage($input->entries_per_page);
 			$settings->setDateTimeFormat($input->datetime_format);
+			$settings->setLanguage($input->language);
 			
 			$settings->save();
 			Message::save(_('Settings saved.'), Message::LEVEL_SUCCESS);

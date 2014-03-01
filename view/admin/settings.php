@@ -14,6 +14,11 @@ $view->load('header');
 </div>
 
 <div class="form-group">
+  <label for="datetime_format"><?php echo _('Language'); ?></label>
+  <?php echo Forms::input('text', 'language', $settings->getLanguage(), ['class' => 'form-control']) ?>
+</div>
+
+<div class="form-group">
   <label for="entries_per_page"><?php echo _('Entries per page'); ?></label>
   <?php echo Forms::input('text', 'entries_per_page', $settings->getEntriesPerPage(), ['class' => 'form-control']) ?>
 </div>

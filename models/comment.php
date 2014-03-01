@@ -140,7 +140,7 @@ class Comment {
 	
 	public function setUrl($value) {
 		if ($value !== null && filter_var($value, FILTER_VALIDATE_URL) === false) {
-			throw new ValidationException(_('Invalid URL')); 
+			throw new ValidationException(_('Invalid Homepage.')); 
 		}
 		$this->comment_url = $value;
 	}

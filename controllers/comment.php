@@ -62,7 +62,11 @@ class Comment extends Controller {
 			$commentAuthor->setRemember($post->comment_remember);
 			$commentAuthor->save();
 			
-			Message::save(_('Comment saved.'), Message::LEVEL_SUCCESS);
+			if ($comment->isSpam()) {
+				Message::save(_('Commment was detected to contain spam and is awaiting moderation.'), Message::LEVEL_WARNING);	
+			} else {
+				Message::save(_('Comment saved.'), Message::LEVEL_SUCCESS);
+			}
 			$this->redirect(Uri::to('blog/' . $entry->getEncodedUri()) . '#com' . $comment->getId());
 		} catch (ValidationException $e) {
 			$post->save();

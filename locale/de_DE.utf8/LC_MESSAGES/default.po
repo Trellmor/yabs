@@ -1,0 +1,474 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: yabs\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-01 17:41+0100\n"
+"PO-Revision-Date: 2014-03-01 17:43+0100\n"
+"Last-Translator: Daniel Triendl <daniel@pew.cc>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ../../../\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: models/user.php:201
+#: models/comment.php:121
+msgid "Name is required."
+msgstr "Es muss ein Name angegeben werden."
+
+#: models/user.php:207
+msgid "There is already an user with this name."
+msgstr "Es existiert bereits ein Benutzer mit diesem Namen."
+
+#: models/user.php:218
+#: models/comment.php:132
+msgid "Invalid E-Mail address."
+msgstr "Ungültige E-Mail Addresse"
+
+#: models/user.php:234
+msgid "Invalid password."
+msgstr "Ungültiges Passwort."
+
+#: models/image.php:38
+msgid "Unable to determine image type of uploaded file."
+msgstr "Der Bildtyp konnte nicht bestimmt werden."
+
+#: models/image.php:45
+msgid "Invalid image name."
+msgstr "Ungültiger Bildname."
+
+#: models/image.php:59
+msgid "Uploaded file is not a valid image type."
+msgstr "Datei ist keine Bilddatei."
+
+#: models/comment.php:143
+msgid "Invalid Homepage."
+msgstr "Ungültige Homepage."
+
+#: models/comment.php:154
+msgid "Text is required."
+msgstr "Es muss ein Text eingegeben werden."
+
+#: models/entry.php:233
+msgid "Entry URI cannot be empty."
+msgstr "Es muss eine URI für den Eintrag angegeben werden."
+
+#: models/entry.php:241
+msgid "Entry URI already in use."
+msgstr "Es existiert bereits ein Eintrag mit dieser URI."
+
+#: controllers/blog.php:46
+msgid "Entry not found."
+msgstr "Eintrag nicht gefunden."
+
+#: controllers/comment.php:27
+#: controllers/comment.php:30
+msgid "Invalid entry."
+msgstr "Ungültiger Eintrag."
+
+#: controllers/comment.php:66
+msgid "Commment was detected to contain spam and is awaiting moderation."
+msgstr "Kommentar wurde als Spam markiert und muss von einem Administrator freigeschalten werden."
+
+#: controllers/comment.php:68
+msgid "Comment saved."
+msgstr "Kommentar wurde gespeichert."
+
+#: controllers/login.php:64
+msgid "Login failed."
+msgstr "Login ist fehlgeschlagen."
+
+#: controllers/login.php:100
+msgid "Logged out."
+msgstr "Ausgeloggt."
+
+#: controllers/admin/user.php:17
+#: controllers/admin/comment.php:34
+#: controllers/admin/comment.php:49
+#: controllers/admin/comment.php:56
+#: controllers/admin/comment.php:71
+#: controllers/admin/settings.php:20
+#: controllers/admin/entry.php:119
+#: controllers/admin/entry.php:169
+msgid "Save failed."
+msgstr "Speichern ist fehlgeschlagen."
+
+#: controllers/admin/user.php:33
+msgid "New password and confirmation didn't match."
+msgstr "Das neue Passwort stimmt nicht mit der Passwortbestätigung überein."
+
+#: controllers/admin/user.php:37
+msgid "Old password is wrong."
+msgstr "Das alte Passwort ist falsch."
+
+#: controllers/admin/user.php:46
+#: controllers/admin/user.php:172
+msgid "Profile saved."
+msgstr "Profil wurde gespeichert."
+
+#: controllers/admin/user.php:71
+#: controllers/admin/user.php:124
+#: controllers/admin/image.php:49
+#: controllers/admin/category.php:39
+#: controllers/admin/category.php:71
+#: controllers/admin/comment.php:79
+#: controllers/admin/entry.php:89
+msgid "Delete failed."
+msgstr "Löschen ist fehlgeschlagen."
+
+#: controllers/admin/user.php:83
+msgid "You cannot delete yourself."
+msgstr "Der eigene Benutzer kann nicht gelöscht werden."
+
+#: controllers/admin/user.php:87
+msgid "User deleted."
+msgstr "Benutzer wurde gelöscht."
+
+#: controllers/admin/user.php:90
+#: controllers/admin/user.php:114
+msgid "User not found."
+msgstr "Benutzer nicht gefunden."
+
+#: controllers/admin/user.php:159
+msgid "You cannot deactivate yourself."
+msgstr "Der eigene Benutzer kann nicht deaktiviert werden."
+
+#: controllers/admin/image.php:56
+msgid "Upload failed."
+msgstr "Upload ist fehlgeschlagen."
+
+#: controllers/admin/image.php:62
+msgid "Image saved."
+msgstr "Bild wurde gespeichert."
+
+#: controllers/admin/image.php:77
+msgid "Image not found."
+msgstr "Bild nicht gefunden."
+
+#: controllers/admin/category.php:32
+#: controllers/admin/category.php:64
+#: controllers/admin/category.php:86
+msgid "Category not found."
+msgstr "Kategorie nicht gefunden."
+
+#: controllers/admin/category.php:56
+msgid "Category saved."
+msgstr "Kategorie wurde gespeichert."
+
+#: controllers/admin/category.php:83
+msgid "Category deleted."
+msgstr "Kategorie wurde gelöscht."
+
+#: controllers/admin/comment.php:41
+#: controllers/admin/comment.php:63
+#: controllers/admin/comment.php:96
+#: controllers/admin/comment.php:123
+msgid "Comment not found."
+msgstr "Kommentar nicht gefunden."
+
+#: controllers/admin/comment.php:93
+msgid "Comment deleted."
+msgstr "Kommentar wurde gelöscht."
+
+#: controllers/admin/settings.php:43
+msgid "Settings saved."
+msgstr "Einstellungen wurden gespeichert."
+
+#: controllers/admin/admincontroller.php:37
+#: controllers/admin/entry.php:48
+#: controllers/admin/entry.php:80
+msgid "Access denied."
+msgstr "Zugriff verweigert."
+
+#: controllers/admin/entry.php:103
+msgid "Entry deleted."
+msgstr "Eintrag wurde gelöscht."
+
+#: controllers/admin/entry.php:137
+msgid "Entry saved."
+msgstr "Eintrag wurde gespeichert."
+
+#: view/default/footer.php:34
+msgid "Admin"
+msgstr "Admin"
+
+#: view/default/comments.php:7
+msgid "Comments"
+msgstr "Kommentare"
+
+#: view/default/comments.php:27
+msgid "New comment"
+msgstr "Neuer Kommentar"
+
+#: view/default/comments.php:30
+#: view/admin/user.php:14
+#: view/admin/users.php:25
+msgid "Name"
+msgstr "Name"
+
+#: view/default/comments.php:31
+#: view/admin/user.php:19
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: view/default/comments.php:32
+msgid "Homepage"
+msgstr "Homepage"
+
+#: view/default/comments.php:33
+msgid "Remember me"
+msgstr "Daten merken"
+
+#: view/default/comments.php:38
+#: view/admin/user.php:105
+msgid "Save"
+msgstr "Speichern"
+
+#: view/default/login.php:9
+#: view/default/login.php:25
+msgid "Login"
+msgstr "Login"
+
+#: view/default/login.php:13
+msgid "Username"
+msgstr "Benutzername"
+
+#: view/default/login.php:18
+#: view/admin/user.php:30
+#: view/admin/user.php:42
+msgid "Password"
+msgstr "Passwort"
+
+#: view/default/login.php:23
+msgid "Remember login"
+msgstr "Eingeloggt bleiben"
+
+#: view/default/entries.php:17
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: view/default/entries.php:29
+msgid "Newer"
+msgstr "Neuer"
+
+#: view/default/entries.php:30
+msgid "Older"
+msgstr "Älter"
+
+#: view/admin/user.php:9
+msgid "User"
+msgstr "Benutzer"
+
+#: view/admin/user.php:46
+msgid "Permissions"
+msgstr "Berechtigungen"
+
+#: view/admin/image.php:15
+msgid "URI"
+msgstr "URI"
+
+#: view/admin/dashboard.php:2
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: view/admin/users.php:10
+msgid "Delete user"
+msgstr "Benutzer löschen"
+
+#: view/admin/users.php:11
+msgid "Do you really want to delete this user?"
+msgstr "Soll dieser Benutzer wirklich gelöscht werden?"
+
+#: view/admin/users.php:12
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: view/admin/users.php:13
+msgid "Delete"
+msgstr "Löschen"
+
+#: view/admin/users.php:16
+msgid "Users"
+msgstr "Benutzer"
+
+#: view/admin/users.php:26
+msgid "Active"
+msgstr "Aktiv"
+
+#: view/admin/categories.php:11
+msgid "Delete category"
+msgstr "Kategorie löschen"
+
+#: view/admin/categories.php:12
+msgid "Do you really want to delete this category?"
+msgstr "Soll diese Kategorie wirklich gelöscht werden?"
+
+#: view/admin/categories.php:17
+msgid "Categories"
+msgstr "Kategorien"
+
+#: view/admin/categories.php:46
+msgid "New category"
+msgstr "Neue Kategorie"
+
+#: view/admin/category.php:7
+#: view/admin/entry.php:32
+msgid "Category"
+msgstr "Kategorie"
+
+#: view/admin/comment.php:16
+#: view/admin/comments.php:41
+#: view/admin/entry.php:22
+msgid "Date"
+msgstr "Datum"
+
+#: view/admin/comment.php:19
+#: view/admin/comments.php:40
+msgid "IP"
+msgstr "IP"
+
+#: view/admin/comment.php:22
+msgid "Hostname"
+msgstr "Hostname"
+
+#: view/admin/comment.php:25
+#: view/admin/entry.php:7
+msgid "Entry"
+msgstr "Eintrag"
+
+#: view/admin/comment.php:28
+#: view/admin/entry.php:45
+msgid "Content"
+msgstr "Inhalt"
+
+#: view/admin/settings.php:7
+#: view/admin/header.php:40
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: view/admin/settings.php:12
+msgid "Site title"
+msgstr "Seitentitel"
+
+#: view/admin/settings.php:17
+msgid "Language"
+msgstr "Sprache"
+
+#: view/admin/settings.php:22
+msgid "Entries per page"
+msgstr "Einträge pro Seite"
+
+#: view/admin/settings.php:27
+msgid "Date and time format"
+msgstr "Datums- und Uhrzeitformat"
+
+#: view/admin/settings.php:32
+msgid "Akismet"
+msgstr "Akismet"
+
+#: view/admin/settings.php:41
+msgid "Akismet key"
+msgstr "Akismet Key"
+
+#: view/admin/images.php:9
+msgid "Images"
+msgstr "Bilder"
+
+#: view/admin/images.php:21
+msgid "Browse"
+msgstr "Öffnen"
+
+#: view/admin/images.php:26
+msgid "Upload"
+msgstr "Hochladen"
+
+#: view/admin/images.php:66
+msgid "Previous"
+msgstr "Zurück"
+
+#: view/admin/images.php:67
+msgid "Next"
+msgstr "Vor"
+
+#: view/admin/comments.php:11
+msgid "Delete comment"
+msgstr "Kommentar löschen"
+
+#: view/admin/comments.php:12
+msgid "Do you really want to delete this comment?"
+msgstr "Soll dieser Kommentar wirklich gelöscht werden?"
+
+#: view/admin/comments.php:23
+msgid "Close"
+msgstr "Schließen"
+
+#: view/admin/comments.php:39
+msgid "Author"
+msgstr "Autor"
+
+#: view/admin/comments.php:42
+msgid "Visible"
+msgstr "Sichtbar"
+
+#: view/admin/comments.php:43
+msgid "Spam"
+msgstr "Spam"
+
+#: view/admin/entry.php:12
+#: view/admin/entries.php:27
+msgid "Title"
+msgstr "Titel"
+
+#: view/admin/entry.php:44
+msgid "Teaser"
+msgstr "Anreißer"
+
+#: view/admin/profile.php:8
+#: view/admin/header.php:42
+msgid "Profile"
+msgstr "Profil"
+
+#: view/admin/profile.php:32
+msgid "Old password"
+msgstr "Altes Passwort"
+
+#: view/admin/profile.php:37
+msgid "New password"
+msgstr "Neues Passwort"
+
+#: view/admin/profile.php:42
+msgid "New password (confirm)"
+msgstr "Neues Passwort (Bestätigung)"
+
+#: view/admin/header.php:16
+msgid "yabs Dashboard"
+msgstr "yabs Dashboard"
+
+#: view/admin/header.php:43
+msgid "Logout"
+msgstr "Ausloggen"
+
+#: view/admin/entries.php:10
+msgid "Delete entry"
+msgstr "Eintrag löschen"
+
+#: view/admin/entries.php:11
+msgid "Do you really want to delete this entry?"
+msgstr "Soll dieser Eintrag wirklich gelöscht werden?"
+
+#: view/admin/entries.php:16
+msgid "Entries"
+msgstr "Einträge"
+
+#: view/admin/entries.php:28
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#~ msgid "Invalid URL."
+#~ msgstr "Ungültiges URL."

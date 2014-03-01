@@ -147,6 +147,10 @@ class Entry extends AdminController {
 	private function fillEntry($entry, $input) {
 		$input->filter('entry_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$input->filter('entry_uri', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		if (empty($input->entry_uri)) {
+			$input->entry_uri = $input->entry_title;
+		}
+		$input->entry_uri = substr($input->entry_uri, 0, 36);
 		$input->filter('category_id', FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
 		$input->filter('entry_visible', FILTER_VALIDATE_BOOLEAN);
 			
