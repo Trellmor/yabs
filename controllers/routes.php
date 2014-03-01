@@ -9,7 +9,9 @@ use Application\Route;
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'index', '/'));
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'index', 'blog/'));
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'index', 'blog/page/([0-9]+)/'));
-Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'entry', 'blog/(.*)/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'entry', 'blog/([^/]+)/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'category', 'category/([^/]+)/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'category', 'category/([^/]+)/page/([0-9]+)/'));
 
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Comment', 'add', 'comment/add/'));
 

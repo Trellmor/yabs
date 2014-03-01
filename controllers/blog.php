@@ -14,9 +14,8 @@ class Blog extends Controller {
 			$this->redirect(Uri::to('/blog/'));
 			exit;
 		}
-		
-		$entry = new Entry();		
-		$entries = $entry->getVisibleEntries(Registry::getInstance()->settings->getEntriesPerPage(),
+						
+		$entries = Entry::getVisibleEntries(Registry::getInstance()->settings->getEntriesPerPage(),
 				($page - 1) * Registry::getInstance()->settings->getEntriesPerPage());
 		
 		$this->view->assignVar('entries', $entries);
@@ -46,6 +45,24 @@ class Blog extends Controller {
 			$this->error(404, _('Entry not found.'));
 			return;
 		}
+	}
+	
+	public function category($categoryName, $page = 1) {
+		$page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+		if ($page < 1) {
+			$this->redirect(Uri::to('/category/' . $categoryName));
+			exit;
+		}
+		
+		$entries = Entry::getVisibleEntriesForCategory($categoryName, Registry::getInstance()->settings->getEntriesPerPage(),
+				($page - 1) * Registry::getInstance()->settings->getEntriesPerPage());
+		
+		$this->view->assignVar('entries', $entries);
+		$this->view->assignVar('page', $page);
+		$this->view->assignVar('page_next', Uri::to('category/' . $categoryName . '/page/' . ($page + 1)));
+		$this->view->assignVar('page_prev', Uri::to('category/' . $categoryName . '/page/' . ($page - 1)));
+		
+		$this->view->load('entries');
 	}
 }
 
