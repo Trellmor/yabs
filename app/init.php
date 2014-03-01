@@ -98,7 +98,7 @@ textdomain('default');
 /**
  * Session
  */
-Session::load();
+Session::start();
 Input::restore();
 
 /**
