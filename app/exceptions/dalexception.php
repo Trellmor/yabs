@@ -18,6 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class QueryBuilderException extends DALException {}
+class DALException extends \PDOException {}
 
 ?>

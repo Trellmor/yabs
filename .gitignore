@@ -1,7 +1,8 @@
-/includes/config.php
+/app/config.php
 
 # Temp files
 *~
+*.bak
 
 # Eclipse files
 .buildpath

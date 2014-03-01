@@ -1,4 +1,4 @@
-<?php namespace Application\Exceptions;
+<?php
 
 /**
  * yabs -  Yet another blog system
@@ -18,6 +18,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class QueryBuilderException extends DALException {}
+$config = array();
+
+$config['database'] = array(
+	'dsn'		=> 'mysql:host=localhost;dbname=yabs;charset=utf8',
+	'username'	=> 'yabs',
+	'password'	=> '',
+	'options'	=> array(
+		PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+	)
+);
+
+$config['uri'] = array(
+	'scheme'	=> 'http',
+	'host' 		=> null,
+	'port' 		=> null,
+	'path'		=> '/yabs/',
+	'script'    => false
+);
 
 ?>
