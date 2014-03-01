@@ -28,7 +28,7 @@ class Blog extends Controller {
 	}
 	
 	public function entry($entryUri) {
-		$entryUri = urldecode($entryUri);
+		$entryUri = $entryUri;
 		$entry = Entry::getEntryByUri($entryUri);
 		
 		if ($entry !== false) {

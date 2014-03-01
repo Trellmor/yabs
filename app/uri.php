@@ -48,7 +48,12 @@ class Uri {
 	 * @return Uri instance
 	 */
 	public function path($path) {
-		$this->path = $path;
+		$path = explode('/', $path);
+		for ($i = 0; $i < count($path); $i++) {
+			$path[$i] = urlencode($path[$i]);
+		}		
+		
+		$this->path = implode('/', $path);
 		return $this;
 	}
 	

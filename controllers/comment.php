@@ -67,11 +67,11 @@ class Comment extends Controller {
 			} else {
 				Message::save(_('Comment saved.'), Message::LEVEL_SUCCESS);
 			}
-			$this->redirect(Uri::to('blog/' . $entry->getEncodedUri()) . '#com' . $comment->getId());
+			$this->redirect(Uri::to('blog/' . $entry->getUri()) . '#com' . $comment->getId());
 		} catch (ValidationException $e) {
 			$post->save();
 			Message::save($e->getMessage(), Message::LEVEL_ERROR);
-			$this->redirect(Uri::to('blog/' . $entry->getEncodedUri()) . '#add');
+			$this->redirect(Uri::to('blog/' . $entry->getUri()) . '#add');
 		}
 	}
 	
@@ -82,7 +82,7 @@ class Comment extends Controller {
 		$akismet->setCommentAuthorEmail($comment->getMail());
 		$akismet->setCommentAuthorURL($comment->getUrl());
 		$akismet->setCommentContent($comment->getText());
-		$akismet->setPermalink(Uri::to('blog/' . $entry->getEncodedUri()));
+		$akismet->setPermalink(Uri::to('blog/' . $entry->getUri()));
 		$comment->setSpam($akismet->isCommentSpam());
 	}
 	

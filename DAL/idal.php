@@ -1,7 +1,8 @@
 <?php namespace DAL;
 
 interface IDAL {
-	static function init();
+	function init();
+	function Select_LatestComments();
 }
 
 ?>

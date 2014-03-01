@@ -26,7 +26,7 @@ use Models\User;
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"><?php echo _('Toggle navigation')?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -52,16 +52,16 @@ use Models\User;
           <ul class="nav nav-sidebar">
                    
             <?php if ($user->hasPermission(User::PERM_ENTRY)): ?> 
-            <li><a href="<?php HTML::out(Uri::to('admin/entry/new')); ?>"><?php echo('New entry'); ?></a></li>
-            <li><a href="<?php HTML::out(Uri::to('admin/entry')); ?>"><?php echo('Entries'); ?></a></li>
+            <li><a href="<?php HTML::out(Uri::to('admin/entry/new')); ?>"><?php echo _('New entry'); ?></a></li>
+            <li><a href="<?php HTML::out(Uri::to('admin/entry')); ?>"><?php echo _('Entries'); ?></a></li>
             <?php endif; ?>
             
             <?php if ($user->hasPermission(User::PERM_CATEGORY)): ?>
-          	<li><a href="<?php HTML::out(Uri::to('admin/category')); ?>"><?php echo('Categories'); ?></a></li>
+          	<li><a href="<?php HTML::out(Uri::to('admin/category')); ?>"><?php echo _('Categories'); ?></a></li>
           	<?php endif; ?>
           	
           	<?php if ($user->hasPermission(User::PERM_IMAGE)): ?>
-          	<li><a href="<?php HTML::out(Uri::to('admin/image')); ?>"><?php echo('Images'); ?></a></li>
+          	<li><a href="<?php HTML::out(Uri::to('admin/image')); ?>"><?php echo _('Images'); ?></a></li>
           	<?php endif; ?>
           	
             <!--<li class="active"><a href="#">Reports</a></li>
@@ -71,13 +71,13 @@ use Models\User;
                     
           <ul class="nav nav-sidebar">          
             <?php if ($user->hasPermission(User::PERM_COMMENT)): ?>
-          	<li><a href="<?php HTML::out(Uri::to('admin/comment')); ?>"><?php echo('Comments'); ?></a></li>
+          	<li><a href="<?php HTML::out(Uri::to('admin/comment')); ?>"><?php echo _('Comments'); ?></a></li>
           	<?php endif; ?>
           </ul>
                 
           <ul class="nav nav-sidebar">          
             <?php if ($user->hasPermission(User::PERM_USER)): ?>
-          	<li><a href="<?php HTML::out(Uri::to('admin/user')); ?>"><?php echo('User'); ?></a></li>
+          	<li><a href="<?php HTML::out(Uri::to('admin/user')); ?>"><?php echo _('User'); ?></a></li>
           	<?php endif; ?>
           </ul>
         </div>

@@ -49,6 +49,23 @@ class Entry {
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	
+	public static function getVisibleEntriesForCategory($categoryName, $limit, $offset = 0) {
+		$qb = static::getAllVisibleEntries();
+		$qb->where('c.category_name = ?', [$categoryName]);
+		$qb->limit($limit, $offset);
+		$qb->orderBy(['e.entry_date DESC']);
+		$sth = $qb->query([
+				'e.entry_title',
+				'e.entry_teaser',
+				'e.entry_content',
+				'e.entry_date',
+				'e.entry_uri',
+				'u.user_name',
+				'c.category_name'
+				]);
+		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
+	}	
+	
 	public static function getEntries($limit, $offset = 0) {
 		$qb = static::getAllEntries();
 		$qb->limit($limit, $offset)->orderBy(['e.entry_id DESC']);
@@ -218,10 +235,6 @@ class Entry {
 	
 	public function getUri() {	
 		return $this->entry_uri;
-	}
-	
-	public function getEncodedUri() {
-		return urlencode($this->entry_uri);
 	}
 	
 	public function setUri($value) {

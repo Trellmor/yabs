@@ -1,6 +1,5 @@
 <?php 
 use Application\Uri;
-
 use View\HTML;
 ?>
 </div>
@@ -8,19 +7,11 @@ use View\HTML;
 <?php if (!isset($wideColumn) || !$wideColumn): ?>
 <div id="sidebar">
 	<ul>
-		<li class="pagenav"><h2>{KUBRICK_MENU_TITLE}</h2>
-			<ul>
-				<li class="page_item"><a href="{L_MENU_URL}">{S_MENU_NAME}</a></li>
-			</ul>
-		</li>
-
-		<li><h2>{S_SIDEBAR_TITLE}</h2>
-			{S_SIDEBAR_CONTENT}
-<!-- use another <ul> for links if you want -->
-		</li>			
+<?php Widgets\LatestEntry::load($view, 'News'); ?>	
+<?php Widgets\Categories::load($view); ?>
+<?php Widgets\LatestComments::load($view); ?>		
 	</ul>
 </div>
-
 <?php endif; ?>
 
 <hr />
