@@ -59,9 +59,9 @@ unset($config['database']['password']);
 \DAL\Factory::DAL()->init();
 
 
-Registry::getInstance()->template = 'default';
 Registry::getInstance()->config = $config;
 Registry::getInstance()->settings = \Models\Settings::load();
+Registry::getInstance()->template = Registry::getInstance()->settings->getTemplate();
 
 /**
  * Initialize routing

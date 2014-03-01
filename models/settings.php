@@ -1,7 +1,7 @@
 <?php namespace Models;
 
 use Application\Registry;
-
+use Application\Exceptions\ValidationException;
 use DAL;
 
 class Settings {
@@ -36,7 +36,6 @@ class Settings {
 			foreach ($this->data as $name => $value) {
 				$sth->execute();
 			}
-			
 			Registry::getInstance()->db->commit();
 		} catch (\Exception $e) {
 			Registry::getInstance()->db->rollBack();
@@ -89,6 +88,18 @@ class Settings {
 	
 	public function setLanguage($value) {
 		$this->language = $value;
+	}
+	
+	public function getTemplate() {
+		return $this->template;
+	}
+	
+	public function setTemplate($value) {
+		$value = str_replace('/', '', $value);
+		if (!file_exists(APP_ROOT . '/view/' . $value)) {
+			throw new ValidationException('Template not found.');
+		}
+		$this->template = $value;
 	}
 	
 	public function getAkismet() {

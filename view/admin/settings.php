@@ -28,6 +28,11 @@ $view->load('header');
   <?php echo Forms::input('text', 'datetime_format', $settings->getDateTimeFormat(), ['class' => 'form-control']) ?>
 </div>
 
+<div class="form-group">
+  <label for="template"><?php echo _('Design'); ?></label>
+  <?php echo Forms::input('text', 'template', $settings->getTemplate(), ['class' => 'form-control']) ?>
+</div>
+
 
 <h2 class="sub-header"><?php echo _('Akismet'); ?></h2>
 
