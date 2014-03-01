@@ -27,9 +27,9 @@ class Blog extends Controller {
 		$this->view->load('entries');
 	}
 	
-	public function entry($entry_uri) {
-		$entry_uri = filter_var($entry_uri, FILTER_SANITIZE_STRING);
-		$entry = Entry::getEntryByUri($entry_uri);
+	public function entry($entryUri) {
+		$entryUri = urldecode($entryUri);
+		$entry = Entry::getEntryByUri($entryUri);
 		
 		if ($entry !== false) {
 			$this->view->assignVar('entry', $entry);

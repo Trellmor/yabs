@@ -10,7 +10,7 @@ use Application\Uri;
 
 <title><?php HTML::out($page_title); ?></title>
 
-<link rel="stylesheet" href="<?php echo Uri::to('/') ?>view/default/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo Uri::getBase() ?>view/default/style.css" type="text/css" media="screen" />
 
 </head>
 <body>
@@ -20,7 +20,7 @@ use Application\Uri;
 
 <div id="header">
 	<div id="headerimg">
-		<h1><a href="<?php echo Uri::to('/') ?>"><?php HTML::out($settings->getSiteTitle()); ?></a></h1>
+		<h1><a href="<?php HTML::out(Uri::to('/')); ?>"><?php HTML::out($settings->getSiteTitle()); ?></a></h1>
 		<div class="description"></div>
 	</div>
 </div>

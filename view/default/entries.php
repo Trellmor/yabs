@@ -6,7 +6,7 @@ $view->load('header');
 
 <?php foreach ($entries as $entry): ?>
 <div class="post">
-	<h2><a href="<?php echo Uri::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
+	<h2><a href="<?php HTML::out(Uri::to('blog/' . $entry->getEncodedUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
 	<small><?php Html::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> by <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
@@ -14,7 +14,7 @@ $view->load('header');
 			<?php if ($entry->hasTeaser()): ?>
 				<?php echo $entry->getTeaser(); ?>
 				<br /><br />
-				<a href="<?php echo URI::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php echo _('Read more'); ?></a>
+				<a href="<?php echo URI::to('blog/' . $entry->getEncodedUri()); ?>"><?php echo _('Read more'); ?></a>
 			<?php else: ?>
 				<?php echo $entry->getContent(); ?>
 			<?php endif; ?>

@@ -37,7 +37,7 @@ $view->load('modal');
           </span>
         </th>
         <th class="text-center">
-          <a class="btn btn-default" href="<?php echo Uri::to('admin/user/' . $currUser->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+          <a class="btn btn-default" href="<?php HTML::out(Uri::to('admin/user/' . $currUser->getId())) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
           <button data-id="<?php echo $currUser->getId(); ?>" class="btn btn-default user-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
@@ -49,5 +49,5 @@ $view->load('modal');
   
  </div>
  
- <a class="btn btn-default" href="<?php echo Uri::to('admin/user/new'); ?>">New</a>
+ <a class="btn btn-default" href="<?php HTML::out(Uri::to('admin/user/new')); ?>">New</a>
 <?php $view->load('footer'); ?>

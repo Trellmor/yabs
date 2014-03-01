@@ -8,6 +8,14 @@ class Uri {
 	private $path;
 	private $params = [];
 	
+	public static function getBase() {
+		if (static::$base == null) {
+			static::generateBaseUri();
+		}
+		
+		return static::$base;
+	}
+	
 	/**
 	 * Create new Uri instance with specific path
 	 * 
@@ -62,46 +70,41 @@ class Uri {
 	 * @param string $value
 	 */
 	public function param($param, $value) {
-		$param = rawurlencode($param);
-		$value = rawurlencode($value);
-		$this->params[$param] = $value;
+		if ($value !== null) {
+			$param = rawurlencode($param);
+			$value = rawurlencode($value);
+			$this->params[$param] = $value;
+		} else {
+			if (isset($this->params[$param])) {
+				unset($this->params[$param]);
+			}
+		}
 		return $this;
-	}
-	
-	/**
-	 * Cast to string
-	 * 
-	 * When casting Uri to string, & in the query string will be encoded to 
-	 * &amp; Use the dedicated build($encode_amp) function to control if & will
-	 * be converted or not. 
-	 * 
-	 * @return string Uri
-	 */
-	public function __toString() {
-		return $this->build(false);
 	}
 	
 	/**
 	 * Convert to string
 	 * 
-	 * If $encode_amp is true, & in the query string will be encoded as &amp;
-	 * 
-	 * @param bool $encode_amp Encode & to &amp;
 	 * @return string
 	 */
-	public function build($encode_amp = true) {
+	public function __toString() {
 		if (static::$base == null) {
 			static::generateBaseUri();
 		}
 		
-		$uri = rtrim(static::$base . ltrim($this->path, '/'), '/') . '/';
+		$base = static::$base;
+		
+		if (Registry::getInstance()->config['uri']['script']) {
+			$base .= 'index.php/';
+		}
+		
+		$uri = rtrim($base . ltrim($this->path, '/'), '/') . '/';
 		if (count($this->params) > 0) {
 			$uri .= '?';
-			$amp = ($encode_amp) ? '&amp;' : '&';
 			$query_string = '';
 			foreach ($this->params as $param => $value) {
 				if ($query_string != '') {
-					$query_string .= $amp;
+					$query_string .= '&';
 				}
 				$query_string .= $param . '=' . $value;
 			}

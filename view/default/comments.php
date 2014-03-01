@@ -26,7 +26,7 @@ use Application\Uri;
 <?php $view->handleMessages(); ?>
 <h3 id="respond"><a name="add"></a><?php echo _('New comment'); ?></h3>
 
-<?php echo Forms::form(Uri::to('comment/add/')->param('entry_id', $entry->getId()), ['id' => 'commentform']); ?>
+<?php echo Forms::form(Uri::to('comment/add/')->param('entry_id', $entry->getId())->param('foo', 'bar'), ['id' => 'commentform']); ?>
 <p><?php echo Forms::input('text', 'comment_author', $commentAuthor->getName()); ?> <label for="comment_author"><small><?php echo _('Name'); ?></small></label></p>
 <p><?php echo Forms::input('text', 'comment_mail', $commentAuthor->getMail()); ?> <label for="comment_mail"><small><?php echo _('E-Mail'); ?></small></label></p>
 <p><?php echo Forms::input('text', 'comment_url', $commentAuthor->getUrl()); ?> <label for="comment_url"><small><?php echo _('Homepage'); ?></small></label></p>

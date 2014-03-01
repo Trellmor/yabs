@@ -38,8 +38,8 @@ abstract class Controller {
 		$this->view->load('messagepage');
 	}
 
-	protected function redirect($url) {
-		header('Location: ' . $url);
+	protected function redirect($uri) {
+		header('Location: ' . $uri);
 	}
 }
 

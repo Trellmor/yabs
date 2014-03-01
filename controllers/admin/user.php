@@ -143,6 +143,8 @@ class User extends AdminController {
 		$input->filter('user_permission_comment', FILTER_VALIDATE_BOOLEAN);
 		$input->filter('user_permission_settings', FILTER_VALIDATE_BOOLEAN);
 		$input->filter('user_permission_user', FILTER_VALIDATE_BOOLEAN);
+		$input->filter('user_permission_image', FILTER_VALIDATE_BOOLEAN);
+		$input->filter('user_permission_image_edit', FILTER_VALIDATE_BOOLEAN);
 		
 		try {
 			if ($input->user_password_change || $user->getId() < 0) {
@@ -163,6 +165,8 @@ class User extends AdminController {
 			$user->setPermission(Models\User::PERM_COMMENT, $input->user_permission_comment);
 			$user->setPermission(Models\User::PERM_SETTINGS, $input->user_permission_settings);
 			$user->setPermission(Models\User::PERM_USER, $input->user_permission_user);
+			$user->setPermission(Models\User::PERM_IMAGE, $input->user_permission_image);
+			$user->setPermission(Models\User::PERM_IMAGE_EDIT, $input->user_permission_image_edit);
 			$user->save();
 			
 			Message::save(_('Profile saved.'), Message::LEVEL_SUCCESS);

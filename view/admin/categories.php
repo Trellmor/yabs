@@ -32,7 +32,7 @@ $view->load('modal');
       <tr>
         <th><?php HTML::out($category->getName()); ?></th>
         <th class="text-right">
-          <a class="btn btn-default" href="<?php echo Uri::to('admin/category/' . $category->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+          <a class="btn btn-default" href="<?php HTML::out(Uri::to('admin/category/' . $category->getId())); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
           <button data-id="<?php echo $category->getId(); ?>" class="btn btn-default category-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>

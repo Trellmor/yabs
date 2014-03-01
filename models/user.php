@@ -15,6 +15,8 @@ class User {
 	const PERM_CATEGORY = 3;
 	const PERM_COMMENT = 4;
 	const PERM_USER = 5;
+	const PERM_IMAGE = 6;
+	const PERM_IMAGE_EDIT = 6;
 	
 	private $user_id = -1;
 	private $user_mail;

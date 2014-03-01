@@ -61,6 +61,20 @@ $view->load('header');
 
 <div class="checkbox">
   <label>
+    <?php echo Forms::input('checkbox', 'user_permission_image', $editUser->hasPermission(User::PERM_IMAGE)); ?>
+    <?php echo ('View images'); ?>
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
+    <?php echo Forms::input('checkbox', 'user_permission_image_edit', $editUser->hasPermission(User::PERM_IMAGE_EDIT)); ?>
+    <?php echo ('Upload and delete images'); ?>
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
     <?php echo Forms::input('checkbox', 'user_permission_category', $editUser->hasPermission(User::PERM_CATEGORY)); ?>
     <?php echo ('Manage categories'); ?>
   </label>

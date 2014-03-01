@@ -21,7 +21,7 @@ $view->load('header');
 <div class="form-group">
   <label for="entry_date"><?php echo _('Date'); ?></label>
   <div class="input-group datetimepicker">
-    <?php echo Forms::input('text', 'entry_date', date('Y-m-d G:H', $entry->getDate()), ['class' => 'form-control', 'data-format' => 'YYYY-MM-DD HH:mm'])?>
+    <?php echo Forms::input('text', 'entry_date', date('Y-m-d H:i', $entry->getDate()), ['class' => 'form-control', 'data-format' => 'YYYY-MM-DD HH:mm'])?>
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-time"></span>
     </span>

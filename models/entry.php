@@ -220,6 +220,10 @@ class Entry {
 		return $this->entry_uri;
 	}
 	
+	public function getEncodedUri() {
+		return urlencode($this->entry_uri);
+	}
+	
 	public function setUri($value) {
 		if (empty($value)) {
 			$value = $this->entry_title;

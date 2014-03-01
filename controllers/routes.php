@@ -53,4 +53,9 @@ Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'edit', 'admin/user/new/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'save', 'admin/user/new/'));
 
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Image', 'index', 'admin/image/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Image', 'index', 'admin/image/page/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Image', 'upload', 'admin/image/upload/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Image', 'image', 'admin/image/([0-9]+)/'));
+
 ?>

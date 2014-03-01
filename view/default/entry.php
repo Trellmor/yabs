@@ -5,7 +5,7 @@ $view->assignVar('wideColumn', true);
 $view->load('header');
 ?>
 <div class="post">
-	<h2><a href="<?php echo Uri::to('blog/' . HTML::filter($entry->getUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
+	<h2><a href="<?php HTML::out(Uri::to('blog/' . $entry->getEncodedUri())); ?>"><?php HTML::out($entry->getTitle()); ?></a></h2>
 	<small><?php HTML::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> by <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">

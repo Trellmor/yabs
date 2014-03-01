@@ -37,7 +37,7 @@ $view->load('modal');
       <tr>
         <th><?php HTML::out($comment->getAuthor()); ?></th>
         <th><span class="comment-ip" data-toggle="tooltip" data-placement="right" title="<?php HTML::out($comment->getHostname()); ?>"><?php HTML::out($comment->getIP()); ?></span></th>
-        <th><?php HTML::out(date('Y-m-d G:H', $comment->getDate())); ?></th>
+        <th><?php HTML::out(date('Y-m-d H:i', $comment->getDate())); ?></th>
         <th class="text-center">
           <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-toggle-visible color-<?php echo ($comment->isVisible()) ? 'success' : 'danger' ?>" type="submit">
             <span class="glyphicon glyphicon-eye-<?php echo ($comment->isVisible()) ? 'open' : 'close'; ?>"></span>
@@ -58,8 +58,8 @@ $view->load('modal');
     </tbody>
   </table>
   <ul class="pager">
-    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/comment/page/' . ($page - 1)); ?>">&larr; <?php echo _('Newer'); ?></a></li>
-    <li class="next <?php echo (count($comments) < 15) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/comment/page/' . ($page + 1)); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
+    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/page/' . ($page - 1))); ?>">&larr; <?php echo _('Newer'); ?></a></li>
+    <li class="next <?php echo (count($comments) < 15) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/page/' . ($page + 1))); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
   </ul>
   
 </div>

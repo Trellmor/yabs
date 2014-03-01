@@ -40,7 +40,7 @@ $view->load('modal');
           </span>
         </th>
         <th class="text-center">
-          <a class="btn btn-default" href="<?php echo Uri::to('admin/entry/' . $entry->getId()); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+          <a class="btn btn-default" href="<?php HTML::out(Uri::to('admin/entry/' . $entry->getId())); ?>"><span class="glyphicon glyphicon-pencil"></span></a>
           <button data-id="<?php echo $entry->getId(); ?>" class="btn btn-default entry-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
@@ -50,8 +50,8 @@ $view->load('modal');
     </tbody>
   </table>
   <ul class="pager">
-    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/entry/page/' . ($page - 1)); ?>">&larr; <?php echo _('Newer'); ?></a></li>
-    <li class="next <?php echo (count($entries) < 15) ? 'disabled' : ''; ?>"><a href="<?php echo Uri::to('admin/entry/page/' . ($page + 1)); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
+    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/entry/page/' . ($page - 1))); ?>">&larr; <?php echo _('Newer'); ?></a></li>
+    <li class="next <?php echo (count($entries) < 15) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/entry/page/' . ($page + 1))); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
   </ul>
   
 </div>
