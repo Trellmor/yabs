@@ -110,6 +110,16 @@ body {
     display: block;
 }
 
+/*
+ * Forms
+ */
 .form-control[readonly] {
 	cursor: text;
+}
+
+/*
+ * Comment
+ */
+.comment-row {
+	cursor: pointer;
 }

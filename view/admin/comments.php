@@ -14,6 +14,18 @@ $view->assignVar('modal_button_negative', _('Cancel'));
 $view->assignVar('modal_button_positive', _('Delete'));
 $view->load('modal');
 ?>
+ 
+<div class="modal fade" id="modal-comment-show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><?php echo _('Close'); ?></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1 class="page-header"><?php echo _('Comments'); ?></h1>
 <?php $view->handleMessages(); ?>
 <div class="table-responsive">
@@ -49,6 +61,9 @@ $view->load('modal');
           </button>
         </th>
         <th class="text-center">
+          <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-show" type="submit">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+          </button>
           <button data-id="<?php echo $comment->getId(); ?>" class="btn btn-default comment-delete" type="submit">
             <span class="glyphicon glyphicon-trash"></span>
           </button>

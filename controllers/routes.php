@@ -39,6 +39,7 @@ Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Categor
 
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment', 'index', 'admin/comment/'));
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment', 'index', 'admin/comment/page/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment', 'comment', 'admin/comment/([0-9]+)/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'toggleSpam', 'admin/api/comment/spam/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'toggleVisible', 'admin/api/comment/visible/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'delete', 'admin/comment/delete/'));

@@ -113,6 +113,16 @@ class Comment extends AdminController {
 	private function jsonError($error) {
 		$this->json(['status' => 'error', 'message' => $error]);
 	}
+	
+	public function comment($commentId) {
+		$comment = Models\Comment::getComment($commentId);
+		if ($comment !== false) {
+			$this->view->assignVar('comment', $comment);
+			$this->view->load('comment');
+		} else {
+			$this->error(404, _('Comment not found.'));
+		}
+	}
 }
 
 ?>

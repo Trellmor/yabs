@@ -124,6 +124,16 @@ $('#modal-comment-delete .btn-primary').click(function () {
 	$('#comment-delete').submit();
 });
 
+$('.comment-show').click(function () {
+	var uri = $('body').data('base-uri') + 'admin/comment/' + $(this).data('id') + '/';
+	$.get(uri, function(data) {
+		if (!$('body').hasClass('modal-open')) {
+			$('#modal-comment-show .modal-body').html(data);			
+			$('#modal-comment-show').modal('show');
+		}
+	});
+});
+
 /*
  * Profile
  */

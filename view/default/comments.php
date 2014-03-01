@@ -14,7 +14,7 @@ use Application\Uri;
 			<cite><?php HTML::out($comment->getAuthor()); ?></cite>:
 			<br />
 
-			<small class="commentmetadata"><a name="com<?php echo $comment->getId(); ?>" href="#com<?php echo $comment->getId(); ?>"><?php echo date('d.m.Y H:i', $comment->getDate()); ?></a></small>
+			<small class="commentmetadata"><a name="com<?php echo $comment->getId(); ?>" href="#com<?php echo $comment->getId(); ?>"><?php HTML::out(date($settings->getDateTimeFormat(), $comment->getDate())); ?></a></small>
 
 			<p><?php echo $comment->getText(); ?></p>
 

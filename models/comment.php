@@ -202,7 +202,7 @@ class Comment {
 	}
 	
 	public function getEntryUri() {
-		return $this->entry_uri;
+		return urlencode($this->entry_uri);
 	}
 	
 	public function getEntryTitle() {
