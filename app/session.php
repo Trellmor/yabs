@@ -23,20 +23,18 @@ use Models\User;
 class Session {
 	private static $started = false;
 
-	public static function load() {
-		if (static::isSessionActive()) {
-			static::start();
-			if (isset($_SESSION['user_id'])) {
-				$user = User::load($_SESSION['user_id'], true);
-				Registry::getInstance()->user = $user;
-			}
-		}
-	}
-
 	public static function start() {
 		if (!static::$started) {
 			session_start();
+			static::load();
 			static::$started = true;
+		}
+	}
+	
+	private static function load() {
+		if (isset($_SESSION['user_id'])) {
+			$user = User::load($_SESSION['user_id'], true);
+			Registry::getInstance()->user = $user;
 		}
 	}
 
@@ -63,7 +61,7 @@ class Session {
 		}
 	}
 
-	public static function isSessionActive() {
+	private static function isSessionActive() {
 		return isset($_COOKIE[session_name()]) && !empty($_COOKIE[session_name()]);
 	}
 }

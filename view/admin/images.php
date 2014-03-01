@@ -64,7 +64,7 @@ $view->load('header');
 
 <ul class="pager">
   <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/image/page/' . ($page - 1))->param('order', $order)->param('q', $query)); ?>">&larr; <?php echo _('Previous'); ?></a></li>
-  <li class="next <?php echo (count($entries) < 15) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/image/page/' . ($page + 1))->param('order', $order)->param('q', $query)); ?>"><?php echo _('Next'); ?> &rarr;</a></li>
+  <li class="next <?php echo (count($images) < 9) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/image/page/' . ($page + 1))->param('order', $order)->param('q', $query)); ?>"><?php echo _('Next'); ?> &rarr;</a></li>
 </ul>
 
 <?php $view->load('footer'); ?>
