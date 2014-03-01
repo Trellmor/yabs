@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yabs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 17:41+0100\n"
-"PO-Revision-Date: 2014-03-01 17:43+0100\n"
+"POT-Creation-Date: 2014-03-01 19:19+0100\n"
+"PO-Revision-Date: 2014-03-01 19:20+0100\n"
 "Last-Translator: Daniel Triendl <daniel@pew.cc>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -55,11 +55,11 @@ msgstr "Ungültige Homepage."
 msgid "Text is required."
 msgstr "Es muss ein Text eingegeben werden."
 
-#: models/entry.php:233
+#: models/entry.php:246
 msgid "Entry URI cannot be empty."
 msgstr "Es muss eine URI für den Eintrag angegeben werden."
 
-#: models/entry.php:241
+#: models/entry.php:254
 msgid "Entry URI already in use."
 msgstr "Es existiert bereits ein Eintrag mit dieser URI."
 
@@ -93,7 +93,7 @@ msgstr "Ausgeloggt."
 #: controllers/admin/comment.php:49
 #: controllers/admin/comment.php:56
 #: controllers/admin/comment.php:71
-#: controllers/admin/settings.php:20
+#: controllers/admin/settings.php:21
 #: controllers/admin/entry.php:119
 #: controllers/admin/entry.php:169
 msgid "Save failed."
@@ -176,7 +176,7 @@ msgstr "Kommentar nicht gefunden."
 msgid "Comment deleted."
 msgstr "Kommentar wurde gelöscht."
 
-#: controllers/admin/settings.php:43
+#: controllers/admin/settings.php:46
 msgid "Settings saved."
 msgstr "Einstellungen wurden gespeichert."
 
@@ -194,26 +194,33 @@ msgstr "Eintrag wurde gelöscht."
 msgid "Entry saved."
 msgstr "Eintrag wurde gespeichert."
 
-#: view/default/footer.php:34
-msgid "Admin"
-msgstr "Admin"
-
+#: view/default/widget_latestcomments.php:6
 #: view/default/comments.php:7
 msgid "Comments"
 msgstr "Kommentare"
+
+#: view/default/widget_latestcomments.php:9
+msgid "By"
+msgstr "Von"
+
+#: view/default/widget_latestentry.php:9
+#: view/default/entries.php:16
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: view/default/footer.php:25
+msgid "Admin"
+msgstr "Admin"
 
 #: view/default/comments.php:27
 msgid "New comment"
 msgstr "Neuer Kommentar"
 
 #: view/default/comments.php:30
-#: view/admin/user.php:14
-#: view/admin/users.php:25
 msgid "Name"
 msgstr "Name"
 
 #: view/default/comments.php:31
-#: view/admin/user.php:19
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -226,9 +233,12 @@ msgid "Remember me"
 msgstr "Daten merken"
 
 #: view/default/comments.php:38
-#: view/admin/user.php:105
 msgid "Save"
 msgstr "Speichern"
+
+#: view/default/widget_categories.php:6
+msgid "Categories"
+msgstr "Kategorien"
 
 #: view/default/login.php:9
 #: view/default/login.php:25
@@ -240,8 +250,6 @@ msgid "Username"
 msgstr "Benutzername"
 
 #: view/default/login.php:18
-#: view/admin/user.php:30
-#: view/admin/user.php:42
 msgid "Password"
 msgstr "Passwort"
 
@@ -249,15 +257,11 @@ msgstr "Passwort"
 msgid "Remember login"
 msgstr "Eingeloggt bleiben"
 
-#: view/default/entries.php:17
-msgid "Read more"
-msgstr "Weiterlesen"
-
-#: view/default/entries.php:29
+#: view/default/entries.php:27
 msgid "Newer"
 msgstr "Neuer"
 
-#: view/default/entries.php:30
+#: view/default/entries.php:28
 msgid "Older"
 msgstr "Älter"
 
@@ -270,6 +274,7 @@ msgid "Permissions"
 msgstr "Berechtigungen"
 
 #: view/admin/image.php:15
+#: view/admin/entry.php:17
 msgid "URI"
 msgstr "URI"
 
@@ -286,10 +291,14 @@ msgid "Do you really want to delete this user?"
 msgstr "Soll dieser Benutzer wirklich gelöscht werden?"
 
 #: view/admin/users.php:12
+#: view/admin/categories.php:13
+#: view/admin/comments.php:13
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #: view/admin/users.php:13
+#: view/admin/categories.php:14
+#: view/admin/comments.php:14
 msgid "Delete"
 msgstr "Löschen"
 
@@ -308,10 +317,6 @@ msgstr "Kategorie löschen"
 #: view/admin/categories.php:12
 msgid "Do you really want to delete this category?"
 msgstr "Soll diese Kategorie wirklich gelöscht werden?"
-
-#: view/admin/categories.php:17
-msgid "Categories"
-msgstr "Kategorien"
 
 #: view/admin/categories.php:46
 msgid "New category"
@@ -348,7 +353,6 @@ msgid "Content"
 msgstr "Inhalt"
 
 #: view/admin/settings.php:7
-#: view/admin/header.php:40
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -369,10 +373,14 @@ msgid "Date and time format"
 msgstr "Datums- und Uhrzeitformat"
 
 #: view/admin/settings.php:32
+msgid "Design"
+msgstr "Design"
+
+#: view/admin/settings.php:37
 msgid "Akismet"
 msgstr "Akismet"
 
-#: view/admin/settings.php:41
+#: view/admin/settings.php:46
 msgid "Akismet key"
 msgstr "Akismet Key"
 
@@ -421,7 +429,6 @@ msgid "Spam"
 msgstr "Spam"
 
 #: view/admin/entry.php:12
-#: view/admin/entries.php:27
 msgid "Title"
 msgstr "Titel"
 
@@ -430,7 +437,6 @@ msgid "Teaser"
 msgstr "Anreißer"
 
 #: view/admin/profile.php:8
-#: view/admin/header.php:42
 msgid "Profile"
 msgstr "Profil"
 
@@ -450,9 +456,22 @@ msgstr "Neues Passwort (Bestätigung)"
 msgid "yabs Dashboard"
 msgstr "yabs Dashboard"
 
+#: view/admin/header.php:29
+msgid "Toggle navigation"
+msgstr "Navigation umschalten"
+
 #: view/admin/header.php:43
 msgid "Logout"
 msgstr "Ausloggen"
+
+#: view/admin/header.php:55
+msgid "New entry"
+msgstr "Neuer Eintrag"
+
+#: view/admin/header.php:56
+#: view/admin/entries.php:16
+msgid "Entries"
+msgstr "Einträge"
 
 #: view/admin/entries.php:10
 msgid "Delete entry"
@@ -461,10 +480,6 @@ msgstr "Eintrag löschen"
 #: view/admin/entries.php:11
 msgid "Do you really want to delete this entry?"
 msgstr "Soll dieser Eintrag wirklich gelöscht werden?"
-
-#: view/admin/entries.php:16
-msgid "Entries"
-msgstr "Einträge"
 
 #: view/admin/entries.php:28
 msgid "Published"
