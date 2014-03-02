@@ -2,7 +2,7 @@
 -- Table structure for table `yabs_category`
 --
 
-CREATE TABLE `yabs_category` (
+CREATE TABLE IF NOT EXISTS `yabs_category` (
   `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`category_id`),
