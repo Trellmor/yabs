@@ -33,6 +33,8 @@ Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'catego
 
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Comment', 'add', 'comment/add/'));
 
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Blog', 'feed', 'feed/'));
+
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Login', 'index', 'admin/login/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Login', 'login', 'admin/login/'));
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Login', 'Logout', 'admin/logout/'));

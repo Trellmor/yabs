@@ -82,6 +82,12 @@ class Blog extends Controller {
 		
 		$this->view->load('entries');
 	}
+	
+	public function feed() {
+		$entries = Entry::getVisibleEntries(Registry::getInstance()->settings->getEntriesPerPage());
+		$this->view->assignVar('entries', $entries);
+		$this->view->load('feed');
+	}
 }
 
 ?>

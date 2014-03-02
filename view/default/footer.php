@@ -22,7 +22,7 @@ use View\HTML;
 		<?php HTML::out($settings->getSiteTitle()) ?> is proudly powered by 
 		<a href="http://yabs.tac-ops.net/">yabs</a> and <a href="http://binarybonsai.com/kubrick/">Kubrick</a> by Michael Heilmann
 
-		<br />{S_FEED_ENTRIES} (ATOM 1.0) | <a href="<?php HTML::out(Uri::to('admin')); ?>"><?php echo _('Admin'); ?></a>
+		<br /><a href="<?php HTML::out(Uri::to('feed')); ?>"><?php echo _('Feed') ?></a> (ATOM 1.0) | <a href="<?php HTML::out(Uri::to('admin')); ?>"><?php echo _('Admin'); ?></a>
 	</p>
 </div>
 
