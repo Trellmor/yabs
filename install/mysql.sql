@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `yabs_entry` (
   `entry_date` bigint(20) NOT NULL,
   `entry_visible` tinyint(4) NOT NULL,
   `entry_uri` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
-  `entry_commentcount` int(11) NOT NULL,
+  `entry_commentcount` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`entry_id`),
   UNIQUE KEY `entry_uri` (`entry_uri`),
   KEY `user_id` (`user_id`),
