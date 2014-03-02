@@ -32,6 +32,16 @@ CREATE TABLE IF NOT EXISTS `yabs_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Data for table `yabs_settings`
+--
+
+INSERT INTO `yabs_settings` (`setting_name`, `setting_value`) VALUES
+('akismet', '0'),
+('datetime_format', 'l, j. F Y G:i'),
+('entries_per_page', '10'),
+('template', 'default');
+
+--
 -- Table structure for table `yabs_user`
 --
 
@@ -46,6 +56,13 @@ CREATE TABLE IF NOT EXISTS `yabs_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Data for table `yabs_user`
+--
+
+INSERT INTO `yabs_user` (`user_id`, `user_name`, `user_password`, `user_mail`, `user_active`) VALUES
+(1, 'Admin', '$2a$12$REdtnL.f35VTPjRpHVJpcOfA3yEYteMtVDR8yWeHwGle2sPh/6M42', 'admin@example.com', 1);
+
+--
 -- Table structure for table `yabs_user_permission`
 --
 
@@ -55,6 +72,13 @@ CREATE TABLE IF NOT EXISTS `yabs_user_permission` (
   UNIQUE KEY `user_id` (`user_id`,`user_permission`),
   CONSTRAINT `yabs_user_permission_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `yabs_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Data for table `yabs_user_permission`
+--
+
+INSERT INTO `yabs_user_permission` (`user_id`, `user_permission`) VALUES
+(1, 5);
 
 --
 -- Table structure for table `yabs_user_remember`
@@ -113,3 +137,4 @@ CREATE TABLE IF NOT EXISTS `yabs_comment` (
   KEY `entry_id` (`entry_id`),
   CONSTRAINT `yabs_comment_entry_id` FOREIGN KEY (`entry_id`) REFERENCES `yabs_entry` (`entry_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
