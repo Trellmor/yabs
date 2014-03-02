@@ -66,7 +66,7 @@ class Category extends AdminController {
 		}
 		if ($category !== false) {
 			$input = new Input(Input::POST);
-			$input->filter('category_name', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+			$input->filter('category_name', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 			try {
 				$category->setName($input->category_name);
 				$category->save();

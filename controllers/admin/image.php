@@ -40,7 +40,7 @@ class Image extends AdminController {
 		}
 		
 		$input = new Input(Input::GET);
-		$input->filter("q", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter("q", FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 		if ($input->order == 'date') {
 			$order = 'date';
 		} else if ($input->order == 'name') {

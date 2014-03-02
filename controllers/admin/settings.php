@@ -43,12 +43,12 @@ class Settings extends AdminController {
 		
 		$input = new Input(Input::POST);
 		$input->filter('akismet', FILTER_VALIDATE_BOOLEAN);
-		$input->filter('akismet_key', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
-		$input->filter('site_title', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter('akismet_key', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+		$input->filter('site_title', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 		$input->filter('entries_per_page', FILTER_SANITIZE_NUMBER_INT);
-		$input->filter('datetime_format', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-		$input->filter('language', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_LOW);
-		$input->filter('template', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_LOW);
+		$input->filter('datetime_format', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
+		$input->filter('language', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+		$input->filter('template', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 		
 		$settings = Models\Settings::load();
 		try {

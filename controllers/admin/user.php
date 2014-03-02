@@ -152,7 +152,7 @@ class User extends AdminController {
 		
 		$input = new Input(Input::POST);
 		$input->filter('user_password_change', FILTER_VALIDATE_BOOLEAN);
-		$input->filter('user_name', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$input->filter('user_name', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 		$input->filter('user_mail', FILTER_SANITIZE_EMAIL);
 		$input->filter('user_active', FILTER_VALIDATE_BOOLEAN);
 		$input->filter('user_permission_entry', FILTER_VALIDATE_BOOLEAN);

@@ -46,7 +46,7 @@ class Comment extends Controller {
 		if (($entry = Models\Entry::getEntry($get->entry_id)) === false) {
 			$this->error(200, _('Invalid entry.'));
 		}		
-		$post->filter('comment_author', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$post->filter('comment_author', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
 		$post->filter('comment_mail', FILTER_SANITIZE_EMAIL);
 		$post->filter('comment_url', FILTER_SANITIZE_URL);
 		$post->filter('comment_remember', FILTER_VALIDATE_BOOLEAN);
