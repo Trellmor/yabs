@@ -175,6 +175,10 @@ class Comment {
 		return $this->comment_url;
 	}
 	
+	public function hasUrl() {
+		return !empty($this->comment_url);
+	}
+	
 	public function setUrl($value) {
 		if ($value !== null && filter_var($value, FILTER_VALIDATE_URL) === false) {
 			throw new ValidationException(_('Invalid Homepage.')); 
