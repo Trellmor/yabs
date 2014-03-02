@@ -9,12 +9,9 @@ $view->load('header');
 	<small><?php HTML::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> by <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
-		<p>
-			<?php echo $entry->getTeaser() . $entry->getContent(); ?>
-		</p>
+		<?php echo $entry->getTeaser() . $entry->getContent(); ?>
 	</div>
-
-	<p class="postmetadata">Posted in <?php HTML::out($entry->getCategoryName()); ?> | {S_ENTRY_FEEDBACKNUMBERS} &#187;</p>
+	<p class="postmetadata"><?php echo _('Posted in'); ?> <?php HTML::out($entry->getCategoryName()); ?> | <a href="<?php HTML::out(Uri::to('blog/' . $entry->getUri()) . '#comments'); ?>"><?php echo $entry->getCommentCount(); ?> <?php echo ngettext('Comment', 'Comments', $entry->getcommentCount()) ?> &#187;</a></p>
 </div>
 <?php 
 $view->load('comments');

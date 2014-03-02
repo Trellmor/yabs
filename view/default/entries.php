@@ -10,15 +10,14 @@ $view->load('header');
 	<small><?php Html::out(date($settings->getDateTimeFormat(), $entry->getDate())); ?> <?php echo _('by'); ?> <?php HTML::out($entry->getUserName()); ?></small>
 
 	<div class="entry">
-			<?php if ($entry->hasTeaser()): ?>
-				<?php echo $entry->getTeaser(); ?>
-				<br /><br />
-				<a href="<?php echo URI::to('blog/' . $entry->getUri()); ?>"><?php echo _('Read more'); ?></a>
-			<?php else: ?>
-				<?php echo $entry->getContent(); ?>
-			<?php endif; ?>
+		<?php if ($entry->hasTeaser()): ?>
+			<?php echo $entry->getTeaser(); ?>
+			<br /><br />
+			<a href="<?php echo URI::to('blog/' . $entry->getUri()); ?>"><?php echo _('Read more'); ?></a>
+		<?php else: ?>
+			<?php echo $entry->getContent(); ?>
+		<?php endif; ?>
 	</div>
-
 	<p class="postmetadata"><?php echo _('Posted in'); ?> <?php HTML::out($entry->getCategoryName()); ?> | <a href="<?php HTML::out(Uri::to('blog/' . $entry->getUri()) . '#comments'); ?>"><?php echo $entry->getCommentCount(); ?> <?php echo ngettext('Comment', 'Comments', $entry->getcommentCount()) ?> &#187;</a></p>
 </div>
 <?php endforeach; ?>
