@@ -177,7 +177,7 @@ class Entry extends AdminController {
 		$date = \DateTime::createFromFormat('Y-m-d H:i', $input->entry_date);
 		$entry->setDate($date->getTimestamp());
 		$entry->setUri($input->entry_uri);
-		$entry->setVisible(isset($input->entry_visible));
+		$entry->setVisible($input->entry_visible);
 		$entry->setCategoryId($input->category_id);
 	}
 

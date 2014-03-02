@@ -52,7 +52,7 @@ class Settings extends AdminController {
 		
 		$settings = Models\Settings::load();
 		try {
-			$settings->setAkismet(isset($input->akismet));
+			$settings->setAkismet($input->akismet);
 			$settings->setAkismetKey($input->akismet_key);
 			$settings->setSiteTitle($input->site_title);
 			$settings->setEntriesPerPage($input->entries_per_page);
