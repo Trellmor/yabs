@@ -13,6 +13,8 @@ $view->assignVar('modal_body', _('Do you really want to delete this comment?'));
 $view->assignVar('modal_button_negative', _('Cancel'));
 $view->assignVar('modal_button_positive', _('Delete'));
 $view->load('modal');
+
+$spamUrl = ($spam) ? 'spam/' : '';
 ?>
  
 <div class="modal fade" id="modal-comment-show" tabindex="-1" role="dialog" aria-hidden="true">
@@ -26,10 +28,10 @@ $view->load('modal');
   </div>
 </div>
 
-<h1 class="page-header"><?php echo _('Comments'); ?></h1>
+<h1 class="page-header"><?php echo ($spam) ? _('Spam') : _('Comments'); ?></h1>
 <?php $view->handleMessages(); ?>
 <div class="table-responsive">
-  <?php echo Forms::form(Uri::to('admin/comment/delete'), ['id' => 'comment-delete']); ?>
+  <?php echo Forms::form(Uri::to('admin/comment/' . $spamUrl . 'delete'), ['id' => 'comment-delete']); ?>
   <?php echo Forms::input('hidden', 'page', $page); ?>
   <?php echo Forms::input('hidden', 'comment_id', ''); ?>
   </form>
@@ -73,8 +75,8 @@ $view->load('modal');
     </tbody>
   </table>
   <ul class="pager">
-    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/page/' . ($page - 1))); ?>">&larr; <?php echo _('Newer'); ?></a></li>
-    <li class="next <?php echo (count($comments) < 15) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/page/' . ($page + 1))); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
+    <li class="previous <?php echo ($page <= 1) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/' . $spamUrl . 'page/' . ($page - 1))); ?>">&larr; <?php echo _('Newer'); ?></a></li>
+    <li class="next <?php echo (count($comments) < 15) ? 'disabled' : ''; ?>"><a href="<?php HTML::out(Uri::to('admin/comment/' . $spamUrl . 'page/' . ($page + 1))); ?>"><?php echo _('Older'); ?> &rarr;</a></li>
   </ul>
   
 </div>

@@ -65,6 +65,9 @@ Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment'
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'toggleSpam', 'admin/api/comment/spam/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'toggleVisible', 'admin/api/comment/visible/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'delete', 'admin/comment/delete/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment', 'indexSpam', 'admin/comment/spam/'));
+Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\Comment', 'indexSpam', 'admin/comment/spam/page/([0-9]+)/'));
+Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\Comment', 'deleteSpam', 'admin/comment/spam//delete/'));
 
 Registry::getInstance()->router->addRoute(Route::get('Controllers\Admin\User', 'profile', 'admin/profile/'));
 Registry::getInstance()->router->addRoute(Route::post('Controllers\Admin\User', 'saveProfile', 'admin/profile/'));

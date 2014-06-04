@@ -72,9 +72,10 @@ class Comment {
 			'e.entry_uri',
 			'e.entry_title'); 
 	
-	public static function getComments($limit, $offset = 0) {
-		$qb = DAL\Factory::newQueryBuilder()->table('yabs_comment c')->limit($limit, $offset);
-		$qb->leftJoin('yabs_entry e', ('e.entry_id = c.entry_id'))->orderBy(['c.comment_date DESC']);
+	public static function getComments($spam, $limit, $offset = 0) {
+		$qb = DAL\Factory::newQueryBuilder()->table('yabs_comment c')->limit($limit, $offset)->
+			where('c.comment_spam = ?', [[($spam) ? 1 : 0, \PDO::PARAM_INT]])->
+			leftJoin('yabs_entry e', ('e.entry_id = c.entry_id'))->orderBy(['c.comment_date DESC']);
 		return $qb->query(static::$columns)->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}
 	

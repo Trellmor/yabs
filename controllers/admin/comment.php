@@ -32,18 +32,23 @@ class Comment extends AdminController {
 		$this->checkPermission(User::PERM_COMMENT);
 	}
 	
-	public function index($page = 1) {
-	
+	public function index($page = 1, $spam = false) {
+		$spamUrl = ($spam) ? 'spam/' : '';
 		if ($page < 1) {
-			$this->redirect(Uri::to('/admin/comment/'));
+			$this->redirect(Uri::to('/admin/comment/' . $spamUrl));
 			exit;
 		}
 		
-		$comments = Models\Comment::getComments(15, ($page - 1) * 15);
+		$comments = Models\Comment::getComments($spam, 15, ($page - 1) * 15);
 		
 		$this->view->assignVar('comments', $comments);
 		$this->view->assignVar('page', $page);
+		$this->view->assignVar('spam', $spam);
 		$this->view->load('comments');
+	}
+	
+	public function indexSpam($page = 1) {
+		$this->index($page, true);
 	}
 	
 	public function toggleSpam() {
@@ -90,12 +95,10 @@ class Comment extends AdminController {
 		}
 	}
 	
-	
-	
-	public function delete() {
+	private function deleteComment($uri) {
 		if (!$this->csrf->verifyToken()) {
 			Message::save(_('Delete failed.'), Message::LEVEL_ERROR);
-			$this->redirect(Uri::to('admin/comment'));
+			$this->redirect(Uri::to($uri));
 			exit;
 		}
 		
@@ -109,18 +112,26 @@ class Comment extends AdminController {
 			if ($comment !== false) {
 				$comment->delete();
 				Message::save(_('Comment deleted.'), Message::LEVEL_SUCCESS);
-				$this->redirect(Uri::to('admin/comment/page/' . ((int) $input->page)));
+				$this->redirect(Uri::to($uri . '/page/' . ((int) $input->page)));
 			} else {
 				Message::save(_('Comment not found.'), Message::LEVEL_ERROR);
-				$this->redirect(Uri::to('admin/comment/page/' . ((int) $input->page)));
+				$this->redirect(Uri::to($uri . '/page/' . ((int) $input->page)));
 				exit;
 			}
 			
 		} catch (ValidationException $e) {
 			Message::save($e->getMessage(), Message::LEVEL_ERROR);
-			$this->redirect(Uri::to('admin/comment/page/' . ((int) $input->page)));
+			$this->redirect(Uri::to($uri . '/page/' . ((int) $input->page)));
 			exit;
 		}
+	}
+	
+	public function delete() {
+		$this->deleteComment('admin/comment');
+	}
+	
+	public function deleteSpam() {
+		$this->deleteComment('admin/comment/spam');
 	}
 	
 	private function json(array $data) {

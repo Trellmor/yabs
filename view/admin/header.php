@@ -72,6 +72,7 @@ use Models\User;
           <ul class="nav nav-sidebar">          
             <?php if ($user->hasPermission(User::PERM_COMMENT)): ?>
           	<li><a href="<?php HTML::out(Uri::to('admin/comment')); ?>"><?php echo _('Comments'); ?></a></li>
+          	<li><a href="<?php HTML::out(Uri::to('admin/comment/spam')); ?>"><?php echo _('Spam'); ?></a></li>
           	<?php endif; ?>
           </ul>
                 
