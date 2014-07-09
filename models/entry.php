@@ -91,7 +91,7 @@ class Entry {
 	
 	public static function getEntriesForUser($userId, $limit, $offset = 0) {
 		$qb = static::getAllEntries();
-		$qb->where('user_id = ?', [[$userId, \PDO::PARAM_INT]])->limit($limit, $offset)->orderBy(['e.entry_date DESC']);
+		$qb->where('e.user_id = ?', [[$userId, \PDO::PARAM_INT]])->limit($limit, $offset)->orderBy(['e.entry_date DESC']);
 		$sth = $qb->query(static::$columns);
 		return $sth->fetchAll(\PDO::FETCH_CLASS, __CLASS__);
 	}

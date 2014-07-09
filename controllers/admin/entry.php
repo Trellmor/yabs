@@ -45,7 +45,7 @@ class Entry extends AdminController {
 		if (Registry::getInstance()->user->hasPermission(User::PERM_ENTRY_ALL)) {
 			$entries = Models\Entry::getEntries(15, $offset);
 		} else {
-			$entries = Models\Entry::getEntriesForUser(Registry::getInstance()->user->getUserId(), 15, $offset);
+			$entries = Models\Entry::getEntriesForUser(Registry::getInstance()->user->getId(), 15, $offset);
 		}
 
 		$this->view->assignVar('entries', $entries);
