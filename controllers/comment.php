@@ -64,11 +64,19 @@ class Comment extends Controller {
 			$comment->setDate(time());
 			$comment->setIP($_SERVER['REMOTE_ADDR']);
 			$comment->setVisible(true);
+			$comment->setSpam(false);
 			
-			if (Registry::getInstance()->settings->akismet) {
+			$regex = ['/\\[url=/i'];
+			$text = $comment->getText();
+			foreach ($regex as $r) {
+				if (preg_match($r, $text)) {
+					$comment->setSpam(true);
+					break;
+				}
+			}
+			
+			if (!$comment->isSpam() && Registry::getInstance()->settings->akismet) {
 				$this->akismet($comment, $entry);
-			} else {			
-				$comment->setSpam(false);
 			}
 			$comment->save();
 		
